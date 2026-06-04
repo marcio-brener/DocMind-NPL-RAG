@@ -1,0 +1,75 @@
+# =========================
+# Ambiente virtual
+# =========================
+venv/
+env/
+.venv/
+
+# =========================
+# Python cache
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+
+# =========================
+# Variáveis de ambiente
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# IDEs
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Dependências
+# =========================
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+
+# =========================
+# ML / IA (pesados e gerados)
+# =========================
+*.bin
+*.model
+*.safetensors
+*.onnx
+*.pt
+*.pth
+
+# =========================
+# ChromaDB / Vector DB
+# =========================
+chroma.sqlite3
+chromadb/
+persist/
+data/chroma/
+
+# =========================
+# Sistema
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Docker (se não quiser versionar volumes)
+# =========================
+docker-data/
