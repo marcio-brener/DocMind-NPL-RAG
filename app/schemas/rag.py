@@ -29,4 +29,5 @@ class RAGResponse(BaseModel):
     sources: List[SourceReference] = Field(..., description="Fragmentos de documentos utilizados como contexto")
     context_found: bool = Field(..., description="Indica se contexto relevante foi encontrado no banco vetorial")
     llm_used: bool = Field(..., description="Indica se o LLM foi chamado para gerar a resposta")
+    cache_hit: bool = Field(default=False, description="Indica se a resposta foi recuperada do cache Redis")
     latency_ms: float = Field(..., description="Tempo total de processamento da requisição em milissegundos")
