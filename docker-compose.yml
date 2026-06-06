@@ -1,0 +1,71 @@
+version: "3.9"
+
+services:
+
+  # ── RabbitMQ Broker ──────────────────────────────────────────────────────────
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: docmind-rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"    # AMQP protocol (pika / consumers)
+      - "15672:15672"  # Management UI: http://localhost:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Application ───────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docmind-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - RABBITMQ_DOCUMENT_QUEUE=document_processing
+      - RABBITMQ_RAG_QUEUE=rag_requests
+      - CHROMADB_PATH=/app/data/chromadb
+      - UPLOAD_DIR=/app/data/uploads
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+  # ── Document Worker ───────────────────────────────────────────────────────────
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docmind-worker
+    restart: unless-stopped
+    environment:
+      - APP_ENV=production
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - RABBITMQ_DOCUMENT_QUEUE=document_processing
+      - RABBITMQ_RAG_QUEUE=rag_requests
+      - CHROMADB_PATH=/app/data/chromadb
+      - UPLOAD_DIR=/app/data/uploads
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    command: python -m workers.document_worker
+
+volumes:
+  rabbitmq_data:
+    driver: local

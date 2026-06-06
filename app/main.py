@@ -9,6 +9,8 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from app.api.router import api_router
 from app.core.config import settings
 from app.core.logging import BaseLogger, setup_logging
+from app.services.message_queue_service import rabbitmq_service
+from app.services.task_service import task_service
 
 
 @asynccontextmanager
@@ -16,11 +18,30 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # Inicialização na inicialização do servidor
     setup_logging()
     BaseLogger.info(f"Iniciando {settings.APP_NAME} no ambiente {settings.APP_ENV}...")
-    
+
+    # Inicializar TaskService (garante que o arquivo tasks.json exista)
+    BaseLogger.info("[Lifespan] TaskService inicializado.")
+    _ = task_service  # acesso ao singleton dispara __init__
+
+    # Conectar ao RabbitMQ (falha não é bloqueante — app continua sem fila)
+    connected = rabbitmq_service.connect()
+    if connected:
+        BaseLogger.info(
+            f"[Lifespan] RabbitMQ conectado. "
+            f"Filas: '{settings.RABBITMQ_DOCUMENT_QUEUE}', '{settings.RABBITMQ_RAG_QUEUE}'"
+        )
+    else:
+        BaseLogger.warning(
+            "[Lifespan] RabbitMQ indisponível no startup. "
+            "O upload assync estará degradado até o broker ficar ativo."
+        )
+
     yield
-    
+
     # Limpeza e encerramento de conexões
+    rabbitmq_service.close()
     BaseLogger.info(f"Encerrando {settings.APP_NAME}...")
+
 
 
 def create_application() -> FastAPI:

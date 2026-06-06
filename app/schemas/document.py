@@ -15,7 +15,11 @@ class DocumentMetadata(BaseModel):
 class DocumentUploadResponse(BaseModel):
     document_id: str = Field(..., description="Identificador único (UUID) do documento gerado")
     filename: str = Field(..., description="Nome do arquivo enviado")
-    status: str = Field(..., description="Status do processamento (ex: 'processed', 'failed')")
+    status: str = Field(..., description="Status do processamento (ex: 'queued', 'processed', 'failed')")
     message: str = Field(..., description="Mensagem de retorno informativa")
     metadata: DocumentMetadata = Field(..., description="Metadados extraídos do arquivo")
     excerpt: str = Field(..., description="Trecho inicial (preview) do texto extraído (até 200 caracteres)")
+    task_id: Optional[str] = Field(
+        default=None,
+        description="ID da tarefa assíncrona criada na fila de processamento (quando disponível)"
+    )
