@@ -12,7 +12,6 @@ try:
 except ImportError:
     REDIS_AVAILABLE = False
 
-
 class CacheService:
     """
     Serviço corporativo de cache Redis desacoplado.
