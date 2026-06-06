@@ -517,7 +517,7 @@ DocMind/
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido como projeto acadêmico para a disciplina de **Análise e Desenvolvimento de Sistemas — 6º Semestre**.
+Este projeto foi desenvolvido como projeto acadêmico para a disciplina de **Análise de Dados - Análise e Desenvolvimento de Sistemas — 6º Semestre**.
 
 ---
 
