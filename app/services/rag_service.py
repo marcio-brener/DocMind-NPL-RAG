@@ -1,9 +1,10 @@
 import time
-from typing import List, Tuple
+from typing import List
 
 from app.core.config import settings
 from app.core.logging import BaseLogger
 from app.schemas.rag import RAGRequest, RAGResponse, SourceReference
+from app.services.cache_service import cache_service, CacheService
 from app.services.embedding_service import embedding_service
 from app.services.vector_store import vector_store
 
@@ -37,14 +38,20 @@ class RAGService:
     """
     Serviço central do pipeline RAG (Retrieval-Augmented Generation).
 
-    Fluxo:
-        1. Gera embedding da pergunta do usuário.
-        2. Recupera os chunks mais semanticamente similares do ChromaDB.
-        3. Filtra chunks por score mínimo de similaridade.
-        4. Constrói um prompt estruturado com o contexto recuperado.
-        5. Chama o LLM (Google Gemini via LangChain) para gerar a resposta.
-        6. Ativa fallback inteligente se: sem contexto, sem API key ou LLM indisponível.
-        7. Retorna a resposta com referências rastreáveis de cada fonte utilizada.
+    Fluxo com cache Redis:
+        1. Gera cache_key determinística via SHA-256 (pergunta + limit).
+        2. Consulta o Redis — se houver HIT, retorna imediatamente sem
+           acionar ChromaDB nem Gemini.
+        3. Em caso de MISS, executa o pipeline RAG completo:
+            a. Gera embedding da pergunta.
+            b. Recupera os chunks mais semanticamente similares do ChromaDB.
+            c. Filtra chunks por score mínimo de similaridade.
+            d. Constrói um prompt estruturado com o contexto recuperado.
+            e. Chama o LLM (Google Gemini via LangChain) para gerar a resposta.
+            f. Ativa fallback inteligente se: sem contexto, sem API key ou LLM indisponível.
+        4. Persiste a resposta final no Redis com TTL configurável.
+        5. Retorna a resposta com referências rastreáveis de cada fonte utilizada
+           e o campo cache_hit indicando a origem da resposta.
     """
 
     def __init__(self) -> None:
@@ -53,8 +60,8 @@ class RAGService:
 
     def _setup_llm(self) -> None:
         BaseLogger.info(
-    f"GOOGLE_API_KEY carregada: {settings.GOOGLE_API_KEY[:10]}"
-)
+            f"GOOGLE_API_KEY carregada: {settings.GOOGLE_API_KEY[:10]}"
+        )
         """
         Configura a chain LangChain (Prompt → LLM → OutputParser).
         Se a GOOGLE_API_KEY não for válida ou o LangChain não estiver disponível,
@@ -86,6 +93,8 @@ class RAGService:
         except Exception as e:
             BaseLogger.error(f"Falha ao inicializar LLM chain: {str(e)}. Usando fallback.")
 
+    # ── Helpers internos ─────────────────────────────────────────────────────
+
     def _build_context_string(self, results: List[dict]) -> str:
         """
         Formata os chunks recuperados em um bloco de contexto estruturado para o prompt.
@@ -113,29 +122,94 @@ class RAGService:
             f"{context}"
         )
 
+    def _response_to_dict(self, response: RAGResponse) -> dict:
+        """
+        Serializa um RAGResponse para dicionário JSON-compatível,
+        adequado para persistência no Redis.
+        """
+        return {
+            "question": response.question,
+            "answer": response.answer,
+            "sources": [
+                {
+                    "chunk_id": s.chunk_id,
+                    "filename": s.filename,
+                    "excerpt": s.excerpt,
+                    "similarity": s.similarity,
+                }
+                for s in response.sources
+            ],
+            "context_found": response.context_found,
+            "llm_used": response.llm_used,
+            "cache_hit": response.cache_hit,
+            "latency_ms": response.latency_ms,
+        }
+
+    def _response_from_dict(self, data: dict, cache_latency_ms: float) -> RAGResponse:
+        """
+        Desserializa um dicionário armazenado no Redis de volta a um RAGResponse,
+        substituindo a latência original pela latência real da recuperação do cache.
+        """
+        return RAGResponse(
+            question=data["question"],
+            answer=data["answer"],
+            sources=[
+                SourceReference(
+                    chunk_id=s["chunk_id"],
+                    filename=s["filename"],
+                    excerpt=s["excerpt"],
+                    similarity=s["similarity"],
+                )
+                for s in data.get("sources", [])
+            ],
+            context_found=data["context_found"],
+            llm_used=data["llm_used"],
+            cache_hit=True,
+            latency_ms=cache_latency_ms,
+        )
+
+    # ── Pipeline principal ───────────────────────────────────────────────────
+
     async def answer(self, request: RAGRequest) -> RAGResponse:
         """
-        Ponto de entrada principal do pipeline RAG.
+        Ponto de entrada principal do pipeline RAG com suporte a cache Redis.
         """
         start_time = time.monotonic()
         BaseLogger.info(f"Pipeline RAG iniciado para a pergunta: '{request.question[:80]}'")
 
-        # ── 1. Geração do embedding da pergunta ─────────────────────────────
+        # ── 1. Geração da chave de cache ─────────────────────────────────────
+        cache_key = CacheService.build_cache_key(request.question, request.limit)
+        BaseLogger.debug(f"[REDIS] Cache key gerada: {cache_key[:16]}...")
+
+        # ── 2. Consulta ao Redis ──────────────────────────────────────────────
+        cached_data = await cache_service.get(cache_key)
+
+        if cached_data is not None:
+            elapsed_ms = round((time.monotonic() - start_time) * 1000, 2)
+            BaseLogger.info(
+                f"[REDIS] Cache HIT → retornando resposta em {elapsed_ms}ms "
+                f"(ChromaDB e Gemini não foram consultados)."
+            )
+            return self._response_from_dict(cached_data, elapsed_ms)
+
+        BaseLogger.info("[REDIS] Cache MISS → executando pipeline RAG completo.")
+
+        # ── 3. Geração do embedding da pergunta ──────────────────────────────
         query_vector = embedding_service.embed_query(request.question)
 
-        # ── 2. Recuperação de contexto do ChromaDB ───────────────────────────
+        # ── 4. Recuperação de contexto do ChromaDB ───────────────────────────
         raw_results = vector_store.similarity_search(
             query_vector=query_vector,
             limit=request.limit
         )
 
-        # ── 3. Filtrar por similaridade mínima ───────────────────────────────
+        # ── 5. Filtrar por similaridade mínima ───────────────────────────────
         filtered = [r for r in raw_results if r.get("similarity", 0.0) >= settings.RAG_MIN_SIMILARITY]
 
         context_found = len(filtered) > 0
         BaseLogger.info(f"{len(filtered)}/{len(raw_results)} chunks passaram pelo filtro de similaridade mínima.")
 
-        # ── 4. Construir referências de fontes ───────────────────────────────
+        # ── 6. Construir referências de fontes ───────────────────────────────
         sources: List[SourceReference] = [
             SourceReference(
                 chunk_id=item["chunk_id"],
@@ -146,11 +220,11 @@ class RAGService:
             for item in filtered
         ]
 
-        # ── 5. Fallback: sem contexto relevante ──────────────────────────────
+        # ── 7. Fallback: sem contexto relevante ──────────────────────────────
         if not context_found:
             BaseLogger.warning("Nenhum contexto relevante encontrado. Retornando fallback sem contexto.")
             elapsed_ms = round((time.monotonic() - start_time) * 1000, 2)
-            return RAGResponse(
+            fallback_response = RAGResponse(
                 question=request.question,
                 answer=(
                     "Não foram encontrados fragmentos de documentos relevantes para esta pergunta. "
@@ -159,10 +233,14 @@ class RAGService:
                 sources=[],
                 context_found=False,
                 llm_used=False,
+                cache_hit=False,
                 latency_ms=elapsed_ms
             )
+            # Respostas de fallback (sem contexto) não são cacheadas para evitar
+            # persistir resultados inconclusivos que mudarão após ingestão de documentos.
+            return fallback_response
 
-        # ── 6. Geração da resposta via LLM ou fallback ───────────────────────
+        # ── 8. Geração da resposta via LLM ou fallback ───────────────────────
         context_str = self._build_context_string(filtered)
         llm_used = False
         answer_text = ""
@@ -182,18 +260,31 @@ class RAGService:
         else:
             answer_text = self._build_fallback_answer(filtered)
 
-        # ── 7. Retorno final ──────────────────────────────────────────────────
+        # ── 9. Montagem da resposta final ─────────────────────────────────────
         elapsed_ms = round((time.monotonic() - start_time) * 1000, 2)
         BaseLogger.info(f"Pipeline RAG concluído em {elapsed_ms}ms. LLM usado: {llm_used}")
 
-        return RAGResponse(
+        final_response = RAGResponse(
             question=request.question,
             answer=answer_text,
             sources=sources,
             context_found=context_found,
             llm_used=llm_used,
+            cache_hit=False,
             latency_ms=elapsed_ms
         )
+
+        # ── 10. Persistência no Redis ─────────────────────────────────────────
+        BaseLogger.info(
+            f"[REDIS] Salvando resposta no cache → TTL: {settings.CACHE_TTL_SECONDS}s"
+        )
+        await cache_service.set(
+            key=cache_key,
+            value=self._response_to_dict(final_response),
+            ttl=settings.CACHE_TTL_SECONDS,
+        )
+
+        return final_response
 
 
 # Instanciação Singleton do serviço RAG

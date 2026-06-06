@@ -50,6 +50,7 @@ class Settings(BaseSettings):
     # Cache & Queues
     REDIS_URL: str = "redis://localhost:6379/0"
     RABBITMQ_URL: str = "amqp://guest:guest@localhost:5672/"
+    CACHE_TTL_SECONDS: int = 3600  # Tempo de vida padrão do cache Redis (1 hora)
 
     # LLM Providers
     GOOGLE_API_KEY: str = ""
