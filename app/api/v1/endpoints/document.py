@@ -4,11 +4,12 @@ import os
 from fastapi import APIRouter, File, UploadFile, status, HTTPException
 from app.core.config import settings
 from app.core.logging import BaseLogger
-from app.schemas.document import DocumentUploadResponse, DocumentMetadata
+from app.schemas.document import DocumentUploadResponse, DocumentMetadata, DocumentReprocessResponse
 from app.schemas.semantic import SemanticProcessResponse
 from app.schemas.task import TaskCreate, TaskStatus
+from app.services.cache_service import cache_service
 from app.services.document_processor import document_processor
-from app.services.message_queue_service import rabbitmq_service
+from app.services.rabbitmq_service import rabbitmq_service
 from app.services.semantic_processor import semantic_processor
 from app.services.task_service import task_service
 from app.services.vector_store import vector_store
@@ -19,92 +20,104 @@ router = APIRouter()
 @router.post(
     "/upload",
     response_model=DocumentUploadResponse,
-    status_code=status.HTTP_201_CREATED,
+    status_code=status.HTTP_202_ACCEPTED,
     summary="Fazer upload de documento PDF ou Markdown (processamento assíncrono)",
     description=(
         "Recebe um arquivo (PDF ou Markdown), valida as restrições de tipo e tamanho, "
-        "salva em disco local, extrai o conteúdo textual e enfileira o processamento "
-        "semântico assíncrono via RabbitMQ. Retorna imediatamente com um task_id "
+        "salva em disco local, registra uma tarefa e enfileira o processamento "
+        "semântico assíncrono via RabbitMQ. Retorna imediatamente com um document_id "
         "para rastreamento do processamento em background."
     ),
 )
 async def upload_document(
     file: UploadFile = File(..., description="Arquivo de documento a ser ingerido (.pdf ou .md)")
 ) -> DocumentUploadResponse:
+    filename = file.filename or "documento_desconhecido"
     BaseLogger.info(
-        f"[Upload] Requisição recebida: arquivo={file.filename} | tipo={file.content_type}"
+        f"[Upload] Requisição recebida: arquivo={filename} | tipo={file.content_type}"
     )
 
-    # 1. Ler bytes do arquivo de forma assíncrona
+    # 1. Validação de extensão
+    file_ext = os.path.splitext(filename)[1].lower()
+    if file_ext not in [".pdf", ".md"]:
+        BaseLogger.warning(f"[Upload] Tentativa de upload de extensão não suportada: {filename}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Tipo de arquivo inválido. Apenas arquivos PDF (.pdf) e Markdown (.md) são suportados."
+        )
+
+    # 2. Ler bytes do arquivo de forma assíncrona para validação de tamanho
     file_content = await file.read()
+    file_size_bytes = len(file_content)
+    max_size_bytes = settings.MAX_FILE_SIZE_MB * 1024 * 1024
+    if file_size_bytes > max_size_bytes:
+        BaseLogger.warning(f"[Upload] Arquivo excede tamanho máximo de {settings.MAX_FILE_SIZE_MB}MB: {filename}")
+        raise HTTPException(
+            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+            detail=f"Arquivo muito grande. O limite máximo permitido é de {settings.MAX_FILE_SIZE_MB} MB."
+        )
 
-    # 2. Processar documento (validação, salvamento em disco, extração de texto)
-    doc_id, cleaned_text, metadata = document_processor.process_document(
-        file_content=file_content,
-        filename=file.filename or "documento_desconhecido",
-        content_type=file.content_type or "application/octet-stream"
-    )
+    # 3. Gerar document_id (UUID) e salvar o arquivo em disco
+    document_id = str(uuid.uuid4())
+    safe_filename = f"{document_id}_{filename}"
+    filepath = os.path.join(settings.UPLOAD_DIR, safe_filename)
 
-    # 3. Gerar task_id e criar tarefa de rastreamento
-    task_id = str(uuid.uuid4())
+    BaseLogger.info(f"[Upload] Salvando arquivo em: {filepath}")
+    try:
+        os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+        with open(filepath, "wb") as f:
+            f.write(file_content)
+    except Exception as e:
+        BaseLogger.error(f"[Upload] Erro ao salvar arquivo em disco: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Erro interno no servidor ao persistir o arquivo enviado."
+        )
+
+    uploaded_at = datetime.utcnow().isoformat()
+
+    # 4. Criar tarefa de rastreamento com status inicial QUEUED
+    # Acoplamos o task_id diretamente ao document_id
     task_input = TaskCreate(
-        task_id=task_id,
-        document_id=doc_id,
-        filename=file.filename or "documento_desconhecido",
+        task_id=document_id,
+        document_id=document_id,
+        filename=filename,
     )
     task_service.create_task(task_input)
+    BaseLogger.info(f"[Upload] Tarefa criada para rastreamento: task_id={document_id}")
 
-    BaseLogger.info(
-        f"[Upload] Tarefa criada: task_id={task_id} | doc_id={doc_id}"
-    )
-
-    # 4. Publicar mensagem na fila RabbitMQ para processamento assíncrono
-    published = rabbitmq_service.publish_document_processing(
-        document_id=doc_id,
-        task_id=task_id,
-        filename=file.filename or "documento_desconhecido",
+    # 5. Publicar mensagem na fila RabbitMQ para processamento assíncrono
+    published = await rabbitmq_service.publish_document_processing(
+        document_id=document_id,
+        filename=filename,
+        filepath=os.path.abspath(filepath),
+        uploaded_at=uploaded_at
     )
 
     if not published:
-        # Broker indisponível: atualiza task para FAILED e ainda retorna os metadados
-        # para o cliente não perder o document_id (pode ser reprocessado manualmente)
+        # Broker indisponível: atualiza task para FAILED
         task_service.update_task(
-            task_id=task_id,
+            task_id=document_id,
             status=TaskStatus.FAILED,
             progress=0,
             message="Falha ao publicar na fila. Broker RabbitMQ indisponível.",
             error_detail="RabbitMQ não pôde ser alcançado no momento do upload.",
         )
-        BaseLogger.error(
-            f"[Upload] ✗ Falha ao publicar na fila RabbitMQ: task_id={task_id}"
-        )
-        queue_status = "queue_failed"
-        queue_message = (
-            "Arquivo salvo mas falha ao enfileirar processamento. "
-            "Verifique o RabbitMQ e use o endpoint /{document_id}/process manualmente."
-        )
-    else:
-        queue_status = "queued"
-        queue_message = (
-            f"Documento enfileirado com sucesso. "
-            f"Acompanhe o processamento em: GET /api/v1/tasks/{task_id}"
-        )
-        BaseLogger.info(
-            f"[Upload] ✓ Documento enfileirado: task_id={task_id} | "
-            f"doc_id={doc_id} | fila={settings.RABBITMQ_DOCUMENT_QUEUE}"
+        BaseLogger.error(f"[Upload] ✗ Falha ao publicar na fila RabbitMQ para doc_id={document_id}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Erro ao enfileirar o documento para processamento (RabbitMQ indisponível)."
         )
 
-    # 5. Gerar excerpt para preview
-    excerpt = cleaned_text[:200] + "..." if len(cleaned_text) > 200 else cleaned_text
+    BaseLogger.info(
+        f"[Upload] ✓ Documento enfileirado com sucesso: doc_id={document_id} | "
+        f"fila={settings.RABBITMQ_QUEUE}"
+    )
 
     return DocumentUploadResponse(
-        document_id=doc_id,
-        filename=metadata.filename,
-        status=queue_status,
-        message=queue_message,
-        metadata=metadata,
-        excerpt=excerpt,
-        task_id=task_id,
+        document_id=document_id,
+        status="queued",
+        message="Documento enviado para processamento"
     )
 
 
@@ -176,6 +189,7 @@ async def process_document_semantically(document_id: str) -> SemanticProcessResp
 
     # 6. Persistência no banco vetorial ChromaDB
     if response.chunks:
+        vector_store.delete_document_chunks(document_id)
         persisted = vector_store.upsert_chunks(response.chunks)
         if not persisted:
             BaseLogger.warning(
@@ -189,3 +203,143 @@ async def process_document_semantically(document_id: str) -> SemanticProcessResp
             )
 
     return response
+
+
+@router.post(
+    "/reprocess",
+    response_model=DocumentReprocessResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Reprocessar e reindexar todos os documentos existentes",
+    description=(
+        "Varre o diretório de uploads local para identificar todos os arquivos persistidos. "
+        "Para cada documento, realiza novamente a extração de texto, limpeza, "
+        "divisão em chunks com o novo CHUNK_SIZE e CHUNK_OVERLAP e a geração de embeddings, "
+        "atualizando a base vetorial do ChromaDB."
+    ),
+)
+async def reprocess_all_documents() -> DocumentReprocessResponse:
+    BaseLogger.info("[Reprocess] Iniciando rotina de reprocessamento em lote...")
+    
+    if not os.path.exists(settings.UPLOAD_DIR):
+        BaseLogger.warning(f"[Reprocess] Diretório de uploads não existe: {settings.UPLOAD_DIR}")
+        return DocumentReprocessResponse(
+            message="Diretório de uploads vazio ou inexistente.",
+            total_processed=0,
+            details=[]
+        )
+        
+    # Identificar documentos a partir do padrão: UPLOAD_DIR/<document_id>_<filename>
+    files = os.listdir(settings.UPLOAD_DIR)
+    documents_to_process = []
+    
+    for filename in files:
+        # Padrão: UUID (36 chars) + '_' + filename
+        if len(filename) > 37 and filename[36] == '_':
+            doc_id = filename[:36]
+            # Verificar se é UUID válido
+            try:
+                uuid.UUID(doc_id)
+                original_filename = filename[37:]
+                filepath = os.path.join(settings.UPLOAD_DIR, filename)
+                documents_to_process.append({
+                    "document_id": doc_id,
+                    "filename": original_filename,
+                    "filepath": filepath
+                })
+            except ValueError:
+                continue
+
+    if not documents_to_process:
+        BaseLogger.info("[Reprocess] Nenhum documento elegível encontrado para reprocessamento.")
+        return DocumentReprocessResponse(
+            message="Nenhum documento encontrado para reprocessar.",
+            total_processed=0,
+            details=[]
+        )
+
+    processed_count = 0
+    details = []
+    
+    for doc in documents_to_process:
+        doc_id = doc["document_id"]
+        orig_name = doc["filename"]
+        path = doc["filepath"]
+        
+        BaseLogger.info(f"[Reprocess] Reprocessando doc_id={doc_id} | arquivo={orig_name}...")
+        try:
+            file_ext = os.path.splitext(orig_name)[1].lower()
+            raw_text = ""
+            page_count = None
+
+            if file_ext == ".pdf":
+                raw_text, page_count = document_processor.extract_text_from_pdf(path)
+            elif file_ext == ".md":
+                raw_text = document_processor.extract_text_from_markdown(path)
+            else:
+                raise ValueError(f"Extensão não suportada: {file_ext}")
+
+            cleaned_text = document_processor.clean_text(raw_text)
+            file_size = os.path.getsize(path)
+
+            metadata = DocumentMetadata(
+                filename=orig_name,
+                file_size_bytes=file_size,
+                content_type="application/pdf" if file_ext == ".pdf" else "text/markdown",
+                page_count=page_count,
+                char_count=len(cleaned_text),
+                uploaded_at=datetime.utcnow()
+            )
+
+            # Garantir que o splitter use os valores atualizados
+            from langchain_text_splitters import RecursiveCharacterTextSplitter
+            semantic_processor.text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=settings.CHUNK_SIZE,
+                chunk_overlap=settings.CHUNK_OVERLAP,
+                length_function=len,
+                separators=["\n\n", "\n", " ", ""]
+            )
+
+            response = semantic_processor.process_text_into_chunks(
+                document_id=doc_id,
+                text=cleaned_text,
+                doc_metadata=metadata
+            )
+
+            if response.chunks:
+                vector_store.delete_document_chunks(doc_id)
+                persisted = vector_store.upsert_chunks(response.chunks)
+                if persisted:
+                    processed_count += 1
+                    details.append({
+                        "document_id": doc_id,
+                        "filename": orig_name,
+                        "chunks_count": response.total_chunks,
+                        "status": "success"
+                    })
+                    BaseLogger.info(f"[Reprocess] Sucesso para doc_id={doc_id}. {response.total_chunks} chunks indexados.")
+                else:
+                    raise RuntimeError("Falha ao persistir no ChromaDB.")
+            else:
+                raise ValueError("Nenhum chunk gerado para o arquivo.")
+
+        except Exception as exc:
+            BaseLogger.error(f"[Reprocess] Falha ao reprocessar {orig_name}: {str(exc)}")
+            details.append({
+                "document_id": doc_id,
+                "filename": orig_name,
+                "status": "failed",
+                "error": str(exc)
+            })
+
+    # Limpar todo o cache do Redis para invalidar respostas RAG antigas
+    try:
+        await cache_service.clear()
+        BaseLogger.info("[Reprocess] Cache do Redis limpo com sucesso para invalidar resultados RAG antigos.")
+    except Exception as e:
+        BaseLogger.error(f"[Reprocess] Falha ao limpar cache Redis: {str(e)}")
+
+    return DocumentReprocessResponse(
+        message=f"Reprocessamento concluído. {processed_count} documentos processados com sucesso.",
+        total_processed=processed_count,
+        details=details
+    )

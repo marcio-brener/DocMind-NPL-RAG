@@ -34,8 +34,9 @@ services:
     environment:
       - APP_ENV=production
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
-      - RABBITMQ_DOCUMENT_QUEUE=document_processing
-      - RABBITMQ_RAG_QUEUE=rag_requests
+      - RABBITMQ_QUEUE=document_processing_queue
+      - RABBITMQ_EXCHANGE=document_exchange
+      - RABBITMQ_ROUTING_KEY=document.process
       - CHROMADB_PATH=/app/data/chromadb
       - UPLOAD_DIR=/app/data/uploads
     volumes:
@@ -55,8 +56,9 @@ services:
     environment:
       - APP_ENV=production
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
-      - RABBITMQ_DOCUMENT_QUEUE=document_processing
-      - RABBITMQ_RAG_QUEUE=rag_requests
+      - RABBITMQ_QUEUE=document_processing_queue
+      - RABBITMQ_EXCHANGE=document_exchange
+      - RABBITMQ_ROUTING_KEY=document.process
       - CHROMADB_PATH=/app/data/chromadb
       - UPLOAD_DIR=/app/data/uploads
     volumes:

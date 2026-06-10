@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from app.api.router import api_router
 from app.core.config import settings
 from app.core.logging import BaseLogger, setup_logging
-from app.services.message_queue_service import rabbitmq_service
+from app.services.rabbitmq_service import rabbitmq_service
 from app.services.task_service import task_service
 
 
@@ -23,23 +23,35 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     BaseLogger.info("[Lifespan] TaskService inicializado.")
     _ = task_service  # acesso ao singleton dispara __init__
 
-    # Conectar ao RabbitMQ (falha não é bloqueante — app continua sem fila)
-    connected = rabbitmq_service.connect()
-    if connected:
-        BaseLogger.info(
-            f"[Lifespan] RabbitMQ conectado. "
-            f"Filas: '{settings.RABBITMQ_DOCUMENT_QUEUE}', '{settings.RABBITMQ_RAG_QUEUE}'"
-        )
-    else:
-        BaseLogger.warning(
-            "[Lifespan] RabbitMQ indisponível no startup. "
-            "O upload assync estará degradado até o broker ficar ativo."
+    # Conectar ao RabbitMQ de forma assíncrona (não-bloqueante no startup se falhar)
+    try:
+        connected = await rabbitmq_service.connect()
+        if connected:
+            BaseLogger.info(
+                f"[Lifespan] RabbitMQ conectado. Fila principal: '{settings.RABBITMQ_QUEUE}'"
+            )
+            # Inicialização automática do consumer rag_requests
+            from app.services.rabbitmq_service import process_rag_request
+            await rabbitmq_service.consume_messages(
+                queue_name=settings.RABBITMQ_RAG_QUEUE,
+                callback=process_rag_request
+            )
+            BaseLogger.info(
+                f"[Lifespan] Consumer da fila '{settings.RABBITMQ_RAG_QUEUE}' inicializado com sucesso."
+            )
+        else:
+            BaseLogger.warning(
+                "[Lifespan] RabbitMQ indisponível no startup. O processamento assíncrono estará degradado."
+            )
+    except Exception as exc:
+        BaseLogger.error(
+            f"[Lifespan] Erro crítico ao conectar com o RabbitMQ no startup: {str(exc)}"
         )
 
     yield
 
-    # Limpeza e encerramento de conexões
-    rabbitmq_service.close()
+    # Limpeza e encerramento de conexões assíncronas
+    await rabbitmq_service.close()
     BaseLogger.info(f"Encerrando {settings.APP_NAME}...")
 
 

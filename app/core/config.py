@@ -43,8 +43,8 @@ class Settings(BaseSettings):
     PERSIST_DIRECTORY: str = "./data/chromadb"
     UPLOAD_DIR: str = "./data/uploads"
     MAX_FILE_SIZE_MB: int = 10
-    CHUNK_SIZE: int = 500
-    CHUNK_OVERLAP: int = 50
+    CHUNK_SIZE: int = 1000
+    CHUNK_OVERLAP: int = 150
     EMBEDDING_MODEL_NAME: str = "sentence-transformers/all-MiniLM-L6-v2"
 
     # Cache & Queues
@@ -52,17 +52,21 @@ class Settings(BaseSettings):
     RABBITMQ_URL: str = "amqp://guest:guest@localhost:5672/"
     RABBITMQ_DOCUMENT_QUEUE: str = "document_processing"
     RABBITMQ_RAG_QUEUE: str = "rag_requests"
+    RABBITMQ_QUEUE: str = "document_processing_queue"
+    RABBITMQ_EXCHANGE: str = "document_exchange"
+    RABBITMQ_ROUTING_KEY: str = "document.process"
     CACHE_TTL_SECONDS: int = 3600  # Tempo de vida padrão do cache Redis (1 hora)
 
     # LLM Providers
     GOOGLE_API_KEY: str = ""
     GEMINI_MODEL: str = "gemini-2.5-flash"
     LLM_TEMPERATURE: float = 0.2
-    LLM_MAX_TOKENS: int = 1024
+    LLM_MAX_TOKENS: int = 2048
 
     # RAG Pipeline
-    RAG_CONTEXT_CHUNKS: int = 4
-    RAG_MIN_SIMILARITY: float = 0.3
+    RAG_CONTEXT_CHUNKS: int = 12
+    RAG_MIN_SIMILARITY: float = 0.25
+    EXCERPT_LENGTH: int = 400
 
 
 # Instanciação global das configurações

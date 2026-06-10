@@ -25,9 +25,14 @@ async def semantic_search(payload: SearchRequest) -> SearchResponse:
     query_vector = embedding_service.embed_query(payload.query)
 
     # 2. Executar a busca de similaridade no ChromaDB
+    where_filter = None
+    if payload.filter_document_id:
+        where_filter = {"source_doc_id": payload.filter_document_id}
+
     raw_results = vector_store.similarity_search(
         query_vector=query_vector,
-        limit=payload.limit
+        limit=payload.limit,
+        where_filter=where_filter
     )
 
     # 3. Converter resultados brutos para o schema de resposta

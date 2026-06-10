@@ -1,6 +1,6 @@
 import os
 import chromadb
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from app.core.config import settings
 from app.core.logging import BaseLogger
@@ -88,18 +88,20 @@ class VectorStoreService:
     def similarity_search(
         self,
         query_vector: List[float],
-        limit: int = 4
+        limit: int = 4,
+        where_filter: Optional[Dict[str, Any]] = None
     ) -> List[Dict[str, Any]]:
 
         try:
 
             BaseLogger.info(
-                f"Executando busca vetorial (limit={limit})"
+                f"Executando busca vetorial (limit={limit}, where={where_filter})"
             )
 
             results = self.collection.query(
                 query_embeddings=[query_vector],
                 n_results=limit,
+                where=where_filter,
                 include=[
                     "documents",
                     "metadatas",
@@ -120,14 +122,34 @@ class VectorStoreService:
                 )
                 return []
 
-            for idx in range(len(ids)):
+            space = "cosine"
+            if self.collection and self.collection.metadata:
+                space = self.collection.metadata.get("hnsw:space", "cosine")
 
+            # Log debug do Chroma
+            BaseLogger.info(
+                "===== CHROMA DEBUG =====\n"
+                f"SPACE: {space}\n"
+                f"DISTANCES: {distances}\n"
+                f"IDS: {ids}\n"
+                "=========="
+            )
+
+            for idx in range(len(ids)):
                 distance = float(distances[idx])
 
-                similarity = max(
-                    0.0,
-                    round(1.0 - distance, 4)
-                )
+                if space == "l2":
+                    # Se o vetor estiver normalizado, a distância L2 quadrada é 2 * (1 - cos_sim)
+                    if distance > 2.0:
+                        similarity = 1.0 / (1.0 + distance)
+                    else:
+                        similarity = max(0.0, 1.0 - (distance / 2.0))
+                elif space == "ip":
+                    similarity = max(0.0, 1.0 - distance)
+                else:  # cosine
+                    similarity = max(0.0, 1.0 - distance)
+
+                similarity = round(similarity, 4)
 
                 formatted_results.append({
                     "chunk_id": ids[idx],
@@ -140,6 +162,10 @@ class VectorStoreService:
             formatted_results.sort(
                 key=lambda x: x["similarity"],
                 reverse=True
+            )
+
+            BaseLogger.info(
+                f"Resultados encontrados: {len(formatted_results)}"
             )
 
             BaseLogger.info(

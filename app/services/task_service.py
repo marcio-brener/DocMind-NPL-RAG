@@ -1,7 +1,6 @@
 import json
 import os
 import threading
-import uuid
 from datetime import datetime
 from typing import Optional
 
@@ -67,14 +66,16 @@ class TaskService:
         """Converte um dicionário bruto do JSON em um TaskResponse tipado."""
         return TaskResponse(
             task_id=task_data["task_id"],
-            document_id=task_data["document_id"],
-            filename=task_data["filename"],
+            document_id=task_data.get("document_id"),
+            filename=task_data.get("filename"),
             status=TaskStatus(task_data["status"]),
             progress=task_data.get("progress", 0),
             message=task_data.get("message", ""),
             created_at=datetime.fromisoformat(task_data["created_at"]),
             updated_at=datetime.fromisoformat(task_data["updated_at"]),
-            error_detail=task_data.get("error_detail"),
+            error_detail=task_data.get("error_detail") or task_data.get("error"),
+            result=task_data.get("result"),
+            error=task_data.get("error") or task_data.get("error_detail"),
         )
 
     # ── Interface Pública ─────────────────────────────────────────────────────
@@ -96,10 +97,12 @@ class TaskService:
             "filename": task_input.filename,
             "status": TaskStatus.QUEUED.value,
             "progress": 0,
-            "message": "Documento enfileirado aguardando processamento.",
+            "message": "Tarefa enfileirada aguardando processamento.",
             "created_at": now.isoformat(),
             "updated_at": now.isoformat(),
             "error_detail": None,
+            "error": None,
+            "result": None,
         }
 
         with self._lock:
@@ -120,6 +123,7 @@ class TaskService:
         progress: int = 0,
         message: str = "",
         error_detail: Optional[str] = None,
+        result: Optional[dict] = None,
     ) -> Optional[TaskResponse]:
         """
         Atualiza o status, progresso e mensagem de uma tarefa existente.
@@ -148,6 +152,9 @@ class TaskService:
             tasks[task_id]["updated_at"] = datetime.utcnow().isoformat()
             if error_detail is not None:
                 tasks[task_id]["error_detail"] = error_detail
+                tasks[task_id]["error"] = error_detail
+            if result is not None:
+                tasks[task_id]["result"] = result
 
             self._save_tasks(tasks)
             task_data = tasks[task_id]
@@ -179,10 +186,6 @@ class TaskService:
             return None
 
         return self._serialize_task(task_data)
-
-    def generate_task_id(self) -> str:
-        """Gera um novo UUID único para uso como task_id."""
-        return str(uuid.uuid4())
 
 
 # Instanciação Singleton do serviço de tarefas

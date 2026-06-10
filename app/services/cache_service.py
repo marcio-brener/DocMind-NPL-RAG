@@ -72,22 +72,23 @@ class CacheService:
     # ── Geração de chave determinística ─────────────────────────────────────
 
     @staticmethod
-    def build_cache_key(question: str, limit: int) -> str:
+    def build_cache_key(question: str, limit: int, document_id: Optional[str] = None) -> str:
         """
-        Gera uma chave de cache determinística via SHA-256.
+        Gera uma chave de cache determinística via SHA-256 com normalização completa da pergunta.
 
         Args:
             question: Pergunta do usuário.
             limit:    Número máximo de chunks solicitados.
+            document_id: ID do documento específico (opcional).
 
         Returns:
             String hexadecimal de 64 caracteres (SHA-256).
-
-        Exemplo:
-            key = CacheService.build_cache_key("O que é RAG?", 4)
-            # → "a3f2c1..."
         """
-        raw = f"{question.strip()}|{limit}"
+        import re
+        normalized = question.strip().lower()
+        normalized = re.sub(r"\s+", " ", normalized)
+        normalized = normalized.rstrip("?./! ")
+        raw = f"{normalized}|{limit}|{document_id or ''}"
         return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
     # ── Métodos de cache ─────────────────────────────────────────────────────
@@ -110,7 +111,7 @@ class CacheService:
             if raw is not None:
                 BaseLogger.info(f"[REDIS] Cache HIT → chave: {key[:16]}...")
                 return json.loads(raw)
-            BaseLogger.debug(f"[REDIS] Cache MISS → chave: {key[:16]}...")
+            BaseLogger.info(f"[REDIS] Cache MISS → chave: {key[:16]}...")
             return None
         except Exception as exc:
             BaseLogger.error(f"[REDIS] Erro de conexão ao executar GET: {exc}")

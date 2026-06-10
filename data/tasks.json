@@ -9,5 +9,2072 @@
     "created_at": "2026-06-06T18:50:53.495643",
     "updated_at": "2026-06-06T18:50:53.495643",
     "error_detail": null
+  },
+  "6f4fded4-c45d-4927-ac28-7de5a1032c5e": {
+    "task_id": "6f4fded4-c45d-4927-ac28-7de5a1032c5e",
+    "document_id": "cc2257ab-59d2-4efb-805b-03a6ba20f74c",
+    "filename": "resumo_senhor_dos_aneis.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-07T17:33:01.210407",
+    "updated_at": "2026-06-07T17:33:01.210407",
+    "error_detail": null
+  },
+  "316316ec-6216-4cda-b44c-0ae142bd0db1": {
+    "task_id": "316316ec-6216-4cda-b44c-0ae142bd0db1",
+    "document_id": "316316ec-6216-4cda-b44c-0ae142bd0db1",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T22:38:27.965716",
+    "updated_at": "2026-06-08T22:38:27.965716",
+    "error_detail": null
+  },
+  "162aafa8-7346-43c6-b361-dedc6e2a59c8": {
+    "task_id": "162aafa8-7346-43c6-b361-dedc6e2a59c8",
+    "document_id": "162aafa8-7346-43c6-b361-dedc6e2a59c8",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T22:38:27.993276",
+    "updated_at": "2026-06-08T22:38:27.993276",
+    "error_detail": null
+  },
+  "ce7034f6-e09c-4eab-8183-77cba0ed4d3a": {
+    "task_id": "ce7034f6-e09c-4eab-8183-77cba0ed4d3a",
+    "document_id": "ce7034f6-e09c-4eab-8183-77cba0ed4d3a",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T22:46:22.873190",
+    "updated_at": "2026-06-08T22:46:22.873190",
+    "error_detail": null
+  },
+  "13ecf383-83e3-4281-af5c-c2583e779323": {
+    "task_id": "13ecf383-83e3-4281-af5c-c2583e779323",
+    "document_id": "13ecf383-83e3-4281-af5c-c2583e779323",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T22:47:31.931460",
+    "updated_at": "2026-06-08T22:47:31.931460",
+    "error_detail": null
+  },
+  "7e61a962-6780-4783-bcb0-db53c6a24d46": {
+    "task_id": "7e61a962-6780-4783-bcb0-db53c6a24d46",
+    "document_id": "7e61a962-6780-4783-bcb0-db53c6a24d46",
+    "filename": "fundamentos_ml.md",
+    "status": "FAILED",
+    "progress": 0,
+    "message": "Falha ao publicar na fila. Broker RabbitMQ indisponível.",
+    "created_at": "2026-06-08T23:10:30.390573",
+    "updated_at": "2026-06-08T23:10:30.410428",
+    "error_detail": "RabbitMQ não pôde ser alcançado no momento do upload."
+  },
+  "89739857-f935-4b9c-b7da-783112d8e951": {
+    "task_id": "89739857-f935-4b9c-b7da-783112d8e951",
+    "document_id": "89739857-f935-4b9c-b7da-783112d8e951",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:11:10.132376",
+    "updated_at": "2026-06-08T23:11:10.132376",
+    "error_detail": null
+  },
+  "72d4644e-6345-43bb-abf0-39dd0c95b901": {
+    "task_id": "72d4644e-6345-43bb-abf0-39dd0c95b901",
+    "document_id": "72d4644e-6345-43bb-abf0-39dd0c95b901",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:11:52.605270",
+    "updated_at": "2026-06-08T23:11:52.605270",
+    "error_detail": null
+  },
+  "ccf30bb9-7316-48f5-bef8-bfb981c240be": {
+    "task_id": "ccf30bb9-7316-48f5-bef8-bfb981c240be",
+    "document_id": "ccf30bb9-7316-48f5-bef8-bfb981c240be",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:12:16.813693",
+    "updated_at": "2026-06-08T23:12:16.813693",
+    "error_detail": null
+  },
+  "f9655a9b-ee46-40b1-aed4-23416e10a08f": {
+    "task_id": "f9655a9b-ee46-40b1-aed4-23416e10a08f",
+    "document_id": "f9655a9b-ee46-40b1-aed4-23416e10a08f",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:12:16.836860",
+    "updated_at": "2026-06-08T23:12:16.836860",
+    "error_detail": null
+  },
+  "12ba1138-3e2b-42ca-a7e8-f5340c8ee53a": {
+    "task_id": "12ba1138-3e2b-42ca-a7e8-f5340c8ee53a",
+    "document_id": "12ba1138-3e2b-42ca-a7e8-f5340c8ee53a",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:12:17.284992",
+    "updated_at": "2026-06-08T23:12:17.284992",
+    "error_detail": null
+  },
+  "93759d70-5e1b-48d4-a6b6-504d94f684d2": {
+    "task_id": "93759d70-5e1b-48d4-a6b6-504d94f684d2",
+    "document_id": "93759d70-5e1b-48d4-a6b6-504d94f684d2",
+    "filename": "auditoria_anual.md",
+    "status": "FAILED",
+    "progress": 0,
+    "message": "Falha ao publicar na fila. Broker RabbitMQ indisponível.",
+    "created_at": "2026-06-08T23:12:17.758811",
+    "updated_at": "2026-06-08T23:12:17.782727",
+    "error_detail": "RabbitMQ não pôde ser alcançado no momento do upload."
+  },
+  "6929348d-ad5d-494b-acae-889f761c1c6a": {
+    "task_id": "6929348d-ad5d-494b-acae-889f761c1c6a",
+    "document_id": "6929348d-ad5d-494b-acae-889f761c1c6a",
+    "filename": "arquitetura.md",
+    "status": "FAILED",
+    "progress": 0,
+    "message": "Falha ao publicar na fila. Broker RabbitMQ indisponível.",
+    "created_at": "2026-06-08T23:12:18.949408",
+    "updated_at": "2026-06-08T23:12:18.972939",
+    "error_detail": "RabbitMQ não pôde ser alcançado no momento do upload."
+  },
+  "76b1806c-4189-4378-b06d-3a4242bad4be": {
+    "task_id": "76b1806c-4189-4378-b06d-3a4242bad4be",
+    "document_id": "76b1806c-4189-4378-b06d-3a4242bad4be",
+    "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:24:28.537317",
+    "updated_at": "2026-06-08T23:24:28.537317",
+    "error_detail": null
+  },
+  "64951e17-728b-4ec5-b262-fe1e5133e256": {
+    "task_id": "64951e17-728b-4ec5-b262-fe1e5133e256",
+    "document_id": "rag_query",
+    "filename": "rag_question",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:43:46.940117",
+    "updated_at": "2026-06-08T23:43:46.940117",
+    "error_detail": null,
+    "result": null
+  },
+  "d6f2bb2e-640c-49d8-a2c6-5e387e039b65": {
+    "task_id": "d6f2bb2e-640c-49d8-a2c6-5e387e039b65",
+    "document_id": "d6f2bb2e-640c-49d8-a2c6-5e387e039b65",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:43:46.959365",
+    "updated_at": "2026-06-08T23:43:46.959365",
+    "error_detail": null,
+    "result": null
+  },
+  "f6dab6b1-3255-49ae-a833-16dfb98bf3a5": {
+    "task_id": "f6dab6b1-3255-49ae-a833-16dfb98bf3a5",
+    "document_id": "rag_query",
+    "filename": "rag_question",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:43:47.156161",
+    "updated_at": "2026-06-08T23:43:47.156161",
+    "error_detail": null,
+    "result": null
+  },
+  "75f1f706-47c1-4864-bdd5-6560358b69de": {
+    "task_id": "75f1f706-47c1-4864-bdd5-6560358b69de",
+    "document_id": "75f1f706-47c1-4864-bdd5-6560358b69de",
+    "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Documento enfileirado aguardando processamento.",
+    "created_at": "2026-06-08T23:46:09.184351",
+    "updated_at": "2026-06-08T23:46:09.184351",
+    "error_detail": null,
+    "result": null
+  },
+  "716eee68-18f4-43e2-ac49-140e84f1db21": {
+    "task_id": "716eee68-18f4-43e2-ac49-140e84f1db21",
+    "document_id": "rag_query",
+    "filename": "rag_question",
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-08T23:48:27.936710",
+    "updated_at": "2026-06-08T23:48:34.950886",
+    "error_detail": null,
+    "result": {
+      "request_id": "716eee68-18f4-43e2-ac49-140e84f1db21",
+      "answer": "Com base nos fragmentos de contexto fornecidos, não há informação suficiente para definir o que é \"Ridebuddy\". Os fragmentos apenas mencionam \"Relatório Técnico de Governança de TI - Ride\".",
+      "sources": [
+        {
+          "chunk_id": "22b22bb2-df79-40cc-9716-c917f886a60e",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.536
+        },
+        {
+          "chunk_id": "549e2aeb-a4ce-4849-a413-267c9d0d9d60",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.536
+        },
+        {
+          "chunk_id": "eaf508ae-2ae0-473e-8a36-b7eab0dfafa4",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.536
+        },
+        {
+          "chunk_id": "864a21ae-6e62-4929-a46e-01a7fb1580cc",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.536
+        }
+      ]
+    }
+  },
+  "7721e531-dc15-4379-8d35-c799eb97c9a0": {
+    "task_id": "7721e531-dc15-4379-8d35-c799eb97c9a0",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-08T23:59:56.020258",
+    "updated_at": "2026-06-08T23:59:56.020258",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "2b790bf1-85f6-4063-828e-528164ef16a3": {
+    "task_id": "2b790bf1-85f6-4063-828e-528164ef16a3",
+    "document_id": "2b790bf1-85f6-4063-828e-528164ef16a3",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-08T23:59:56.043468",
+    "updated_at": "2026-06-08T23:59:56.043468",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "cb599cdb-8460-4286-90d2-109d046bbf08": {
+    "task_id": "cb599cdb-8460-4286-90d2-109d046bbf08",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-08T23:59:56.225706",
+    "updated_at": "2026-06-08T23:59:56.225706",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a3e8b1cd-f17c-4269-b4dd-73f37a19dc34": {
+    "task_id": "a3e8b1cd-f17c-4269-b4dd-73f37a19dc34",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:01:06.654635",
+    "updated_at": "2026-06-09T00:01:06.654635",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "cc8a84db-9bc1-4ce4-9d5c-02b52fefe3ba": {
+    "task_id": "cc8a84db-9bc1-4ce4-9d5c-02b52fefe3ba",
+    "document_id": "cc8a84db-9bc1-4ce4-9d5c-02b52fefe3ba",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:01:06.685150",
+    "updated_at": "2026-06-09T00:01:06.685150",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "e848838c-7485-4e1e-9b34-30d5a28119f2": {
+    "task_id": "e848838c-7485-4e1e-9b34-30d5a28119f2",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:01:06.858808",
+    "updated_at": "2026-06-09T00:01:06.858808",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "7ea1cbc2-5e82-42f7-ae0d-2d0dc744c77e": {
+    "task_id": "7ea1cbc2-5e82-42f7-ae0d-2d0dc744c77e",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:02:01.107506",
+    "updated_at": "2026-06-09T00:02:01.107506",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "2b2f9510-904a-4085-9c3d-c3b1c1e93c53": {
+    "task_id": "2b2f9510-904a-4085-9c3d-c3b1c1e93c53",
+    "document_id": "2b2f9510-904a-4085-9c3d-c3b1c1e93c53",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:02:01.137263",
+    "updated_at": "2026-06-09T00:02:01.137263",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "09d17ef5-b5e1-4713-bb5c-e7c5ed4b52d5": {
+    "task_id": "09d17ef5-b5e1-4713-bb5c-e7c5ed4b52d5",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:02:01.352484",
+    "updated_at": "2026-06-09T00:02:01.352484",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "457b8eeb-f692-4890-be0b-f7925036b8f2": {
+    "task_id": "457b8eeb-f692-4890-be0b-f7925036b8f2",
+    "document_id": "457b8eeb-f692-4890-be0b-f7925036b8f2",
+    "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:04:32.836594",
+    "updated_at": "2026-06-09T00:04:32.836594",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "604f26c3-45d0-486b-a6ea-82fcb918baee": {
+    "task_id": "604f26c3-45d0-486b-a6ea-82fcb918baee",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T00:06:24.207135",
+    "updated_at": "2026-06-09T00:06:25.911840",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "e15a3c3b-bea2-4b82-b893-bed528129379",
+      "answer": "Não foi encontrada informação relevante sobre o que é \"RideBuddy\" nos documentos disponíveis. Os fragmentos mencionam apenas \"Relatório Técnico de Governança de TI - Ride\".",
+      "sources": [
+        {
+          "chunk_id": "22b22bb2-df79-40cc-9716-c917f886a60e",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.536
+        },
+        {
+          "chunk_id": "549e2aeb-a4ce-4849-a413-267c9d0d9d60",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.536
+        },
+        {
+          "chunk_id": "d95e41b5-1331-415d-be02-989dc6ad55f1",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.536
+        },
+        {
+          "chunk_id": "eaf508ae-2ae0-473e-8a36-b7eab0dfafa4",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.536
+        }
+      ]
+    }
+  },
+  "32dbd391-c8d9-4769-9dd1-634d7c12bab7": {
+    "task_id": "32dbd391-c8d9-4769-9dd1-634d7c12bab7",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T00:07:46.083342",
+    "updated_at": "2026-06-09T00:07:51.576015",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "02e553ec-1fc2-4fd7-8c22-d79d66cf9f1e",
+      "answer": "O projeto Ride Buddy consiste em uma aplicação mobile desenvolvida utilizando o framework Flutter.",
+      "sources": [
+        {
+          "chunk_id": "79eda5a2-ea4b-4f57-9663-f33aec7ea2e4",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Participantes: \nMárcio Brener de Moraes — Prontuário: BP304470X Marco Aurélio Nichi Rodermel — Prontuário: BP3044149 Tiago Silva Fernandes — Prontuário: BP3044254 Willian Rodrigues Spada — Prontuário:...",
+          "similarity": 0.3676
+        },
+        {
+          "chunk_id": "1439677c-45c0-4a52-9417-8acdc4b92b9c",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Participantes: \nMárcio Brener de Moraes — Prontuário: BP304470X Marco Aurélio Nichi Rodermel — Prontuário: BP3044149 Tiago Silva Fernandes — Prontuário: BP3044254 Willian Rodrigues Spada — Prontuário:...",
+          "similarity": 0.3676
+        },
+        {
+          "chunk_id": "ee96e196-5b12-4848-a153-db51a9783e0d",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Participantes: \nMárcio Brener de Moraes — Prontuário: BP304470X Marco Aurélio Nichi Rodermel — Prontuário: BP3044149 Tiago Silva Fernandes — Prontuário: BP3044254 Willian Rodrigues Spada — Prontuário:...",
+          "similarity": 0.3676
+        },
+        {
+          "chunk_id": "6fce4922-c96e-4f3d-9835-22f8fa54f4cd",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Participantes: \nMárcio Brener de Moraes — Prontuário: BP304470X Marco Aurélio Nichi Rodermel — Prontuário: BP3044149 Tiago Silva Fernandes — Prontuário: BP3044254 Willian Rodrigues Spada — Prontuário:...",
+          "similarity": 0.3676
+        }
+      ]
+    }
+  },
+  "c350efd9-5f1f-4ba1-a2df-13e9085244ab": {
+    "task_id": "c350efd9-5f1f-4ba1-a2df-13e9085244ab",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:18:00.542975",
+    "updated_at": "2026-06-09T00:18:00.542975",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "cc3931f2-3d04-4878-bb37-8e23a2537bc5": {
+    "task_id": "cc3931f2-3d04-4878-bb37-8e23a2537bc5",
+    "document_id": "cc3931f2-3d04-4878-bb37-8e23a2537bc5",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:18:00.559205",
+    "updated_at": "2026-06-09T00:18:00.559205",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d98be10b-2bb3-4968-8ca6-1e5d8b6a9047": {
+    "task_id": "d98be10b-2bb3-4968-8ca6-1e5d8b6a9047",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:18:00.755025",
+    "updated_at": "2026-06-09T00:18:00.755025",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "ad080b1b-c050-495f-91c4-f440503c851e": {
+    "task_id": "ad080b1b-c050-495f-91c4-f440503c851e",
+    "document_id": "ad080b1b-c050-495f-91c4-f440503c851e",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T00:20:19.754281",
+    "updated_at": "2026-06-09T00:20:19.754281",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "ea898aa0-780f-482e-a396-f1f4a9cd9cac": {
+    "task_id": "ea898aa0-780f-482e-a396-f1f4a9cd9cac",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T00:22:07.330951",
+    "updated_at": "2026-06-09T00:22:09.023426",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "ea898aa0-780f-482e-a396-f1f4a9cd9cac",
+      "answer": "Não encontrei informações suficientes nos documentos para responder essa pergunta.",
+      "sources": []
+    }
+  },
+  "24e81fe8-d78d-4b49-8173-ceb4f187e481": {
+    "task_id": "24e81fe8-d78d-4b49-8173-ceb4f187e481",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T00:28:51.232112",
+    "updated_at": "2026-06-09T00:28:53.664319",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "24e81fe8-d78d-4b49-8173-ceb4f187e481",
+      "answer": "Não encontrei informações sobre as habilidades de Marcio Brener nos documentos fornecidos.",
+      "sources": [
+        {
+          "chunk_id": "705a15f5-5550-499d-a8ca-91bfd44558f8",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "cabeça; se atacar o meio, será atacado por ambas.\n30. Se perguntarem se um exército pode imitar o \nshuai-jan, eu responderia: sim. Pois os homens de Wu e \nde Yueh são inimigos; ainda assim, se estiver...",
+          "similarity": 0.5027
+        },
+        {
+          "chunk_id": "26bf36a2-c60d-4eb3-8a6d-4a564c54f96a",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "3\nSun Tzu sobre a Arte da Guerra\n(6) De qual lado oficiais e soldados são mais bem \ntreinados?\n(7) Em qual exército há maior constância tanto \nnas recompensas quanto nas punições?\n14. Com base nessas ...",
+          "similarity": 0.5252
+        },
+        {
+          "chunk_id": "a2f8e5f1-77a2-4644-abea-9d4381ab297a",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "sábio que seja — conseguirá evitar as consequências \nque se seguirão.\n5.Assim, embora já se tenha ouvido falar de pressa \nimprudente na guerra, nunca se viu habilidade \nassociada a longas demoras.\n5\nS...",
+          "similarity": 0.5127
+        },
+        {
+          "chunk_id": "16349af5-f8ca-4013-8422-28b24f681b55",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "8. Ver a vitória apenas quando ela é evidente para o \nsenso comum não é o auge da excelência.\n9. Tampouco é excelência suprema lutar, vencer e \nouvir todo o império dizer: “Muito bem!”.\n10. Levantar u...",
+          "similarity": 0.5354
+        }
+      ]
+    }
+  },
+  "04ed985b-0421-46b7-b96c-d54ec190d598": {
+    "task_id": "04ed985b-0421-46b7-b96c-d54ec190d598",
+    "document_id": "04ed985b-0421-46b7-b96c-d54ec190d598",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:00:20.526960",
+    "updated_at": "2026-06-09T01:00:20.526960",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "63e9496e-d103-4082-b8bd-a4129943c0a7": {
+    "task_id": "63e9496e-d103-4082-b8bd-a4129943c0a7",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:01:14.695373",
+    "updated_at": "2026-06-09T01:01:14.695373",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "9affc262-4837-4aa4-8b89-452e5df08c7e": {
+    "task_id": "9affc262-4837-4aa4-8b89-452e5df08c7e",
+    "document_id": "9affc262-4837-4aa4-8b89-452e5df08c7e",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:01:14.725543",
+    "updated_at": "2026-06-09T01:01:14.725543",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "c2fbab95-32b0-4946-8eb8-c844d67c19d1": {
+    "task_id": "c2fbab95-32b0-4946-8eb8-c844d67c19d1",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:01:14.936185",
+    "updated_at": "2026-06-09T01:01:14.936185",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "87a9c70e-3549-4f87-abcb-f91eb81ae853": {
+    "task_id": "87a9c70e-3549-4f87-abcb-f91eb81ae853",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:02:01.788749",
+    "updated_at": "2026-06-09T01:02:01.788749",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "5c4772b6-11d2-4d52-8e77-d7ca45f9ccff": {
+    "task_id": "5c4772b6-11d2-4d52-8e77-d7ca45f9ccff",
+    "document_id": "5c4772b6-11d2-4d52-8e77-d7ca45f9ccff",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:02:01.819342",
+    "updated_at": "2026-06-09T01:02:01.819342",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "7502bd34-211a-4695-98a1-5409eeed631b": {
+    "task_id": "7502bd34-211a-4695-98a1-5409eeed631b",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:02:02.132314",
+    "updated_at": "2026-06-09T01:02:02.132314",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "2f503cec-aa75-42b7-b929-2bd6ce238c29": {
+    "task_id": "2f503cec-aa75-42b7-b929-2bd6ce238c29",
+    "document_id": "2f503cec-aa75-42b7-b929-2bd6ce238c29",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:05:02.889826",
+    "updated_at": "2026-06-09T01:05:02.889826",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "4be38d9b-793b-4e8e-9994-45fb0c436527": {
+    "task_id": "4be38d9b-793b-4e8e-9994-45fb0c436527",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T01:07:19.710369",
+    "updated_at": "2026-06-09T01:07:23.947191",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "4be38d9b-793b-4e8e-9994-45fb0c436527",
+      "answer": "Não encontrei informação relevante sobre experiência profissional nos documentos disponíveis.",
+      "sources": [
+        {
+          "chunk_id": "7e5e0b79-73e3-4f57-b090-2bde449d3324",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "forma que administra um reino, ignorando as \ncondições próprias da vida militar. Isso causa \ninquietação na mente dos soldados.\n15. (3) Ao empregar os oficiais sem critério, por \nignorar o princípio m...",
+          "similarity": 0.3704
+        }
+      ]
+    }
+  },
+  "183c4235-2a8a-4379-919f-1977e8210076": {
+    "task_id": "183c4235-2a8a-4379-919f-1977e8210076",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T01:08:13.614599",
+    "updated_at": "2026-06-09T01:08:13.683238",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "183c4235-2a8a-4379-919f-1977e8210076",
+      "answer": "Não encontrei informações suficientes nos documentos para responder essa pergunta.",
+      "sources": []
+    }
+  },
+  "ebefcadb-0b80-4a87-8c98-da526c22fecb": {
+    "task_id": "ebefcadb-0b80-4a87-8c98-da526c22fecb",
+    "document_id": "ebefcadb-0b80-4a87-8c98-da526c22fecb",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:17:46.278441",
+    "updated_at": "2026-06-09T01:17:46.278441",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "876f7316-84d0-4805-a5c2-696fa062cf23": {
+    "task_id": "876f7316-84d0-4805-a5c2-696fa062cf23",
+    "document_id": "876f7316-84d0-4805-a5c2-696fa062cf23",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:17:46.288912",
+    "updated_at": "2026-06-09T01:17:46.288912",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "362e602e-9414-4fb9-bb29-60f8649bbaed": {
+    "task_id": "362e602e-9414-4fb9-bb29-60f8649bbaed",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:17:46.791540",
+    "updated_at": "2026-06-09T01:17:46.791540",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "06a43e7c-11dc-4d1a-8310-3ab2bcf45f96": {
+    "task_id": "06a43e7c-11dc-4d1a-8310-3ab2bcf45f96",
+    "document_id": "06a43e7c-11dc-4d1a-8310-3ab2bcf45f96",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:17:46.816511",
+    "updated_at": "2026-06-09T01:17:46.816511",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "f6d6df86-5e26-497b-ba46-49fab06cc70a": {
+    "task_id": "f6d6df86-5e26-497b-ba46-49fab06cc70a",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:17:46.974884",
+    "updated_at": "2026-06-09T01:17:46.974884",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b829c93e-656e-4441-81ee-bdf9625c6c7c": {
+    "task_id": "b829c93e-656e-4441-81ee-bdf9625c6c7c",
+    "document_id": "b829c93e-656e-4441-81ee-bdf9625c6c7c",
+    "filename": "auditoria_anual.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:17:47.328014",
+    "updated_at": "2026-06-09T01:17:47.328014",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "0b949557-236b-445d-99f1-83a25903a94d": {
+    "task_id": "0b949557-236b-445d-99f1-83a25903a94d",
+    "document_id": "0b949557-236b-445d-99f1-83a25903a94d",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:17:48.477940",
+    "updated_at": "2026-06-09T01:17:48.477940",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a2d9320a-0c72-455f-867c-6fb99fa09264": {
+    "task_id": "a2d9320a-0c72-455f-867c-6fb99fa09264",
+    "document_id": "a2d9320a-0c72-455f-867c-6fb99fa09264",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:18:50.324937",
+    "updated_at": "2026-06-09T01:18:50.324937",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "761da5a1-76dd-4fe6-88b3-040ef5dc7d00": {
+    "task_id": "761da5a1-76dd-4fe6-88b3-040ef5dc7d00",
+    "document_id": "761da5a1-76dd-4fe6-88b3-040ef5dc7d00",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:18:50.343281",
+    "updated_at": "2026-06-09T01:18:50.343281",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "63279d4e-58cb-4a2d-9032-a2addb23ed40": {
+    "task_id": "63279d4e-58cb-4a2d-9032-a2addb23ed40",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:18:50.747723",
+    "updated_at": "2026-06-09T01:18:50.747723",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a3f3ccbe-8ce0-4795-92cd-770db9033f50": {
+    "task_id": "a3f3ccbe-8ce0-4795-92cd-770db9033f50",
+    "document_id": "a3f3ccbe-8ce0-4795-92cd-770db9033f50",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:18:50.772542",
+    "updated_at": "2026-06-09T01:18:50.772542",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "5884285c-aff1-4f8e-a896-7d80a1af6dfb": {
+    "task_id": "5884285c-aff1-4f8e-a896-7d80a1af6dfb",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:18:50.913907",
+    "updated_at": "2026-06-09T01:18:50.913907",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "42c4402e-75a2-40f2-af50-18626339a953": {
+    "task_id": "42c4402e-75a2-40f2-af50-18626339a953",
+    "document_id": "42c4402e-75a2-40f2-af50-18626339a953",
+    "filename": "auditoria_anual.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:18:51.296925",
+    "updated_at": "2026-06-09T01:18:51.296925",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "3bd5c3eb-d3c8-4027-92ef-6284f8a6e921": {
+    "task_id": "3bd5c3eb-d3c8-4027-92ef-6284f8a6e921",
+    "document_id": "3bd5c3eb-d3c8-4027-92ef-6284f8a6e921",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:18:52.593907",
+    "updated_at": "2026-06-09T01:18:52.593907",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "00259a3a-d936-46c2-883c-11fdfde2e1a5": {
+    "task_id": "00259a3a-d936-46c2-883c-11fdfde2e1a5",
+    "document_id": "00259a3a-d936-46c2-883c-11fdfde2e1a5",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:20:58.259944",
+    "updated_at": "2026-06-09T01:20:58.259944",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d64e4c0f-1472-47bc-9daf-efde48a7c087": {
+    "task_id": "d64e4c0f-1472-47bc-9daf-efde48a7c087",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T01:28:09.556249",
+    "updated_at": "2026-06-09T01:28:15.113824",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "d64e4c0f-1472-47bc-9daf-efde48a7c087",
+      "answer": "Com base nos documentos fornecidos, Márcio Brener de Moraes possui a seguinte experiência profissional:\n\n*   **Dev Lead (Flutter)** no desenvolvimento do projeto Ride Buddy V3.\n*   Atua como **Márcio (Dev)** nos processos COBIT EDM02, EDM03, APO12 e APO13.\n*   É estudante de Análise e Desenvolvimento de Sistemas no Instituto Federal de São Paulo (IFSP).",
+      "sources": [
+        {
+          "chunk_id": "c2773218-417a-438c-86b4-018c08f704fb",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "MÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000b...",
+          "similarity": 0.48539999999999994
+        },
+        {
+          "chunk_id": "ae748a84-f240-4926-ac5c-825d8599c3a3",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "desenvolvimento:\n ● PO / Analista de Requisitos: Tiago Silva Fernandes ● Dev Lead (Flutter): Márcio Brener de Moraes ● Analista de QA / Segurança: Marco Aurélio Nichi Rodermel ● Analista de Governança...",
+          "similarity": 0.4537
+        },
+        {
+          "chunk_id": "51b56c25-e265-4ba5-ae92-844dd12b7ed7",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "restaurado; nem os mortos podem voltar à vida.\n22. Portanto, o governante esclarecido é prudente, e o \nbom general é cauteloso. Esse é o caminho para \nmanter um país em paz e um exército intacto.\n58\nS...",
+          "similarity": 0.4383
+        },
+        {
+          "chunk_id": "10d86385-bbbb-42e9-9e0e-7c2f8ac66ee3",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "mostre-a claramente; quando for desfavorável, não \ndiga nada.\n58. Coloque seu exército em perigo extremo, e ele \nsobreviverá; lance-o em situações desesperadoras, e \nele sairá em segurança.\n59. Pois é...",
+          "similarity": 0.42
+        }
+      ]
+    }
+  },
+  "9cddfcc7-3fb3-4bfb-9554-6e58ceea51f9": {
+    "task_id": "9cddfcc7-3fb3-4bfb-9554-6e58ceea51f9",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:37:09.524343",
+    "updated_at": "2026-06-09T01:37:09.524343",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a26c1722-9c36-4dc5-983a-efce9b1cd707": {
+    "task_id": "a26c1722-9c36-4dc5-983a-efce9b1cd707",
+    "document_id": "a26c1722-9c36-4dc5-983a-efce9b1cd707",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:37:09.559063",
+    "updated_at": "2026-06-09T01:37:09.559063",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "3348a70a-bf9f-43bf-9f16-525cdcdf03f8": {
+    "task_id": "3348a70a-bf9f-43bf-9f16-525cdcdf03f8",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:37:09.793022",
+    "updated_at": "2026-06-09T01:37:09.793022",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "78af4b87-b882-4572-8822-6cc023dd871e": {
+    "task_id": "78af4b87-b882-4572-8822-6cc023dd871e",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:37:51.084803",
+    "updated_at": "2026-06-09T01:37:51.084803",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "994378c5-f2b6-4a9b-b4cb-3010b1fad7f2": {
+    "task_id": "994378c5-f2b6-4a9b-b4cb-3010b1fad7f2",
+    "document_id": "994378c5-f2b6-4a9b-b4cb-3010b1fad7f2",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:37:51.110892",
+    "updated_at": "2026-06-09T01:37:51.110892",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "8caea975-6a01-47c2-a001-be72ad031e69": {
+    "task_id": "8caea975-6a01-47c2-a001-be72ad031e69",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:37:51.316985",
+    "updated_at": "2026-06-09T01:37:51.316985",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "38fa4e98-62d6-48f3-8c88-5c502a3acdda": {
+    "task_id": "38fa4e98-62d6-48f3-8c88-5c502a3acdda",
+    "document_id": "38fa4e98-62d6-48f3-8c88-5c502a3acdda",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T01:40:42.741038",
+    "updated_at": "2026-06-09T01:40:42.741038",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "c6a85f42-5955-47ed-9453-47eceee2568f": {
+    "task_id": "c6a85f42-5955-47ed-9453-47eceee2568f",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T01:42:19.568274",
+    "updated_at": "2026-06-09T01:42:25.044102",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "c6a85f42-5955-47ed-9453-47eceee2568f",
+      "answer": "Não encontrei informações sobre as experiências profissionais de Marcio nos documentos disponíveis.",
+      "sources": [
+        {
+          "chunk_id": "df9febb2-e4b8-47a2-bd81-c483a9fb82fc",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "busca a batalha depois que a vitória já foi assegurada; \nenquanto aquele destinado à derrota primeiro luta e \ndepois procura a vitória.\n13\nSun Tzu sobre a Arte da Guerra\n16. O líder consumado cultiva ...",
+          "similarity": 0.5038
+        },
+        {
+          "chunk_id": "6a2186a2-810a-4d17-927f-e81ad698a098",
+          "filename": "Bibliografia_Nicolau_Maquiavel.pdf",
+          "excerpt": "Falecimento: 21 de junho de 1527, em Florença, Itália.\nÁrea de atuação: Filosofia política, diplomacia, história e literatura.\nLegado\nMaquiavel é amplamente reconhecido por suas análises realistas do ...",
+          "similarity": 0.5033
+        },
+        {
+          "chunk_id": "c7161867-7423-4f55-86ed-d306a470d202",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "na prática vencerá suas batalhas. Aquele que não \nos conhece, nem os aplica, certamente será \nderrotado.\n23. Se lutar certamente resultará em vitória, então \ndeve-se lutar, mesmo que o governante proí...",
+          "similarity": 0.4851
+        },
+        {
+          "chunk_id": "21462e1c-c810-4fa5-b257-7d7d6d99ec49",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "outro, uma vitória completa.\n12\nSun Tzu sobre a Arte da Guerra\nDisposições Táticas",
+          "similarity": 0.484
+        }
+      ]
+    }
+  },
+  "df8f88d4-a172-4d6d-bf78-461d034e4fc8": {
+    "task_id": "df8f88d4-a172-4d6d-bf78-461d034e4fc8",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T01:45:18.389975",
+    "updated_at": "2026-06-09T01:45:18.435358",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "df8f88d4-a172-4d6d-bf78-461d034e4fc8",
+      "answer": "Não encontrei informações sobre as experiências profissionais de Marcio nos documentos disponíveis.",
+      "sources": [
+        {
+          "chunk_id": "df9febb2-e4b8-47a2-bd81-c483a9fb82fc",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "busca a batalha depois que a vitória já foi assegurada; \nenquanto aquele destinado à derrota primeiro luta e \ndepois procura a vitória.\n13\nSun Tzu sobre a Arte da Guerra\n16. O líder consumado cultiva ...",
+          "similarity": 0.5038
+        },
+        {
+          "chunk_id": "6a2186a2-810a-4d17-927f-e81ad698a098",
+          "filename": "Bibliografia_Nicolau_Maquiavel.pdf",
+          "excerpt": "Falecimento: 21 de junho de 1527, em Florença, Itália.\nÁrea de atuação: Filosofia política, diplomacia, história e literatura.\nLegado\nMaquiavel é amplamente reconhecido por suas análises realistas do ...",
+          "similarity": 0.5033
+        },
+        {
+          "chunk_id": "c7161867-7423-4f55-86ed-d306a470d202",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "na prática vencerá suas batalhas. Aquele que não \nos conhece, nem os aplica, certamente será \nderrotado.\n23. Se lutar certamente resultará em vitória, então \ndeve-se lutar, mesmo que o governante proí...",
+          "similarity": 0.4851
+        },
+        {
+          "chunk_id": "21462e1c-c810-4fa5-b257-7d7d6d99ec49",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "outro, uma vitória completa.\n12\nSun Tzu sobre a Arte da Guerra\nDisposições Táticas",
+          "similarity": 0.484
+        }
+      ]
+    }
+  },
+  "daccf19a-595e-430e-a3e2-8db7631ec5f5": {
+    "task_id": "daccf19a-595e-430e-a3e2-8db7631ec5f5",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T01:47:04.414960",
+    "updated_at": "2026-06-09T01:47:04.464654",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "daccf19a-595e-430e-a3e2-8db7631ec5f5",
+      "answer": "Não encontrei informações sobre as experiências profissionais de Marcio nos documentos disponíveis.",
+      "sources": [
+        {
+          "chunk_id": "df9febb2-e4b8-47a2-bd81-c483a9fb82fc",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "busca a batalha depois que a vitória já foi assegurada; \nenquanto aquele destinado à derrota primeiro luta e \ndepois procura a vitória.\n13\nSun Tzu sobre a Arte da Guerra\n16. O líder consumado cultiva ...",
+          "similarity": 0.5038
+        },
+        {
+          "chunk_id": "6a2186a2-810a-4d17-927f-e81ad698a098",
+          "filename": "Bibliografia_Nicolau_Maquiavel.pdf",
+          "excerpt": "Falecimento: 21 de junho de 1527, em Florença, Itália.\nÁrea de atuação: Filosofia política, diplomacia, história e literatura.\nLegado\nMaquiavel é amplamente reconhecido por suas análises realistas do ...",
+          "similarity": 0.5033
+        },
+        {
+          "chunk_id": "c7161867-7423-4f55-86ed-d306a470d202",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "na prática vencerá suas batalhas. Aquele que não \nos conhece, nem os aplica, certamente será \nderrotado.\n23. Se lutar certamente resultará em vitória, então \ndeve-se lutar, mesmo que o governante proí...",
+          "similarity": 0.4851
+        },
+        {
+          "chunk_id": "21462e1c-c810-4fa5-b257-7d7d6d99ec49",
+          "filename": "arte-da-guerra.pdf",
+          "excerpt": "outro, uma vitória completa.\n12\nSun Tzu sobre a Arte da Guerra\nDisposições Táticas",
+          "similarity": 0.484
+        }
+      ]
+    }
+  },
+  "005d52c1-196a-4aae-af8e-9d86d80ad43e": {
+    "task_id": "005d52c1-196a-4aae-af8e-9d86d80ad43e",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:36:12.202494",
+    "updated_at": "2026-06-09T22:36:12.202494",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "3f6ad4a6-fa68-4bac-8fd9-f72b514cbe07": {
+    "task_id": "3f6ad4a6-fa68-4bac-8fd9-f72b514cbe07",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:36:12.228394",
+    "updated_at": "2026-06-09T22:36:12.228394",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "85496970-83e0-4898-837f-0087a53d84b6": {
+    "task_id": "85496970-83e0-4898-837f-0087a53d84b6",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:37:09.299441",
+    "updated_at": "2026-06-09T22:37:09.299441",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "ce5c2501-9ba4-4592-aa11-ec6e261df450": {
+    "task_id": "ce5c2501-9ba4-4592-aa11-ec6e261df450",
+    "document_id": "ce5c2501-9ba4-4592-aa11-ec6e261df450",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:37:09.327793",
+    "updated_at": "2026-06-09T22:37:09.327793",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "e6cb148f-c159-48c5-97aa-7bb4649b81b2": {
+    "task_id": "e6cb148f-c159-48c5-97aa-7bb4649b81b2",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:37:09.615322",
+    "updated_at": "2026-06-09T22:37:09.615322",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "8ace3e2d-2c20-4540-a27e-b02722f78c09": {
+    "task_id": "8ace3e2d-2c20-4540-a27e-b02722f78c09",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:00.866284",
+    "updated_at": "2026-06-09T22:39:00.866284",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b17bb772-7490-4845-822f-0fad4a513222": {
+    "task_id": "b17bb772-7490-4845-822f-0fad4a513222",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:00.886706",
+    "updated_at": "2026-06-09T22:39:00.886706",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "2d383c2a-6953-4b71-b486-27789e313fff": {
+    "task_id": "2d383c2a-6953-4b71-b486-27789e313fff",
+    "document_id": "2d383c2a-6953-4b71-b486-27789e313fff",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:31.055802",
+    "updated_at": "2026-06-09T22:39:31.055802",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "2bc0fdf9-e0b2-47ed-bbf0-a120da219c74": {
+    "task_id": "2bc0fdf9-e0b2-47ed-bbf0-a120da219c74",
+    "document_id": "2bc0fdf9-e0b2-47ed-bbf0-a120da219c74",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:31.076790",
+    "updated_at": "2026-06-09T22:39:31.076790",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "5e8a833e-d4b3-41b4-b974-44688e3ed10c": {
+    "task_id": "5e8a833e-d4b3-41b4-b974-44688e3ed10c",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:35.644202",
+    "updated_at": "2026-06-09T22:39:35.644202",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d36f994c-761b-4219-a048-0d08242eca1e": {
+    "task_id": "d36f994c-761b-4219-a048-0d08242eca1e",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:35.662863",
+    "updated_at": "2026-06-09T22:39:35.662863",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "88301968-10d4-47f3-9241-ca1bc6f472cc": {
+    "task_id": "88301968-10d4-47f3-9241-ca1bc6f472cc",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:44.204370",
+    "updated_at": "2026-06-09T22:39:44.204370",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "c03b2006-d362-435f-b483-051a28c6ac6e": {
+    "task_id": "c03b2006-d362-435f-b483-051a28c6ac6e",
+    "document_id": "c03b2006-d362-435f-b483-051a28c6ac6e",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:44.238460",
+    "updated_at": "2026-06-09T22:39:44.238460",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "fde76d25-af7d-4851-999a-65c0892a6fa2": {
+    "task_id": "fde76d25-af7d-4851-999a-65c0892a6fa2",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:39:44.423888",
+    "updated_at": "2026-06-09T22:39:44.423888",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "ac4542c3-3079-43e8-8774-56fa08ab7e14": {
+    "task_id": "ac4542c3-3079-43e8-8774-56fa08ab7e14",
+    "document_id": "ac4542c3-3079-43e8-8774-56fa08ab7e14",
+    "filename": "auditoria_anual.md",
+    "status": "FAILED",
+    "progress": 0,
+    "message": "Falha ao publicar na fila. Broker RabbitMQ indisponível.",
+    "created_at": "2026-06-09T22:39:57.553336",
+    "updated_at": "2026-06-09T22:39:57.578461",
+    "error_detail": "RabbitMQ não pôde ser alcançado no momento do upload.",
+    "error": "RabbitMQ não pôde ser alcançado no momento do upload.",
+    "result": null
+  },
+  "1a272e43-83ba-433b-8554-026b77a54258": {
+    "task_id": "1a272e43-83ba-433b-8554-026b77a54258",
+    "document_id": "1a272e43-83ba-433b-8554-026b77a54258",
+    "filename": "arquitetura.md",
+    "status": "FAILED",
+    "progress": 0,
+    "message": "Falha ao publicar na fila. Broker RabbitMQ indisponível.",
+    "created_at": "2026-06-09T22:40:02.614674",
+    "updated_at": "2026-06-09T22:40:02.633947",
+    "error_detail": "RabbitMQ não pôde ser alcançado no momento do upload.",
+    "error": "RabbitMQ não pôde ser alcançado no momento do upload.",
+    "result": null
+  },
+  "0825dceb-de9c-46fc-928d-cb1ade2ee21b": {
+    "task_id": "0825dceb-de9c-46fc-928d-cb1ade2ee21b",
+    "document_id": "0825dceb-de9c-46fc-928d-cb1ade2ee21b",
+    "filename": "Resumo_Completo_Star_Wars_5_Paginas.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T22:55:02.345505",
+    "updated_at": "2026-06-09T22:55:02.345505",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "4a54a543-5045-401e-925f-b19966f30b2b": {
+    "task_id": "4a54a543-5045-401e-925f-b19966f30b2b",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T22:58:45.888846",
+    "updated_at": "2026-06-09T22:58:50.500191",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "4a54a543-5045-401e-925f-b19966f30b2b",
+      "answer": "Luke Skywalker é um jovem que vive uma vida simples sem conhecer completamente sua origem. Ele inicia uma jornada após entrar em contato com uma mensagem secreta da princesa Leia, sendo guiado por Obi-Wan Kenobi, com quem aprende sobre os Jedi e a Força. Com a ajuda de Han Solo, Chewbacca e outros aliados, ele se une à Aliança Rebelde.\n\nPosteriormente, Luke enfrenta o desafio de confrontar Darth Vader e o Imperador. Ele acredita que ainda existe bondade em seu pai e, durante o confronto final, recusa seguir o caminho do ódio, tentando resgatar Anakin Skywalker da influência do lado sombrio.",
+      "sources": [
+        {
+          "chunk_id": "0825dceb-de9c-46fc-928d-cb1ade2ee21b_chunk_8",
+          "filename": "Resumo_Completo_Star_Wars_5_Paginas.pdf",
+          "excerpt": "Décadas depois, o Episódio IV – Uma Nova Esperança apresenta Luke Skywalker, um jovem que\nvive uma vida simples sem conhecer completamente sua origem. Quando entra em contato com\numa mensagem secreta ...",
+          "similarity": 0.69634
+        },
+        {
+          "chunk_id": "0825dceb-de9c-46fc-928d-cb1ade2ee21b_chunk_11",
+          "filename": "Resumo_Completo_Star_Wars_5_Paginas.pdf",
+          "excerpt": "O Episódio VI – O Retorno de Jedi conclui a história iniciada por George Lucas. A Aliança Rebelde\nprepara uma ofensiva decisiva contra o Império, enquanto Luke enfrenta o desafio de confrontar\nDarth V...",
+          "similarity": 0.67548
+        }
+      ]
+    }
+  },
+  "19132ed9-bc56-47f6-a62b-d952fce4d8d3": {
+    "task_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3",
+    "document_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-09T23:03:13.183326",
+    "updated_at": "2026-06-09T23:03:13.183326",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "cdefbbf4-7549-4cb4-ab1e-ca3d0fe801c5": {
+    "task_id": "cdefbbf4-7549-4cb4-ab1e-ca3d0fe801c5",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T23:05:30.714911",
+    "updated_at": "2026-06-09T23:05:36.597137",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "cdefbbf4-7549-4cb4-ab1e-ca3d0fe801c5",
+      "answer": "Com base nos fragmentos fornecidos, Márcio Brener possui a seguinte experiência profissional:\n\n*   **Magon Confecção e Comércio Ltda – Operador de Máquina II**\n    *   Período: Abr/2024 – Atual\n    *   Responsabilidades:\n        *   Elaboração de relatórios e análise de dados operacionais.\n        *   Apoio à automação de processos internos e melhoria de rotinas operacionais.\n        *   Suporte ao controle de atividades logísticas com foco em organização e eficiência.",
+      "sources": [
+        {
+          "chunk_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3_chunk_0",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "MÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000b...",
+          "similarity": 0.3917
+        },
+        {
+          "chunk_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3_chunk_5",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Banco de dados: MongoDB e bancos de dados relacionais\nFerramentas: Git, GitHub, VS Code e Pacote Office (intermedia\u0000rio)\nConceitos: Lo\u0000gica de programaça\u0000o, APIs REST e ana\u0000lise de dados\nSOFT SKILLS\n•...",
+          "similarity": 0.3694
+        },
+        {
+          "chunk_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3_chunk_8",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Elaboraça\u0000o de relato\u0000rios e ana\u0000lise de dados operacionais.\n• Apoio a\u0000 automaça\u0000o de processos internos e melhoria de rotinas operacionais.\n• Suporte ao controle de atividades log\u0000\u0000sticas com foco ...",
+          "similarity": 0.3572
+        }
+      ]
+    }
+  },
+  "03e88a73-f882-4bdb-9810-8352d17878e7": {
+    "task_id": "03e88a73-f882-4bdb-9810-8352d17878e7",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-09T23:09:33.388540",
+    "updated_at": "2026-06-09T23:09:40.111858",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "03e88a73-f882-4bdb-9810-8352d17878e7",
+      "answer": "Com base nos fragmentos de contexto fornecidos, a experiência profissional e atuação de Márcio Brener incluem:\n\n**Experiência Profissional (Cargo/Emprego):**\n*   **Magon Confecção e Comércio Ltda:** Operador de Máquina II (Abril/2024 – Atual)\n\n**Atuação Profissional e Projetos:**\n*   **Projeto RideBuddy – Aplicativo de controle financeiro para motoristas de aplicativo:**\n    *   Desenvolvimento de aplicativo mobile para gestão financeira, fluxo de caixa e controle de despesas de motoristas e entregadores autônomos (Uber, 99 e iFood).\n    *   Criação de funcionalidades de cadastro, atualização e exclusão de tarefas (CRUD).\n    *   Aplicação de boas práticas de organização e estruturação de código.\n    *   Versionamento do projeto com Git e GitHub.\n*   **Outras atuações:**\n    *   Elaboração de relatórios e análise de dados operacionais.\n    *   Apoio à automação de processos internos e melhoria de rotinas operacionais.\n    *   Suporte ao controle de atividades logísticas com foco em organização e eficiência.",
+      "sources": [
+        {
+          "chunk_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3_chunk_5",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Banco de dados: MongoDB e bancos de dados relacionais\nFerramentas: Git, GitHub, VS Code e Pacote Office (intermedia\u0000rio)\nConceitos: Lo\u0000gica de programaça\u0000o, APIs REST e ana\u0000lise de dados\nSOFT SKILLS\n•...",
+          "similarity": 0.4955
+        },
+        {
+          "chunk_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3_chunk_0",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "MÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000b...",
+          "similarity": 0.4472
+        },
+        {
+          "chunk_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3_chunk_3",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Criaça\u0000o de funcionalidades de cadastro, atualizaça\u0000o e exclusa\u0000o de tarefas (CRUD).\n• Aplicaça\u0000o de boas pra\u0000ticas de organizaça\u0000o e estruturaça\u0000o de co\u0000digo.\n• Versionamento do projeto com Git e G...",
+          "similarity": 0.4403
+        },
+        {
+          "chunk_id": "19132ed9-bc56-47f6-a62b-d952fce4d8d3_chunk_8",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Elaboraça\u0000o de relato\u0000rios e ana\u0000lise de dados operacionais.\n• Apoio a\u0000 automaça\u0000o de processos internos e melhoria de rotinas operacionais.\n• Suporte ao controle de atividades log\u0000\u0000sticas com foco ...",
+          "similarity": 0.4109
+        }
+      ]
+    }
+  },
+  "cd01a6ac-46d7-4ab7-8563-36140faaf08f": {
+    "task_id": "cd01a6ac-46d7-4ab7-8563-36140faaf08f",
+    "document_id": "cd01a6ac-46d7-4ab7-8563-36140faaf08f",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:03.902841",
+    "updated_at": "2026-06-10T00:13:03.902841",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "db81fe9f-b13b-4b84-bd1b-0539ea72dee2": {
+    "task_id": "db81fe9f-b13b-4b84-bd1b-0539ea72dee2",
+    "document_id": "db81fe9f-b13b-4b84-bd1b-0539ea72dee2",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:03.933588",
+    "updated_at": "2026-06-10T00:13:03.933588",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "6fc669eb-6cfd-478e-8dbd-d8b67cc24c30": {
+    "task_id": "6fc669eb-6cfd-478e-8dbd-d8b67cc24c30",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:04.701555",
+    "updated_at": "2026-06-10T00:13:04.701555",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "c66e4e7b-d27d-4842-ab6f-352a6420856f": {
+    "task_id": "c66e4e7b-d27d-4842-ab6f-352a6420856f",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:04.720360",
+    "updated_at": "2026-06-10T00:13:04.720360",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "dc0b138d-a664-49b8-adb8-d2a1eb8c388b": {
+    "task_id": "dc0b138d-a664-49b8-adb8-d2a1eb8c388b",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:05.561673",
+    "updated_at": "2026-06-10T00:13:05.561673",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "dd505748-65b6-4f40-a9f3-f57a0d60f82c": {
+    "task_id": "dd505748-65b6-4f40-a9f3-f57a0d60f82c",
+    "document_id": "dd505748-65b6-4f40-a9f3-f57a0d60f82c",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:05.604069",
+    "updated_at": "2026-06-10T00:13:05.604069",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d7841af2-7355-49aa-8f69-7c61a47c8d2b": {
+    "task_id": "d7841af2-7355-49aa-8f69-7c61a47c8d2b",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:05.775471",
+    "updated_at": "2026-06-10T00:13:05.775471",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "92192c3d-5f6c-453f-abf7-4afcbfbe2b52": {
+    "task_id": "92192c3d-5f6c-453f-abf7-4afcbfbe2b52",
+    "document_id": "92192c3d-5f6c-453f-abf7-4afcbfbe2b52",
+    "filename": "auditoria_anual.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:10.577972",
+    "updated_at": "2026-06-10T00:13:10.577972",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "e8026588-05e5-4f57-b128-50525c431867": {
+    "task_id": "e8026588-05e5-4f57-b128-50525c431867",
+    "document_id": "e8026588-05e5-4f57-b128-50525c431867",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:13:11.642677",
+    "updated_at": "2026-06-10T00:13:11.642677",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "f97de7d7-ccb9-4737-8f4f-e9fa019522f7": {
+    "task_id": "f97de7d7-ccb9-4737-8f4f-e9fa019522f7",
+    "document_id": "f97de7d7-ccb9-4737-8f4f-e9fa019522f7",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:14:43.639913",
+    "updated_at": "2026-06-10T00:14:43.639913",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "18eebaae-c401-4524-a064-bd3e136fb9a3": {
+    "task_id": "18eebaae-c401-4524-a064-bd3e136fb9a3",
+    "document_id": "18eebaae-c401-4524-a064-bd3e136fb9a3",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:14:43.662002",
+    "updated_at": "2026-06-10T00:14:43.662002",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "6c6c0ecd-f3e8-4b86-ba92-93c65739f7bc": {
+    "task_id": "6c6c0ecd-f3e8-4b86-ba92-93c65739f7bc",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:14:44.243382",
+    "updated_at": "2026-06-10T00:14:44.243382",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "f469fc80-3391-4b49-a7ff-c2da994a08a3": {
+    "task_id": "f469fc80-3391-4b49-a7ff-c2da994a08a3",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:14:44.270533",
+    "updated_at": "2026-06-10T00:14:44.270533",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "f6ca6d25-42cc-491e-8d8e-c7ae020d8a3c": {
+    "task_id": "f6ca6d25-42cc-491e-8d8e-c7ae020d8a3c",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:14:44.818337",
+    "updated_at": "2026-06-10T00:14:44.818337",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "bfc2b0df-44f2-4a1c-93c7-54c0346d9dd8": {
+    "task_id": "bfc2b0df-44f2-4a1c-93c7-54c0346d9dd8",
+    "document_id": "bfc2b0df-44f2-4a1c-93c7-54c0346d9dd8",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:14:44.847246",
+    "updated_at": "2026-06-10T00:14:44.847246",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "23eac842-b081-4a25-9fcd-c04c5d3d43dd": {
+    "task_id": "23eac842-b081-4a25-9fcd-c04c5d3d43dd",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:14:44.999757",
+    "updated_at": "2026-06-10T00:14:44.999757",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "8fbff0c8-8e58-4357-865a-a6f37f1f0e37": {
+    "task_id": "8fbff0c8-8e58-4357-865a-a6f37f1f0e37",
+    "document_id": "8fbff0c8-8e58-4357-865a-a6f37f1f0e37",
+    "filename": "auditoria_anual.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:15:46.952699",
+    "updated_at": "2026-06-10T00:15:46.952699",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "733b294c-4847-4a62-b23b-818b28245657": {
+    "task_id": "733b294c-4847-4a62-b23b-818b28245657",
+    "document_id": "733b294c-4847-4a62-b23b-818b28245657",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:15:47.858611",
+    "updated_at": "2026-06-10T00:15:47.858611",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d0005a03-0579-410d-b9b6-e7120d3065a9": {
+    "task_id": "d0005a03-0579-410d-b9b6-e7120d3065a9",
+    "document_id": "d0005a03-0579-410d-b9b6-e7120d3065a9",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:16:45.980649",
+    "updated_at": "2026-06-10T00:16:45.980649",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d88935ec-b054-4ed1-a9ef-9668e5caa7ba": {
+    "task_id": "d88935ec-b054-4ed1-a9ef-9668e5caa7ba",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T00:19:55.969770",
+    "updated_at": "2026-06-10T00:20:34.026989",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "d88935ec-b054-4ed1-a9ef-9668e5caa7ba",
+      "answer": "Com base nos documentos fornecidos, Marcio Brener trabalhou na Magon Confecção e Comércio Ltda.",
+      "sources": [
+        {
+          "chunk_id": "d0005a03-0579-410d-b9b6-e7120d3065a9_chunk_5",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Banco de dados: MongoDB e bancos de dados relacionais\nFerramentas: Git, GitHub, VS Code e Pacote Office (intermedia\u0000rio)\nConceitos: Lo\u0000gica de programaça\u0000o, APIs REST e ana\u0000lise de dados\nSOFT SKILLS\n• Aprendizado cont\u0000\u0000nuo\n• Pensamento anal\u0000\u0000tico\n• Proatividade\n• Boa comunicaça\u0000o\n• Trabalho em equipe\n• Comprometimento\n• Flexibilidade\n• Resilie\u0000ncia\n• Intelige\u0000ncia emocional\nEXPERIÊNCIA PROFISSIONA...",
+          "similarity": 0.4796
+        }
+      ]
+    }
+  },
+  "3cc01ba8-0fea-4465-95ab-e650275b415b": {
+    "task_id": "3cc01ba8-0fea-4465-95ab-e650275b415b",
+    "document_id": "3cc01ba8-0fea-4465-95ab-e650275b415b",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:35:59.077445",
+    "updated_at": "2026-06-10T00:35:59.077445",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "415d390a-c5ed-4376-94d8-cd25044eeddd": {
+    "task_id": "415d390a-c5ed-4376-94d8-cd25044eeddd",
+    "document_id": "415d390a-c5ed-4376-94d8-cd25044eeddd",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:35:59.092800",
+    "updated_at": "2026-06-10T00:35:59.092800",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "bcff364c-21c1-4b25-9aa4-a8a9ae0a78a3": {
+    "task_id": "bcff364c-21c1-4b25-9aa4-a8a9ae0a78a3",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:35:59.558005",
+    "updated_at": "2026-06-10T00:35:59.558005",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a8959502-93e3-4a51-9db6-2bb05f8fcdf6": {
+    "task_id": "a8959502-93e3-4a51-9db6-2bb05f8fcdf6",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:35:59.578516",
+    "updated_at": "2026-06-10T00:35:59.578516",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b40bcbb0-3698-4110-b2fa-4fe9e524e136": {
+    "task_id": "b40bcbb0-3698-4110-b2fa-4fe9e524e136",
+    "document_id": "b40bcbb0-3698-4110-b2fa-4fe9e524e136",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:39:23.775294",
+    "updated_at": "2026-06-10T00:39:23.775294",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "c44c924f-be88-4d36-bd0f-4af88240aa09": {
+    "task_id": "c44c924f-be88-4d36-bd0f-4af88240aa09",
+    "document_id": "c44c924f-be88-4d36-bd0f-4af88240aa09",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:39:23.802649",
+    "updated_at": "2026-06-10T00:39:23.802649",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "164b6593-e915-4f45-9f8a-f473ab77260a": {
+    "task_id": "164b6593-e915-4f45-9f8a-f473ab77260a",
+    "document_id": "164b6593-e915-4f45-9f8a-f473ab77260a",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:41:02.881612",
+    "updated_at": "2026-06-10T00:41:02.881612",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "dae51be6-be42-4fcb-a5df-dec0ecd51b3a": {
+    "task_id": "dae51be6-be42-4fcb-a5df-dec0ecd51b3a",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T00:43:27.634304",
+    "updated_at": "2026-06-10T00:44:06.701224",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "dae51be6-be42-4fcb-a5df-dec0ecd51b3a",
+      "answer": "⚠️ Resposta gerada sem LLM (modo fallback — configure GOOGLE_API_KEY para respostas geradas por IA).\n\nFragmentos de documentos mais relevantes encontrados:\n\n[Fragmento 1 - Fonte: Curriculo_Marcio_Brener.pdf]\nBanco de dados: MongoDB e bancos de dados relacionais\nFerramentas: Git, GitHub, VS Code e Pacote Office (intermedia\u0000rio)\nConceitos: Lo\u0000gica de programaça\u0000o, APIs REST e ana\u0000lise de dados\nSOFT SKILLS\n• Aprendizado cont\u0000\u0000nuo\n• Pensamento anal\u0000\u0000tico\n• Proatividade\n• Boa comunicaça\u0000o\n• Trabalho em equipe\n• Comprometimento\n• Flexibilidade\n• Resilie\u0000ncia\n• Intelige\u0000ncia emocional\nEXPERIÊNCIA PROFISSIONAL\nMagon Confecção e Comércio Ltda – Operador de Máquina II\nAbr/2024 – Atual\n\n---\n\n[Fragmento 2 - Fonte: Curriculo_Marcio_Brener.pdf]\nMÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000brida/remota | marciobrener.contato@gmail.com | (11) 99606-7984\nLinkedIn: www.linkedin.com/in/marcio-brener/ | GitHub: https://github.com/marcio-brener\nRESUMO PROFISSIONAL\nEstudante de Ana\u0000lise e Desenvolvimento de Sistemas no Instituto Federal de Sa\u0000o Paulo (IFSP). Possuo\n\n---\n\n[Fragmento 3 - Fonte: Curriculo_Marcio_Brener.pdf]\n• Criaça\u0000o de funcionalidades de cadastro, atualizaça\u0000o e exclusa\u0000o de tarefas (CRUD).\n• Aplicaça\u0000o de boas pra\u0000ticas de organizaça\u0000o e estruturaça\u0000o de co\u0000digo.\n• Versionamento do projeto com Git e GitHub.\nRideBuddy – Aplicativo de controle financeiro para motoristas de aplicativo\n• Desenvolvimento de aplicativo mobile para gesta\u0000o financeira, fluxo de caixa e controle de despesas de motoristas \ne entregadores auto\u0000nomos (Uber, 99 e iFood).\n\n---\n\n[Fragmento 4 - Fonte: Curriculo_Marcio_Brener.pdf]\n• Elaboraça\u0000o de relato\u0000rios e ana\u0000lise de dados operacionais.\n• Apoio a\u0000 automaça\u0000o de processos internos e melhoria de rotinas operacionais.\n• Suporte ao controle de atividades log\u0000\u0000sticas com foco em organizaça\u0000o e eficie\u0000ncia.\n\n---\n\n[Fragmento 5 - Fonte: Curriculo_Marcio_Brener.pdf]\nde software.\nFORMAÇÃO ACADÊMICA\nTecno\u0000logo em Ana\u0000lise e Desenvolvimento de Sistemas – Instituto Federal de Sa\u0000o Paulo (IFSP)Ago/2023 – Jul/2027 \n(previsa\u0000o)\nPROJETOS ACADÊMICOS / PESSOAIS\nTaskManager – Sistema de gerenciamento de tarefas\n• Desenvolvimento de aplicaça\u0000o para gerenciamento e organizaça\u0000o de tarefas.\n• Implementaça\u0000o do back-end em Python.\n• Integraça\u0000o com MongoDB para armazenamento e gerenciamento de dados.\n\n---\n\n[Fragmento 6 - Fonte: Curriculo_Marcio_Brener.pdf]\nAbr/2024 – Atual\n• Operaça\u0000o de linha de produça\u0000o e acompanhamento do fluxo operacional.\n• Operaça\u0000o e monitoramento de ma\u0000quinas automatizadas.\n• Controle de qualidade e cumprimento de procedimentos produtivos.\n• Atuaça\u0000o com foco em organizaça\u0000o, produtividade e atença\u0000o aos processos.\nEverlux & Masterlux – Operador de Produção\nJan/2023 – Out/2023\n• Operaça\u0000o de linha de produça\u0000o e suporte a\u0000s rotinas operacionais.\n• Confere\u0000ncia, separaça\u0000o e organizaça\u0000o de produtos.\n\n---\n\n[Fragmento 7 - Fonte: Curriculo_Marcio_Brener.pdf]\nconhecimentos em Python, JavaScript, SQL, Dart, Flutter e HTML, ale\u0000m de experie\u0000ncia com ana\u0000lise de dados \noperacionais, elaboraça\u0000o de relato\u0000rios e apoio a\u0000 automaça\u0000o de processos internos. Tenho vive\u0000ncia em projetos \nacade\u0000micos e pessoais com Git/GitHub, MongoDB e operaço\u0000es CRUD. Busco oportunidade de esta\u0000gio ou posiça\u0000o \nju\u0000nior em Tecnologia da Informaça\u0000o para aplicar e desenvolver conhecimentos te\u0000cnicos, contribuindo com soluço\u0000es \nde software.\nFORMAÇÃO ACADÊMICA\n\n---\n\n[Fragmento 8 - Fonte: Curriculo_Marcio_Brener.pdf]\n• Operaça\u0000o de ma\u0000quinas automatizadas seguindo padro\u0000es de qualidade.\n• Apoio no controle e organizaça\u0000o do fluxo de produça\u0000o.\nTeam Leasing Brasil – Alimentador de Linha de Produção\nMar/2022 – Out/2022\n• Operaça\u0000o de ma\u0000quinas e apoio a\u0000 linha de produça\u0000o.\n• Confere\u0000ncia e organizaça\u0000o de produtos.\n• Cumprimento de processos operacionais e controle das atividades da a\u0000rea.\nSanther – Auxiliar de Logística\nAbr/2020 – Fev/2022\n• Confere\u0000ncia, separaça\u0000o e organizaça\u0000o de produtos e materiais.\n\n---\n\n[Fragmento 9 - Fonte: Curriculo_Marcio_Brener.pdf]\ne entregadores auto\u0000nomos (Uber, 99 e iFood).\n• Criaça\u0000o de interface multiplataforma responsiva com Flutter e Dart.\n• Implementaça\u0000o de funcionalidades para registro de despesas operacionais, como combust\u0000\u0000vel, manutença\u0000o e \ntaxas.\n• Ca\u0000lculo automatizado de lucro l\u0000\u0000quido e acompanhamento financeiro dia\u0000rio.\n• Aplicaça\u0000o de boas pra\u0000ticas de usabilidade (UI/UX).\n• Versionamento do projeto com Git e hospedagem no GitHub.\nHARD SKILLS\nTecnologias: Python, JavaScript, Dart, Flutter, SQL e HTML",
+      "sources": [
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_5",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Banco de dados: MongoDB e bancos de dados relacionais\nFerramentas: Git, GitHub, VS Code e Pacote Office (intermedia\u0000rio)\nConceitos: Lo\u0000gica de programaça\u0000o, APIs REST e ana\u0000lise de dados\nSOFT SKILLS\n• Aprendizado cont\u0000\u0000nuo\n• Pensamento anal\u0000\u0000tico\n• Proatividade\n• Boa comunicaça\u0000o\n• Trabalho em equipe\n• Comprometimento\n• Flexibilidade\n• Resilie\u0000ncia\n• Intelige\u0000ncia emocional\nEXPERIÊNCIA PROFISSIONA...",
+          "similarity": 0.6718
+        },
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_0",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "MÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000brida/remota | marciobrener.contato@gmail.com | (11) 99606-7984\nLinkedIn: www.linkedin.com/in/marcio-brener/ | GitHub: https://github.com/marcio-brener\nRESUMO PROFISSIONAL\nEstudante de Ana\u0000lise e Desen...",
+          "similarity": 0.3946
+        },
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_3",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Criaça\u0000o de funcionalidades de cadastro, atualizaça\u0000o e exclusa\u0000o de tarefas (CRUD).\n• Aplicaça\u0000o de boas pra\u0000ticas de organizaça\u0000o e estruturaça\u0000o de co\u0000digo.\n• Versionamento do projeto com Git e GitHub.\nRideBuddy – Aplicativo de controle financeiro para motoristas de aplicativo\n• Desenvolvimento de aplicativo mobile para gesta\u0000o financeira, fluxo de caixa e controle de despesas de motoristas \n...",
+          "similarity": 0.3744
+        },
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_8",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Elaboraça\u0000o de relato\u0000rios e ana\u0000lise de dados operacionais.\n• Apoio a\u0000 automaça\u0000o de processos internos e melhoria de rotinas operacionais.\n• Suporte ao controle de atividades log\u0000\u0000sticas com foco em organizaça\u0000o e eficie\u0000ncia.",
+          "similarity": 0.3709
+        },
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_2",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "de software.\nFORMAÇÃO ACADÊMICA\nTecno\u0000logo em Ana\u0000lise e Desenvolvimento de Sistemas – Instituto Federal de Sa\u0000o Paulo (IFSP)Ago/2023 – Jul/2027 \n(previsa\u0000o)\nPROJETOS ACADÊMICOS / PESSOAIS\nTaskManager – Sistema de gerenciamento de tarefas\n• Desenvolvimento de aplicaça\u0000o para gerenciamento e organizaça\u0000o de tarefas.\n• Implementaça\u0000o do back-end em Python.\n• Integraça\u0000o com MongoDB para armazenament...",
+          "similarity": 0.3488
+        },
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_6",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Abr/2024 – Atual\n• Operaça\u0000o de linha de produça\u0000o e acompanhamento do fluxo operacional.\n• Operaça\u0000o e monitoramento de ma\u0000quinas automatizadas.\n• Controle de qualidade e cumprimento de procedimentos produtivos.\n• Atuaça\u0000o com foco em organizaça\u0000o, produtividade e atença\u0000o aos processos.\nEverlux & Masterlux – Operador de Produção\nJan/2023 – Out/2023\n• Operaça\u0000o de linha de produça\u0000o e suporte a\u0000s...",
+          "similarity": 0.3268
+        },
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_1",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "conhecimentos em Python, JavaScript, SQL, Dart, Flutter e HTML, ale\u0000m de experie\u0000ncia com ana\u0000lise de dados \noperacionais, elaboraça\u0000o de relato\u0000rios e apoio a\u0000 automaça\u0000o de processos internos. Tenho vive\u0000ncia em projetos \nacade\u0000micos e pessoais com Git/GitHub, MongoDB e operaço\u0000es CRUD. Busco oportunidade de esta\u0000gio ou posiça\u0000o \nju\u0000nior em Tecnologia da Informaça\u0000o para aplicar e desenvolver co...",
+          "similarity": 0.3186
+        },
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_7",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Operaça\u0000o de ma\u0000quinas automatizadas seguindo padro\u0000es de qualidade.\n• Apoio no controle e organizaça\u0000o do fluxo de produça\u0000o.\nTeam Leasing Brasil – Alimentador de Linha de Produção\nMar/2022 – Out/2022\n• Operaça\u0000o de ma\u0000quinas e apoio a\u0000 linha de produça\u0000o.\n• Confere\u0000ncia e organizaça\u0000o de produtos.\n• Cumprimento de processos operacionais e controle das atividades da a\u0000rea.\nSanther – Auxiliar de...",
+          "similarity": 0.317
+        },
+        {
+          "chunk_id": "164b6593-e915-4f45-9f8a-f473ab77260a_chunk_4",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "e entregadores auto\u0000nomos (Uber, 99 e iFood).\n• Criaça\u0000o de interface multiplataforma responsiva com Flutter e Dart.\n• Implementaça\u0000o de funcionalidades para registro de despesas operacionais, como combust\u0000\u0000vel, manutença\u0000o e \ntaxas.\n• Ca\u0000lculo automatizado de lucro l\u0000\u0000quido e acompanhamento financeiro dia\u0000rio.\n• Aplicaça\u0000o de boas pra\u0000ticas de usabilidade (UI/UX).\n• Versionamento do projeto com G...",
+          "similarity": 0.2731
+        }
+      ]
+    }
+  },
+  "3025f4cb-c4c2-4912-9a33-596fa4ed933e": {
+    "task_id": "3025f4cb-c4c2-4912-9a33-596fa4ed933e",
+    "document_id": "3025f4cb-c4c2-4912-9a33-596fa4ed933e",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:53:01.858445",
+    "updated_at": "2026-06-10T00:53:01.858445",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b134ce34-455b-4c37-b01c-4bfbbe9fcf84": {
+    "task_id": "b134ce34-455b-4c37-b01c-4bfbbe9fcf84",
+    "document_id": "b134ce34-455b-4c37-b01c-4bfbbe9fcf84",
+    "filename": "resumo_senhor_dos_aneis.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T00:58:29.302283",
+    "updated_at": "2026-06-10T00:58:29.302283",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "020be369-68d7-49b0-b46f-348fcb5a5fe6": {
+    "task_id": "020be369-68d7-49b0-b46f-348fcb5a5fe6",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T01:02:57.663702",
+    "updated_at": "2026-06-10T01:03:36.533139",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "020be369-68d7-49b0-b46f-348fcb5a5fe6",
+      "answer": "⚠️ Resposta gerada sem LLM (modo fallback — configure GOOGLE_API_KEY para respostas geradas por IA).\n\nFragmentos de documentos mais relevantes encontrados:\n\n[Fragmento 1 - Fonte: resumo_senhor_dos_aneis.pdf]\nquando as próprias forças de Frodo o abandonaram por completo.\nAo alcançarem as Fendas da Perdição, onde o Um Anel fora outrora forjado, o destino da Terra-média\nvacilou à beira do abismo. Diante do fogo eterno, o poder de sedução do artefato finalmente dominou a\nmente exausta de Frodo. Em vez de lançá-lo à destruição, o hobbit reivindicou o Anel para si, colocando-o\nno dedo e desaparecendo aos olhos do mundo. Foi nesse instante de desespero que a figura traiçoeira de",
+      "sources": [
+        {
+          "chunk_id": "b134ce34-455b-4c37-b01c-4bfbbe9fcf84_chunk_1",
+          "filename": "resumo_senhor_dos_aneis.pdf",
+          "excerpt": "quando as próprias forças de Frodo o abandonaram por completo.\nAo alcançarem as Fendas da Perdição, onde o Um Anel fora outrora forjado, o destino da Terra-média\nvacilou à beira do abismo. Diante do fogo eterno, o poder de sedução do artefato finalmente dominou a\nmente exausta de Frodo. Em vez de lançá-lo à destruição, o hobbit reivindicou o Anel para si, colocando-o\nno dedo e desaparecendo aos ol...",
+          "similarity": 0.6076
+        }
+      ]
+    }
+  },
+  "00185c94-f958-4837-b946-b6e5afcb466a": {
+    "task_id": "00185c94-f958-4837-b946-b6e5afcb466a",
+    "document_id": "00185c94-f958-4837-b946-b6e5afcb466a",
+    "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T21:32:39.084233",
+    "updated_at": "2026-06-10T21:32:39.084233",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "05f67a53-f2e9-4242-96ed-19e989901948": {
+    "task_id": "05f67a53-f2e9-4242-96ed-19e989901948",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T21:35:10.098681",
+    "updated_at": "2026-06-10T21:35:13.866783",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "05f67a53-f2e9-4242-96ed-19e989901948",
+      "answer": "O projeto Ride Buddy consiste em uma aplicação mobile desenvolvida utilizando o framework Flutter. Os participantes envolvidos no projeto são Márcio Brener de Moraes, Marco Aurélio Nichi Rodermel, Tiago Silva Fernandes e Willian Rodrigues Spada.",
+      "sources": [
+        {
+          "chunk_id": "00185c94-f958-4837-b946-b6e5afcb466a_chunk_2",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Participantes: \nMárcio Brener de Moraes — Prontuário: BP304470X Marco Aurélio Nichi Rodermel — Prontuário: BP3044149 Tiago Silva Fernandes — Prontuário: BP3044254 Willian Rodrigues Spada — Prontuário: BP3044106 \n1. Resumo do Projeto (BRAGOTI) \nO projeto Ride Buddy consiste em uma aplicação mobile desenvolvida utilizando o framework \nFlutter",
+          "similarity": 0.5271
+        }
+      ]
+    }
+  },
+  "120f1fe5-c7b3-4960-92bc-547d12460497": {
+    "task_id": "120f1fe5-c7b3-4960-92bc-547d12460497",
+    "document_id": "120f1fe5-c7b3-4960-92bc-547d12460497",
+    "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T22:21:25.039247",
+    "updated_at": "2026-06-10T22:21:25.039247",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "70d01357-7196-4afa-b1c4-c2ca9dde26f8": {
+    "task_id": "70d01357-7196-4afa-b1c4-c2ca9dde26f8",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T22:23:59.979258",
+    "updated_at": "2026-06-10T22:24:05.522240",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "70d01357-7196-4afa-b1c4-c2ca9dde26f8",
+      "answer": "O projeto Ride Buddy é uma solução tecnológica desenvolvida em Flutter, que se alinha à atividade de extensão, especificamente ao negócio do motorista parceiro. Seu principal objetivo é estabelecer um modelo de governança corporativa sólido através do alinhamento estratégico entre os objetivos da atividade de extensão (o negócio do motorista parceiro) e a entrega de valor da tecnologia (a solução em Flutter).",
+      "sources": [
+        {
+          "chunk_id": "120f1fe5-c7b3-4960-92bc-547d12460497_chunk_5",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "como:\n\nplataforma\n\nde\n\norigem,\n\ndistância\n\npercorrida\n\nem\n\nquilômetros,\n\ncoordenadas\n\nde\n\norigem\n\ne\n\ndestino,\n\nvalor\n\nbruto\n\nrecebido\n\ne\n\ndata/horário\n\nda\n\noperação.\n\n2. Alinhamento Estratégico: Objetivos de Negócio e TI \nPara estabelecer um modelo de governança corporativa sólido, o Ride Buddy passa pelo \nalinhamento\n\nestratégico\n\nentre\n\nos\n\nobjetivos\n\nda\n\natividade\n\nde\n\nextensão\n\n(o\n\nnegócio\n\ndo...",
+          "similarity": 0.5989
+        }
+      ]
+    }
   }
 }

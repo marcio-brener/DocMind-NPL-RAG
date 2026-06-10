@@ -103,10 +103,9 @@ O sistema opera com **fallback inteligente**: mesmo sem uma chave de API do Goog
 
 ## ✅ Pré-requisitos
 
-- **Python 3.10+**
-- **pip** (gerenciador de pacotes)
+- **Python 3.10+** e **pip** (gerenciador de pacotes)
+- **Docker** e **Docker Compose** (para infraestrutura local de mensageria e cache)
 - *(Opcional)* Chave de API do **Google AI Studio** para respostas geradas por LLM
-- *(Opcional)* **Redis** e **RabbitMQ** para funcionalidades de cache e filas (planejadas)
 
 ---
 
@@ -186,19 +185,30 @@ BACKEND_CORS_ORIGINS=["http://localhost:3000", "http://localhost:8000"]
 
 ## ▶️ Executando o Projeto
 
-### Servidor de desenvolvimento (com hot reload)
+### 1. Subindo a infraestrutura local (RabbitMQ e Redis)
+
+O projeto utiliza RabbitMQ para filas assíncronas e Redis para cache. Inicie os serviços via Docker:
+
+```bash
+docker-compose up -d
+```
+
+> **Painel de Gerenciamento do RabbitMQ:**
+> - **URL:** http://localhost:15672
+> - **Usuário:** `guest`
+> - **Senha:** `guest`
+
+### 2. Servidor de desenvolvimento (FastAPI)
+
+Com a infraestrutura rodando, inicie o servidor com hot reload:
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-### Servidor com host e porta customizados
+> 🛡️ **Resiliência no Startup:** O evento de `lifespan` do FastAPI possui tratamento inteligente (`try/except`). Se o RabbitMQ estiver offline durante a inicialização, a API não quebrará. Ela exibirá um aviso informando o modo degradado e continuará operando para as demais funções da API.
 
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-Após iniciar, acesse:
+Após iniciar, acesse as interfaces da API:
 
 | Interface | URL |
 |---|---|
@@ -452,7 +462,8 @@ DocMind/
 │   │           ├── health.py     # GET /health
 │   │           ├── document.py   # POST /document/upload e /process
 │   │           ├── query.py      # POST /query/search
-│   │           └── rag.py        # POST /rag/ask
+│   │           ├── rag.py        # POST /rag/ask
+│   │           └── tasks.py      # GET /tasks/{task_id}
 │   │
 │   ├── core/                     # Infraestrutura e configurações
 │   │   ├── config.py             # Settings via pydantic-settings (.env)
@@ -463,16 +474,20 @@ DocMind/
 │   │   ├── health.py             # HealthResponse, ServiceStatus
 │   │   ├── rag.py                # RAGRequest, RAGResponse, SourceReference
 │   │   ├── search.py             # SearchRequest, SearchResponse
-│   │   └── semantic.py           # Chunk, SemanticProcessResponse
+│   │   ├── semantic.py           # Chunk, SemanticProcessResponse
+│   │   └── task.py               # Modelos para tarefas assíncronas
 │   │
 │   ├── services/                 # Lógica de negócio
 │   │   ├── document_processor.py # Extração e limpeza de texto (PDF/Markdown)
 │   │   ├── embedding_service.py  # Geração de embeddings (HuggingFace + fallback)
+│   │   ├── message_queue_service.py # Integração com RabbitMQ (pika)
 │   │   ├── semantic_processor.py # Chunking semântico + embedding em lote
+│   │   ├── task_service.py       # Rastreamento de tarefas persistido
 │   │   ├── vector_store.py       # Interface com ChromaDB
 │   │   └── rag_service.py        # Orquestração do pipeline RAG completo
 │   │
-│   └── workers/                  # Workers assíncronos (planejado)
+│   └── workers/                  # Workers assíncronos
+│       └── document_worker.py    # Processa ingestão em background via RabbitMQ
 │
 ├── tests/                        # Suítes de testes
 │   ├── conftest.py               # Fixtures globais (TestClient)
@@ -486,6 +501,8 @@ DocMind/
 │   ├── chromadb/                 # Banco vetorial ChromaDB
 │   └── uploads/                  # Arquivos enviados pelos usuários
 │
+├── docker-compose.yml            # Orquestração de RabbitMQ, Redis, Worker e API
+├── README_EVENT_DRIVEN.md        # Documentação da arquitetura baseada em eventos
 ├── .env                          # Variáveis de ambiente (não versionado)
 ├── .env.example                  # Template de configuração
 ├── .gitignore
@@ -507,8 +524,8 @@ DocMind/
 ## 🗺️ Roadmap
 
 - [ ] Autenticação JWT com `pyjwt` e `passlib`
-- [ ] Cache de embeddings e respostas com **Redis**
-- [ ] Processamento assíncrono de documentos com **RabbitMQ**
+- [x] Cache de embeddings e respostas com **Redis**
+- [x] Processamento assíncrono de documentos com **RabbitMQ**
 - [ ] Suporte a mais formatos (DOCX, TXT, HTML)
 - [ ] Múltiplas coleções isoladas por usuário/projeto
 - [ ] Dashboard de monitoramento de documentos ingeridos

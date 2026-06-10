@@ -69,13 +69,21 @@ class EmbeddingService:
         Gera o vetor (embedding) para uma única sentença ou query.
         """
         if self.is_fallback or not self.model:
-            return self._generate_mock_embedding(text)
+            vector = self._generate_mock_embedding(text)
+        else:
+            try:
+                vector = self.model.embed_query(text)
+            except Exception as e:
+                BaseLogger.error(f"Erro ao gerar embedding de query com HuggingFace: {str(e)}. Usando fallback.")
+                vector = self._generate_mock_embedding(text)
         
-        try:
-            return self.model.embed_query(text)
-        except Exception as e:
-            BaseLogger.error(f"Erro ao gerar embedding de query com HuggingFace: {str(e)}. Usando fallback.")
-            return self._generate_mock_embedding(text)
+        # Log embedding info as requested in Etapa 5
+        model_name = settings.EMBEDDING_MODEL_NAME if not (self.is_fallback or not self.model) else "offline_fallback_hash"
+        BaseLogger.info(
+            f"Embedding Model: {model_name}\n"
+            f"Vector Dimension: {len(vector)}"
+        )
+        return vector
 
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
         """

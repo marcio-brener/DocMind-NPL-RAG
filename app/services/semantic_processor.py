@@ -59,7 +59,7 @@ class SemanticProcessorService:
         chunks_response: List[Chunk] = []
         
         for idx, (chunk_text, chunk_vector) in enumerate(zip(text_chunks, embeddings)):
-            chunk_id = str(uuid.uuid4())
+            chunk_id = f"{document_id}_chunk_{idx}"
             
             # Montar metadados específicos deste fragmento
             chunk_metadata = {

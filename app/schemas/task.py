@@ -19,8 +19,8 @@ class TaskCreate(BaseModel):
     Schema para criação de uma nova tarefa de processamento.
     """
     task_id: str = Field(..., description="Identificador único da tarefa (UUID)")
-    document_id: str = Field(..., description="ID do documento associado à tarefa")
-    filename: str = Field(..., description="Nome do arquivo que será processado")
+    document_id: Optional[str] = Field(None, description="ID do documento associado à tarefa")
+    filename: Optional[str] = Field(None, description="Nome do arquivo que será processado")
 
 
 class TaskResponse(BaseModel):
@@ -28,8 +28,8 @@ class TaskResponse(BaseModel):
     Schema de resposta para consulta de status de uma tarefa.
     """
     task_id: str = Field(..., description="Identificador único da tarefa")
-    document_id: str = Field(..., description="ID do documento associado")
-    filename: str = Field(..., description="Nome do arquivo sendo processado")
+    document_id: Optional[str] = Field(None, description="ID do documento associado")
+    filename: Optional[str] = Field(None, description="Nome do arquivo sendo processado")
     status: TaskStatus = Field(..., description="Status atual da tarefa")
     progress: int = Field(
         default=0,
@@ -47,23 +47,11 @@ class TaskResponse(BaseModel):
         default=None,
         description="Detalhes do erro em caso de falha (status=FAILED)"
     )
-
-
-class TaskQueuedResponse(BaseModel):
-    """
-    Schema de resposta imediata ao upload — confirma enfileiramento.
-    """
-    task_id: str = Field(..., description="ID da tarefa criada para rastreamento")
-    document_id: str = Field(..., description="ID do documento que será processado")
-    status: TaskStatus = Field(
-        default=TaskStatus.QUEUED,
-        description="Status inicial da tarefa"
+    result: Optional[dict] = Field(
+        default=None,
+        description="Resultado final retornado pela tarefa (ex: resposta RAG)"
     )
-    message: str = Field(
-        default="Documento enfileirado para processamento assíncrono.",
-        description="Mensagem informativa sobre o status do enfileiramento"
-    )
-    queue_endpoint: str = Field(
-        ...,
-        description="Endpoint para consultar o status da tarefa"
+    error: Optional[str] = Field(
+        default=None,
+        description="Mensagem de erro em caso de falha"
     )

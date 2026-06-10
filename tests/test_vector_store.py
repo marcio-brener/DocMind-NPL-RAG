@@ -61,6 +61,10 @@ def test_vector_store_upsert_and_search() -> None:
             # O chunk mais similar deve ser o próprio chunk[0] (similaridade ~1.0)
             assert first["similarity"] > 0.95
 
+            # Clean up ChromaDB client to release file lock on Windows
+            if store.client and hasattr(store.client, "_system") and hasattr(store.client._system, "stop"):
+                store.client._system.stop()
+
 
 def test_vector_store_upsert_empty_list() -> None:
     """
@@ -71,6 +75,10 @@ def test_vector_store_upsert_empty_list() -> None:
             store = VectorStoreService(collection_name="test_empty")
             result = store.upsert_chunks([])
             assert result is False
+
+            # Clean up ChromaDB client to release file lock on Windows
+            if store.client and hasattr(store.client, "_system") and hasattr(store.client._system, "stop"):
+                store.client._system.stop()
 
 
 def test_vector_store_delete_document() -> None:
@@ -93,6 +101,10 @@ def test_vector_store_delete_document() -> None:
             deleted = store.delete_document_chunks("doc-delete")
             assert deleted is True
 
+            # Clean up ChromaDB client to release file lock on Windows
+            if store.client and hasattr(store.client, "_system") and hasattr(store.client._system, "stop"):
+                store.client._system.stop()
+
 
 def test_api_full_pipeline_with_search(client: TestClient) -> None:
     """
@@ -107,7 +119,7 @@ def test_api_full_pipeline_with_search(client: TestClient) -> None:
     )
     files = {"file": ("arquitetura.md", io.BytesIO(file_content.encode("utf-8")), "text/markdown")}
     upload_resp = client.post("/api/v1/document/upload", files=files)
-    assert upload_resp.status_code == status.HTTP_201_CREATED
+    assert upload_resp.status_code == status.HTTP_202_ACCEPTED
     doc_id = upload_resp.json()["document_id"]
 
     # 2. Processamento semântico e persistência no ChromaDB
