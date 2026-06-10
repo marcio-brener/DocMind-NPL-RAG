@@ -4,7 +4,7 @@ import os
 from fastapi import APIRouter, File, UploadFile, status, HTTPException
 from app.core.config import settings
 from app.core.logging import BaseLogger
-from app.schemas.document import DocumentUploadResponse, DocumentMetadata, DocumentReprocessResponse
+from app.schemas.document import DocumentUploadResponse, DocumentMetadata, DocumentReprocessResponse, DocumentDeleteResponse
 from app.schemas.semantic import SemanticProcessResponse
 from app.schemas.task import TaskCreate, TaskStatus
 from app.services.cache_service import cache_service
@@ -342,4 +342,107 @@ async def reprocess_all_documents() -> DocumentReprocessResponse:
         message=f"Reprocessamento concluído. {processed_count} documentos processados com sucesso.",
         total_processed=processed_count,
         details=details
+    )
+
+
+@router.delete(
+    "/{document_id}",
+    response_model=DocumentDeleteResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Excluir documento do sistema",
+    description=(
+        "Remove permanentemente um documento do sistema, incluindo: "
+        "todos os chunks vetoriais no ChromaDB, o arquivo físico em disco e a invalidação do cache Redis."
+    ),
+)
+async def delete_document(
+    document_id: str,
+) -> DocumentDeleteResponse:
+    """
+    DELETE /api/v1/document/{document_id}
+
+    Fluxo de remoção:
+    1. Localiza o arquivo físico em data/uploads/ pelo prefixo document_id.
+    2. Remove todos os chunks vetoriais do ChromaDB (retorna contagem).
+    3. Remove o arquivo físico em disco.
+    4. Invalida o cache Redis (flush completo).
+    5. Retorna estatísticas da remoção.
+
+    Status HTTP:
+    - 200: Remoção concluída (com ou sem chunks/arquivo existentes no momento).
+    - 404: Nenhum registro encontrado para o document_id informado.
+    - 500: Falha interna durante a remoção.
+    """
+    BaseLogger.info(f"[DELETE] Recebida solicitação de exclusão para document_id={document_id}")
+
+    # ── 1. Localizar arquivo físico pelo prefixo document_id ─────────────────
+    physical_file_path: str | None = None
+    if os.path.isdir(settings.UPLOAD_DIR):
+        for filename in os.listdir(settings.UPLOAD_DIR):
+            if filename.startswith(f"{document_id}_"):
+                physical_file_path = os.path.join(settings.UPLOAD_DIR, filename)
+                break
+
+    # ── 2. Contar chunks existentes antes de qualquer remoção ─────────────────
+    try:
+        existing_check = vector_store.collection.get(
+            where={"source_doc_id": document_id},
+            include=["documents"]
+        )
+        has_chunks = len(existing_check.get("ids", [])) > 0
+    except Exception as chk_exc:
+        BaseLogger.error(f"[DELETE] Falha ao verificar chunks no ChromaDB: {str(chk_exc)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Erro ao verificar o documento no banco vetorial: {str(chk_exc)}",
+        )
+
+    # ── 3. 404 se não há nenhum rastro do documento ───────────────────────────
+    if not has_chunks and physical_file_path is None:
+        BaseLogger.warning(f"[DELETE] document_id={document_id} não encontrado (sem chunks e sem arquivo físico).")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Documento '{document_id}' não encontrado no sistema.",
+        )
+
+    # ── 4. Remover chunks do ChromaDB ─────────────────────────────────────────
+    try:
+        chunks_removed = vector_store.delete_document(document_id)
+        BaseLogger.info(f"[DELETE] {chunks_removed} chunk(s) removido(s) do ChromaDB para document_id={document_id}")
+    except Exception as vs_exc:
+        BaseLogger.error(f"[DELETE] Falha ao remover chunks do ChromaDB: {str(vs_exc)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Erro ao remover chunks do banco vetorial: {str(vs_exc)}",
+        )
+
+    # ── 5. Remover arquivo físico ─────────────────────────────────────────────
+    file_removed = False
+    if physical_file_path and os.path.exists(physical_file_path):
+        try:
+            os.remove(physical_file_path)
+            file_removed = True
+            BaseLogger.info(f"[DELETE] Arquivo físico removido: {physical_file_path}")
+        except OSError as rm_exc:
+            BaseLogger.error(f"[DELETE] Falha ao remover arquivo físico '{physical_file_path}': {str(rm_exc)}")
+            # Não abortamos — o ChromaDB já foi limpo; apenas reportamos no response.
+
+    # ── 6. Invalidar cache Redis ──────────────────────────────────────────────
+    try:
+        await cache_service.clear()
+        BaseLogger.info("[DELETE] Cache Redis invalidado com sucesso.")
+    except Exception as cache_exc:
+        BaseLogger.warning(f"[DELETE] Falha ao invalidar cache Redis (não-crítico): {str(cache_exc)}")
+
+    BaseLogger.info(
+        f"[DELETE] Exclusão concluída: document_id={document_id} | "
+        f"chunks_removed={chunks_removed} | file_removed={file_removed}"
+    )
+
+    return DocumentDeleteResponse(
+        success=True,
+        document_id=document_id,
+        chunks_removed=chunks_removed,
+        file_removed=file_removed,
+        message="Documento removido com sucesso.",
     )

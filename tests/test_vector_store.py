@@ -162,3 +162,55 @@ def test_api_search_returns_empty_gracefully(client: TestClient) -> None:
     assert "results" in data
     assert "total_results" in data
     assert isinstance(data["results"], list)
+
+
+# ─────────────────────────────────────────────────────────────
+# Testes unitários do novo método VectorStoreService.delete_document()
+# ─────────────────────────────────────────────────────────────
+
+def test_delete_document_returns_correct_count() -> None:
+    """
+    Testa que delete_document() retorna a quantidade exata de chunks
+    removidos para um dado document_id usando um ChromaDB isolado em tempdir.
+    """
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        with patch("app.core.config.settings.CHROMADB_PATH", tmp_dir):
+            store = VectorStoreService(collection_name="test_delete_doc_count")
+
+            # Inserir 3 chunks do doc-X e 2 chunks do doc-Y
+            chunks_x = [_make_chunk("doc-X", i) for i in range(3)]
+            chunks_y = [_make_chunk("doc-Y", i) for i in range(2)]
+            store.upsert_chunks(chunks_x + chunks_y)
+
+            # Verificar contagem inicial
+            assert store.collection.count() == 5
+
+            # Remover apenas os chunks de doc-X e verificar retorno
+            removed = store.delete_document("doc-X")
+            assert removed == 3, f"Esperado 3 chunks removidos, obteve {removed}"
+
+            # Confirmar que apenas os chunks de doc-Y permanecem
+            remaining = store.collection.count()
+            assert remaining == 2, f"Esperado 2 chunks restantes, obteve {remaining}"
+
+            # Cleanup ChromaDB client
+            if store.client and hasattr(store.client, "_system") and hasattr(store.client._system, "stop"):
+                store.client._system.stop()
+
+
+def test_delete_document_returns_zero_when_not_found() -> None:
+    """
+    Testa que delete_document() retorna 0 sem lançar exceção quando
+    o document_id não possui nenhum chunk no ChromaDB.
+    """
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        with patch("app.core.config.settings.CHROMADB_PATH", tmp_dir):
+            store = VectorStoreService(collection_name="test_delete_doc_empty")
+
+            # Coleção vazia — nenhum chunk inserido
+            removed = store.delete_document("doc-inexistente-xyz")
+            assert removed == 0, f"Esperado 0 chunks removidos, obteve {removed}"
+
+            # Cleanup ChromaDB client
+            if store.client and hasattr(store.client, "_system") and hasattr(store.client._system, "stop"):
+                store.client._system.stop()

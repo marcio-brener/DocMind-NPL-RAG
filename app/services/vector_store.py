@@ -275,6 +275,56 @@ class VectorStoreService:
             )
             return False
 
+    def delete_document(self, document_id: str) -> int:
+        """
+        Remove todos os chunks associados ao document_id do ChromaDB.
+
+        Diferente de delete_document_chunks(), este método:
+          1. Conta os chunks existentes antes da remoção.
+          2. Executa a deleção.
+          3. Retorna a quantidade de chunks efetivamente removidos.
+
+        Args:
+            document_id: Identificador único do documento (UUID).
+
+        Returns:
+            Número inteiro com a quantidade de chunks removidos (0 se não havia chunks).
+
+        Raises:
+            Exception: Propaga exceções do ChromaDB para que o endpoint possa tratar.
+        """
+        try:
+            # 1. Recuperar apenas os IDs dos chunks do documento (sem carregar embeddings/textos)
+            existing = self.collection.get(
+                where={"source_doc_id": document_id},
+                include=["documents"]
+            )
+            chunk_ids = existing.get("ids", [])
+            count = len(chunk_ids)
+
+            BaseLogger.info(
+                f"[DELETE] document_id={document_id} → {count} chunk(s) encontrado(s) no ChromaDB."
+            )
+
+            if count == 0:
+                return 0
+
+            # 2. Remover todos os chunks do documento
+            self.collection.delete(
+                where={"source_doc_id": document_id}
+            )
+
+            BaseLogger.info(
+                f"[DELETE] {count} chunk(s) do documento {document_id} removidos com sucesso."
+            )
+            return count
+
+        except Exception as e:
+            BaseLogger.error(
+                f"[DELETE] Erro ao remover documento {document_id} do ChromaDB: {str(e)}"
+            )
+            raise
+
     def clear_collection(self) -> bool:
 
         try:
