@@ -12,7 +12,10 @@ class RAGRequest(BaseModel):
         default=None,
         ge=1,
         le=20,
-        description="Número máximo de chunks de contexto a usar na geração da resposta (se omitido, usa o padrão do servidor RAG_CONTEXT_CHUNKS)"
+        description="Número máximo de chunks de contexto utilizados na resposta",
+        json_schema_extra={
+            "example": 10
+        }
     )
     filter_document_id: Optional[str] = Field(
         default=None,

@@ -25,6 +25,10 @@ async def ask_question(payload: RAGRequest) -> RAGAskResponse:
     timestamp = datetime.utcnow().isoformat()
     
     BaseLogger.info(f"Endpoint RAG /ask requisitado. Pergunta: '{payload.question[:60]}' | task_id={task_id} | request_id={request_id}")
+    BaseLogger.info(
+        f"[REQUEST_AUDIT] Payload recebido: {payload.model_dump()}"
+    )
+
     
     # Criar a tarefa inicial no TaskService usando task_id
     from app.schemas.task import TaskCreate, TaskStatus

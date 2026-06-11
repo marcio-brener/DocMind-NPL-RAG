@@ -2076,5 +2076,1436 @@
         }
       ]
     }
+  },
+  "cce01187-3830-41b3-a99c-86b25f8f4384": {
+    "task_id": "cce01187-3830-41b3-a99c-86b25f8f4384",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T22:49:55.046828",
+    "updated_at": "2026-06-10T22:49:59.638076",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "cce01187-3830-41b3-a99c-86b25f8f4384",
+      "answer": "Com base nos fragmentos fornecidos:\n\n*   **APO12** refere-se a \"Data, Horário e Plataforma de Origem (Uber, 99, InDrive)\".\n*   **APO13** refere-se a \"Valores Financeiros das Corridas e Custos operacionais\". É classificado como um Dado Pessoal Comum (Financeiro / Proteção à Intimidade), com base legal de Legítimo Interesse do Controlador (Inciso IX). Um risco associado é o furto ou perda física do smartphone com o aplicativo aberto, expondo a receita e faturamento privado do trabalhador. Para mitigar esse risco, é implementado o pacote `local_auth` em Flutter, exigindo biometria (Fingerprint/FaceID) na inicialização do aplicativo.",
+      "sources": [
+        {
+          "chunk_id": "120f1fe5-c7b3-4960-92bc-547d12460497_chunk_28",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "APO13 \nValores Financeiros das Corridas e Custos operacionais \nDado Pessoal Comum (Financeiro / Proteção à Intimidade) \nLegítimo Interesse do Controlador (Inciso IX) \nFurto ou perda física do smartphone com o aplicativo aberto, expondo toda a receita e faturamento privado do trabalhador. \nImplementação do pacote local_auth em Flutter, exigindo biometria (Fingerprint/FaceID) na inicialização do app...",
+          "similarity": 0.6297
+        }
+      ]
+    }
+  },
+  "db0d5bb3-4896-4660-8af8-63736ddc1e60": {
+    "task_id": "db0d5bb3-4896-4660-8af8-63736ddc1e60",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T22:51:59.063098",
+    "updated_at": "2026-06-10T22:52:01.727713",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "db0d5bb3-4896-4660-8af8-63736ddc1e60",
+      "answer": "Não foi encontrada informação relevante nos documentos disponíveis sobre as camadas de Gestão e a diferença entre elas. O fragmento fornecido detalha o processo MEA03 (Gerenciar a Conformidade com Requisitos Externos), que garante que o aplicativo Ride Buddy não viole leis vigentes, realizando a verificação contínua de telas e fluxos de dados para assegurar conformidade com a LGPD, incluindo o mapeamento do consentimento do usuário e seus direitos sobre as informações.",
+      "sources": [
+        {
+          "chunk_id": "120f1fe5-c7b3-4960-92bc-547d12460497_chunk_17",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "de\n\nlucro\n\nlevantadas\n\ncom\n\na\n\ncategoria\n\nde\n\nmotoristas.\n ● MEA03 (Gerenciar a Conformidade com Requisitos Externos): Garante que o \naplicativo\n\nnão\n\nviole\n\nleis\n\nvigentes.\n\nNo\n\ncontexto\n\ndo\n\nRide\n\nBuddy,\n\neste\n\nprocesso\n\nfaz\n\na\n\nverificação\n\ncontínua\n\ndas\n\ntelas\n\ne\n\nfluxos\n\nde\n\ndados\n\npara\n\nassegurar\n\nconformidade\n\ntotal\n\ncom\n\na\n\nLGPD,\n\nmapeando\n\nse\n\no\n\nusuário\n\ndeu\n\nconsentimento\n\nclaro\n\ne\n\npos...",
+          "similarity": 0.4997
+        }
+      ]
+    }
+  },
+  "e8731fce-f5cd-4731-828a-eb4f55bb8d22": {
+    "task_id": "e8731fce-f5cd-4731-828a-eb4f55bb8d22",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T22:54:20.102061",
+    "updated_at": "2026-06-10T22:54:22.218196",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "e8731fce-f5cd-4731-828a-eb4f55bb8d22",
+      "answer": "Com base nos fragmentos de contexto fornecidos, não há informação disponível sobre quais Processos COBIT são apresentados no relatório técnico de governança de TI - Ride Buddy. Os fragmentos apenas mencionam o título do documento.",
+      "sources": [
+        {
+          "chunk_id": "120f1fe5-c7b3-4960-92bc-547d12460497_chunk_0",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.73
+        }
+      ]
+    }
+  },
+  "453bb27e-406a-4dae-b68b-432f5b5f221e": {
+    "task_id": "453bb27e-406a-4dae-b68b-432f5b5f221e",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T22:55:10.620230",
+    "updated_at": "2026-06-10T22:55:12.968780",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "453bb27e-406a-4dae-b68b-432f5b5f221e",
+      "answer": "O projeto, parte do \"Plano de Melhorias (Roadmap de Governança de TI)\" para o Ride Buddy V3, tem como objetivo mitigar lacunas e elevar o nível de capacidade geral dos processos corporativos para o Nível 3 (Definido). Uma ação estratégica de curto prazo (2 semanas) envolve a adição de uma tela de Onboarding em Flutter que exibirá os Termos de Uso e a Política de Privacidade antes do primeiro acesso do motorista, exigindo o aceite formal.",
+      "sources": [
+        {
+          "chunk_id": "120f1fe5-c7b3-4960-92bc-547d12460497_chunk_30",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "7. Plano de Melhorias (Roadmap de Governança de TI) \nCom o intuito de mitigar as lacunas e elevar o nível de capacidade geral dos processos \ncorporativos\n\npara\n\no\n\nNível\n\n3\n\n(Definido),\n\na\n\nequipe\n\nestabeleceu\n\no\n\nseguinte\n\nplano\n\nestratégico:\n 1. Curto Prazo (Prazo: 2 semanas): Adicionar uma tela de Onboarding em Flutter que \nexiba\n\nos\n\nTermos\n\nde\n\nUso\n\ne\n\na\n\nPolítica\n\nde\n\nPrivacidade\n\nantes\n\ndo\n...",
+          "similarity": 0.5381
+        }
+      ]
+    }
+  },
+  "3467d487-0cd8-49da-9539-5dd0974389b1": {
+    "task_id": "3467d487-0cd8-49da-9539-5dd0974389b1",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T23:00:17.828767",
+    "updated_at": "2026-06-10T23:00:39.973908",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "3467d487-0cd8-49da-9539-5dd0974389b1",
+      "answer": "A base legal da LGPD é a Lei 13.709/18.",
+      "sources": [
+        {
+          "chunk_id": "120f1fe5-c7b3-4960-92bc-547d12460497_chunk_26",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "6. Engenharia de Privacidade e Conformidade LGPD \n(Lei\n\n13.709/18)\n\nO Ride Buddy trata dados que expõem intimidades financeiras e rotinas diárias precisas dos \nusuários\n\n(alta\n\ncriticidade\n\ncontextual).\n\nPara\n\nmitigar\n\nriscos\n\ne\n\nassegurar\n\na\n\nlegalidade,\n\nestruturou-se\n\na\n\nmatriz\n\nde\n\ntratamento\n\nde\n\ndados\n\nabaixo:",
+          "similarity": 0.5118
+        }
+      ]
+    }
+  },
+  "330d5678-fd01-4f4b-8fac-a282a50297de": {
+    "task_id": "330d5678-fd01-4f4b-8fac-a282a50297de",
+    "document_id": "330d5678-fd01-4f4b-8fac-a282a50297de",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:10:42.574938",
+    "updated_at": "2026-06-10T23:10:42.574938",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "376a3337-b79c-47b7-a982-7a9fe2fe7e73": {
+    "task_id": "376a3337-b79c-47b7-a982-7a9fe2fe7e73",
+    "document_id": "376a3337-b79c-47b7-a982-7a9fe2fe7e73",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:10:42.592142",
+    "updated_at": "2026-06-10T23:10:42.592142",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "1097a5f0-38d5-4299-a590-e1112fdcc5b7": {
+    "task_id": "1097a5f0-38d5-4299-a590-e1112fdcc5b7",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:10:42.999154",
+    "updated_at": "2026-06-10T23:10:42.999154",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "13994f15-569d-4f20-a3ae-919134396670": {
+    "task_id": "13994f15-569d-4f20-a3ae-919134396670",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:10:43.021804",
+    "updated_at": "2026-06-10T23:10:43.021804",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "44a2c917-4dc5-4ed7-9ac7-b81fe3a9f94e": {
+    "task_id": "44a2c917-4dc5-4ed7-9ac7-b81fe3a9f94e",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:10:43.357437",
+    "updated_at": "2026-06-10T23:10:43.357437",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d745533b-6e96-4ba8-970e-ddc44be5ecc2": {
+    "task_id": "d745533b-6e96-4ba8-970e-ddc44be5ecc2",
+    "document_id": "d745533b-6e96-4ba8-970e-ddc44be5ecc2",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:10:43.389285",
+    "updated_at": "2026-06-10T23:10:43.389285",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "427d4368-1134-4186-ba8f-03761bf40676": {
+    "task_id": "427d4368-1134-4186-ba8f-03761bf40676",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:10:43.563167",
+    "updated_at": "2026-06-10T23:10:43.563167",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "0a773e9e-3ef0-4d6c-a063-fba5b220f741": {
+    "task_id": "0a773e9e-3ef0-4d6c-a063-fba5b220f741",
+    "document_id": "0a773e9e-3ef0-4d6c-a063-fba5b220f741",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:10:44.349484",
+    "updated_at": "2026-06-10T23:10:44.349484",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "e923f8e1-a2fc-44a8-adb9-7266b5d884af": {
+    "task_id": "e923f8e1-a2fc-44a8-adb9-7266b5d884af",
+    "document_id": "e923f8e1-a2fc-44a8-adb9-7266b5d884af",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:17:12.441666",
+    "updated_at": "2026-06-10T23:17:12.441666",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "e0623686-1fc2-4e6a-9a4c-8d0213a924e5": {
+    "task_id": "e0623686-1fc2-4e6a-9a4c-8d0213a924e5",
+    "document_id": "e0623686-1fc2-4e6a-9a4c-8d0213a924e5",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:17:12.465348",
+    "updated_at": "2026-06-10T23:17:12.465348",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "5db7ba91-876c-4958-b02c-a623b1baf94f": {
+    "task_id": "5db7ba91-876c-4958-b02c-a623b1baf94f",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:17:12.828361",
+    "updated_at": "2026-06-10T23:17:12.828361",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "c332c0b7-be82-42a1-a35d-5061a159fbb8": {
+    "task_id": "c332c0b7-be82-42a1-a35d-5061a159fbb8",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:17:12.861513",
+    "updated_at": "2026-06-10T23:17:12.861513",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "e858ecd5-33f9-4dc3-8c17-dd8f6156b191": {
+    "task_id": "e858ecd5-33f9-4dc3-8c17-dd8f6156b191",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:17:13.215444",
+    "updated_at": "2026-06-10T23:17:13.215444",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "0fe00ce9-d68b-4999-8e0f-89f9c5ba5f0a": {
+    "task_id": "0fe00ce9-d68b-4999-8e0f-89f9c5ba5f0a",
+    "document_id": "0fe00ce9-d68b-4999-8e0f-89f9c5ba5f0a",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:17:13.246495",
+    "updated_at": "2026-06-10T23:17:13.246495",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "627b5d54-8a96-4276-b0a3-506032c72472": {
+    "task_id": "627b5d54-8a96-4276-b0a3-506032c72472",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:17:13.394140",
+    "updated_at": "2026-06-10T23:17:13.394140",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "17d5e593-f2bd-4260-ae16-e18965a4e746": {
+    "task_id": "17d5e593-f2bd-4260-ae16-e18965a4e746",
+    "document_id": "17d5e593-f2bd-4260-ae16-e18965a4e746",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:17:14.203037",
+    "updated_at": "2026-06-10T23:17:14.203037",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "9601283e-3eef-4e35-9ab2-16d010cb1a06": {
+    "task_id": "9601283e-3eef-4e35-9ab2-16d010cb1a06",
+    "document_id": "9601283e-3eef-4e35-9ab2-16d010cb1a06",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:19:37.900824",
+    "updated_at": "2026-06-10T23:19:37.900824",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "5040c962-394a-47fa-a46c-9e9c5319902b": {
+    "task_id": "5040c962-394a-47fa-a46c-9e9c5319902b",
+    "document_id": "5040c962-394a-47fa-a46c-9e9c5319902b",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:19:37.925424",
+    "updated_at": "2026-06-10T23:19:37.925424",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "5d26411f-db60-478b-aadd-61e8593539cd": {
+    "task_id": "5d26411f-db60-478b-aadd-61e8593539cd",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:19:38.294940",
+    "updated_at": "2026-06-10T23:19:38.294940",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "5680294b-936c-4172-b296-45fd1a45943e": {
+    "task_id": "5680294b-936c-4172-b296-45fd1a45943e",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:19:38.316568",
+    "updated_at": "2026-06-10T23:19:38.316568",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "257bb39b-529a-43b2-b758-00ebd6757bb5": {
+    "task_id": "257bb39b-529a-43b2-b758-00ebd6757bb5",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:19:38.646942",
+    "updated_at": "2026-06-10T23:19:38.646942",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "cd8dff50-7bba-44dc-9238-c7a3b3b81a24": {
+    "task_id": "cd8dff50-7bba-44dc-9238-c7a3b3b81a24",
+    "document_id": "cd8dff50-7bba-44dc-9238-c7a3b3b81a24",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:19:38.678069",
+    "updated_at": "2026-06-10T23:19:38.678069",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a67efcc3-4c3a-4467-b9ec-061afb1a52a5": {
+    "task_id": "a67efcc3-4c3a-4467-b9ec-061afb1a52a5",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:19:38.815543",
+    "updated_at": "2026-06-10T23:19:38.815543",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "3e0abc0d-3c21-44bb-8e85-32830b6fb412": {
+    "task_id": "3e0abc0d-3c21-44bb-8e85-32830b6fb412",
+    "document_id": "3e0abc0d-3c21-44bb-8e85-32830b6fb412",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:19:39.685141",
+    "updated_at": "2026-06-10T23:19:39.685141",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "67366a7b-a674-4d7c-ad59-f5d6252f7381": {
+    "task_id": "67366a7b-a674-4d7c-ad59-f5d6252f7381",
+    "document_id": "67366a7b-a674-4d7c-ad59-f5d6252f7381",
+    "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:26:10.931057",
+    "updated_at": "2026-06-10T23:26:10.931057",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "7b6be8dd-9df1-4794-996c-74590db96fda": {
+    "task_id": "7b6be8dd-9df1-4794-996c-74590db96fda",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T23:29:06.431151",
+    "updated_at": "2026-06-10T23:29:10.134103",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "7b6be8dd-9df1-4794-996c-74590db96fda",
+      "answer": "Não foi encontrada informação relevante nos documentos disponíveis sobre as camadas de governança e camadas de gestão do projeto RideBuddy. Os fragmentos fornecidos apenas mencionam o \"Relatório Técnico de Governança de TI - Ride Buddy V3.pdf\" sem detalhar seu conteúdo.",
+      "sources": [
+        {
+          "chunk_id": "67366a7b-a674-4d7c-ad59-f5d6252f7381_chunk_0",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.7016
+        }
+      ]
+    }
+  },
+  "6b6845e5-3f07-403a-a578-7435af5ccac4": {
+    "task_id": "6b6845e5-3f07-403a-a578-7435af5ccac4",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-10T23:47:44.236551",
+    "updated_at": "2026-06-10T23:47:50.490712",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "6b6845e5-3f07-403a-a578-7435af5ccac4",
+      "answer": "O principal objetivo do projeto RideBuddy é prover ao motorista uma ferramenta autônoma que transforme dados brutos de viagens em uma visão analítica real de sua margem de lucro. Isso permite que o motorista escolha estrategicamente as melhores plataformas de atuação e maximize sua rentabilidade por hora trabalhada.\n\nEm relação aos Processos COBIT, o projeto utiliza a Cascata de Objetivos do COBIT 2019, alinhando-se ao Objetivo de Negócio EG01 - Portfólio de Produtos e Serviços Competitivos. O fragmento fornecido não especifica quais processos COBIT estão implementados.",
+      "sources": [
+        {
+          "chunk_id": "67366a7b-a674-4d7c-ad59-f5d6252f7381_chunk_6",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "da\n\ntecnologia\n\n(a\n\nsolução\n\nem\n\nFlutter),\n\nutilizando\n\na\n\nCascata\n\nde\n\nObjetivos\n\ndo\n\nCOBIT\n\n2019:\n\nObjetivos de Negócio (EG01 - Portfólio de Produtos e Serviços \nCompetitivos)\n\nProver ao motorista uma ferramenta autônoma que transforme dados brutos de viagens em \numa\n\nvisão\n\nanalítica\n\nreal\n\nde\n\nsua\n\nmargem\n\nde\n\nlucro,\n\npermitindo\n\nque\n\nele\n\nescolha\n\nestrategicamente\n\nas\n\nmelhores\n\nplataformas\n\n...",
+          "similarity": 0.6929
+        }
+      ]
+    }
+  },
+  "2c101ddf-895e-4c4c-b774-44cb750a4432": {
+    "task_id": "2c101ddf-895e-4c4c-b774-44cb750a4432",
+    "document_id": "2c101ddf-895e-4c4c-b774-44cb750a4432",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:51:46.670997",
+    "updated_at": "2026-06-10T23:51:46.670997",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b9b15fae-c2cf-49e8-b728-f4b310269704": {
+    "task_id": "b9b15fae-c2cf-49e8-b728-f4b310269704",
+    "document_id": "b9b15fae-c2cf-49e8-b728-f4b310269704",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:51:46.688544",
+    "updated_at": "2026-06-10T23:51:46.688544",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "bc5daf9a-3a06-4687-8df9-7de9c17d74be": {
+    "task_id": "bc5daf9a-3a06-4687-8df9-7de9c17d74be",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:51:47.035465",
+    "updated_at": "2026-06-10T23:51:47.035465",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "7a69f94a-296a-46a5-8309-e80ec0174ea0": {
+    "task_id": "7a69f94a-296a-46a5-8309-e80ec0174ea0",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:51:47.056947",
+    "updated_at": "2026-06-10T23:51:47.056947",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "4f70c031-7b02-49a6-acac-67bec97732fb": {
+    "task_id": "4f70c031-7b02-49a6-acac-67bec97732fb",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:51:47.384139",
+    "updated_at": "2026-06-10T23:51:47.384139",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b3c4abc5-eb72-4187-8667-396385feaa7c": {
+    "task_id": "b3c4abc5-eb72-4187-8667-396385feaa7c",
+    "document_id": "b3c4abc5-eb72-4187-8667-396385feaa7c",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:51:47.416203",
+    "updated_at": "2026-06-10T23:51:47.416203",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a547b8fa-f184-4740-a520-a628ff1990f6": {
+    "task_id": "a547b8fa-f184-4740-a520-a628ff1990f6",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:51:47.559118",
+    "updated_at": "2026-06-10T23:51:47.559118",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b08e6cbe-7bd7-4ab6-ac19-c29128dd8886": {
+    "task_id": "b08e6cbe-7bd7-4ab6-ac19-c29128dd8886",
+    "document_id": "b08e6cbe-7bd7-4ab6-ac19-c29128dd8886",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-10T23:51:48.526838",
+    "updated_at": "2026-06-10T23:51:48.526838",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d77c409b-8cc9-44a3-a586-656da9e1dd02": {
+    "task_id": "d77c409b-8cc9-44a3-a586-656da9e1dd02",
+    "document_id": "d77c409b-8cc9-44a3-a586-656da9e1dd02",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:07:45.019713",
+    "updated_at": "2026-06-11T00:07:45.019713",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "f3c3a1a6-a08d-4994-827c-796d0310edef": {
+    "task_id": "f3c3a1a6-a08d-4994-827c-796d0310edef",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:07:45.238449",
+    "updated_at": "2026-06-11T00:07:45.238449",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "fddc506d-09ed-49b3-b4ab-08b541d68967": {
+    "task_id": "fddc506d-09ed-49b3-b4ab-08b541d68967",
+    "document_id": "fddc506d-09ed-49b3-b4ab-08b541d68967",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:11:24.277309",
+    "updated_at": "2026-06-11T00:11:24.277309",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "bc4805e1-9e09-4745-8e60-4c9f91ccb4fd": {
+    "task_id": "bc4805e1-9e09-4745-8e60-4c9f91ccb4fd",
+    "document_id": "bc4805e1-9e09-4745-8e60-4c9f91ccb4fd",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:11:24.294376",
+    "updated_at": "2026-06-11T00:11:24.294376",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "beeaddda-aac2-48ee-85db-f155189ea2e3": {
+    "task_id": "beeaddda-aac2-48ee-85db-f155189ea2e3",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:11:24.667493",
+    "updated_at": "2026-06-11T00:11:24.667493",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "6de51123-3a1e-4d43-8402-de2892071150": {
+    "task_id": "6de51123-3a1e-4d43-8402-de2892071150",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:11:24.692062",
+    "updated_at": "2026-06-11T00:11:24.692062",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "94d21c12-c040-4e8e-8cef-6ea1ab14232f": {
+    "task_id": "94d21c12-c040-4e8e-8cef-6ea1ab14232f",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:11:25.043633",
+    "updated_at": "2026-06-11T00:11:25.043633",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "89113d1a-2a3b-49aa-9b23-8551cf73f9a5": {
+    "task_id": "89113d1a-2a3b-49aa-9b23-8551cf73f9a5",
+    "document_id": "89113d1a-2a3b-49aa-9b23-8551cf73f9a5",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:11:25.077548",
+    "updated_at": "2026-06-11T00:11:25.077548",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "ac535b47-42f0-4662-9f10-4324fa02f7b8": {
+    "task_id": "ac535b47-42f0-4662-9f10-4324fa02f7b8",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:11:25.221658",
+    "updated_at": "2026-06-11T00:11:25.221658",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "ae8ee03b-a423-4375-9ff8-915b732d4768": {
+    "task_id": "ae8ee03b-a423-4375-9ff8-915b732d4768",
+    "document_id": "ae8ee03b-a423-4375-9ff8-915b732d4768",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:11:26.015718",
+    "updated_at": "2026-06-11T00:11:26.015718",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "368fb08d-3d4a-4f98-a651-993a25f2467b": {
+    "task_id": "368fb08d-3d4a-4f98-a651-993a25f2467b",
+    "document_id": "368fb08d-3d4a-4f98-a651-993a25f2467b",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:27:45.607901",
+    "updated_at": "2026-06-11T00:27:45.607901",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b5cbdf16-a6a9-4dee-be1a-a2ea2c2876e8": {
+    "task_id": "b5cbdf16-a6a9-4dee-be1a-a2ea2c2876e8",
+    "document_id": "b5cbdf16-a6a9-4dee-be1a-a2ea2c2876e8",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:27:45.635988",
+    "updated_at": "2026-06-11T00:27:45.635988",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "1bd46f88-7bf7-42de-8fb9-451eb7153afc": {
+    "task_id": "1bd46f88-7bf7-42de-8fb9-451eb7153afc",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:27:46.013667",
+    "updated_at": "2026-06-11T00:27:46.013667",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b0d671fb-adff-4626-bb90-334e99c7d520": {
+    "task_id": "b0d671fb-adff-4626-bb90-334e99c7d520",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:27:46.037576",
+    "updated_at": "2026-06-11T00:27:46.037576",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "8647cc65-93b4-46f1-b4b7-ac6497b6d36d": {
+    "task_id": "8647cc65-93b4-46f1-b4b7-ac6497b6d36d",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:27:46.337927",
+    "updated_at": "2026-06-11T00:27:46.337927",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d99fafe4-ca41-4a9a-829d-20e66bda5b2f": {
+    "task_id": "d99fafe4-ca41-4a9a-829d-20e66bda5b2f",
+    "document_id": "d99fafe4-ca41-4a9a-829d-20e66bda5b2f",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:27:46.367998",
+    "updated_at": "2026-06-11T00:27:46.367998",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "e88d872a-1ef5-4a5e-a012-2de187d7fb72": {
+    "task_id": "e88d872a-1ef5-4a5e-a012-2de187d7fb72",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:27:46.492385",
+    "updated_at": "2026-06-11T00:27:46.492385",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "981641a0-6fe1-4671-9f95-992db24110ec": {
+    "task_id": "981641a0-6fe1-4671-9f95-992db24110ec",
+    "document_id": "981641a0-6fe1-4671-9f95-992db24110ec",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:27:47.235759",
+    "updated_at": "2026-06-11T00:27:47.235759",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "e6b62fd7-4a94-408e-95b0-562d2ffa3268": {
+    "task_id": "e6b62fd7-4a94-408e-95b0-562d2ffa3268",
+    "document_id": "e6b62fd7-4a94-408e-95b0-562d2ffa3268",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:30:19.134093",
+    "updated_at": "2026-06-11T00:30:19.134093",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "13297913-18e6-40c5-9e9e-db2de88790b9": {
+    "task_id": "13297913-18e6-40c5-9e9e-db2de88790b9",
+    "document_id": "13297913-18e6-40c5-9e9e-db2de88790b9",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:30:19.153806",
+    "updated_at": "2026-06-11T00:30:19.153806",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b4c30029-d08e-48d3-855a-eaa68a376bca": {
+    "task_id": "b4c30029-d08e-48d3-855a-eaa68a376bca",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:30:19.500152",
+    "updated_at": "2026-06-11T00:30:19.500152",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "f81c4b5d-47a0-46be-a6c7-b4da6df55a19": {
+    "task_id": "f81c4b5d-47a0-46be-a6c7-b4da6df55a19",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:30:19.529748",
+    "updated_at": "2026-06-11T00:30:19.529748",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "bad83fc9-f724-4ee5-b1c9-388c13d7bcc6": {
+    "task_id": "bad83fc9-f724-4ee5-b1c9-388c13d7bcc6",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:30:19.885640",
+    "updated_at": "2026-06-11T00:30:19.885640",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "95915626-4dfb-48f7-bf39-726b6f37ba93": {
+    "task_id": "95915626-4dfb-48f7-bf39-726b6f37ba93",
+    "document_id": "95915626-4dfb-48f7-bf39-726b6f37ba93",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:30:19.926657",
+    "updated_at": "2026-06-11T00:30:19.926657",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "503b3ef3-5dd4-4b94-9966-d49a9f2dca3e": {
+    "task_id": "503b3ef3-5dd4-4b94-9966-d49a9f2dca3e",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:30:20.066253",
+    "updated_at": "2026-06-11T00:30:20.066253",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b7dd816e-84b5-441a-8964-675abc6fb231": {
+    "task_id": "b7dd816e-84b5-441a-8964-675abc6fb231",
+    "document_id": "b7dd816e-84b5-441a-8964-675abc6fb231",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:30:20.907202",
+    "updated_at": "2026-06-11T00:30:20.907202",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "8703cfa6-f075-47d0-8c66-8b30810d0d6e": {
+    "task_id": "8703cfa6-f075-47d0-8c66-8b30810d0d6e",
+    "document_id": "8703cfa6-f075-47d0-8c66-8b30810d0d6e",
+    "filename": "resumo_senhor_dos_aneis.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:36:53.642521",
+    "updated_at": "2026-06-11T00:36:53.642521",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "7ce6f9f1-9c52-4875-a4b5-a6fbcfeae387": {
+    "task_id": "7ce6f9f1-9c52-4875-a4b5-a6fbcfeae387",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T00:38:45.965580",
+    "updated_at": "2026-06-11T00:38:49.814425",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "7ce6f9f1-9c52-4875-a4b5-a6fbcfeae387",
+      "answer": "Com base nos documentos fornecidos:\n\nGandalf é mencionado como um dos heróis que, junto com as Grandes Águias, rasgou o céu enfumaçado e foi resgatado de um \"inferno de pedra\", despertando posteriormente em Ithilien.\n\nNão há informações sobre Sauron nos documentos disponíveis.",
+      "sources": [
+        {
+          "chunk_id": "8703cfa6-f075-47d0-8c66-8b30810d0d6e_chunk_4",
+          "filename": "resumo_senhor_dos_aneis.pdf",
+          "excerpt": "em uma pequena colina de cinzas, Gandalf e as Grandes Águias rasgaram o céu enfumaçado. Em um resgate\nmilagroso, os heróis exaustos foram erguidos do inferno de pedra, deixando para trás a escuridão e\ndespertando, tempos depois, sob a luz suave de um novo amanhecer em Ithilien.\nResumo de O Senhor dos Anéis: O Retorno do Rei • J.R.R. Tolkien",
+          "similarity": 0.5449
+        }
+      ]
+    }
+  },
+  "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b": {
+    "task_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b",
+    "document_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b",
+    "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:41:32.692420",
+    "updated_at": "2026-06-11T00:41:32.692420",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a37aad9b-f5d8-42af-a055-67ec8c57dc12": {
+    "task_id": "a37aad9b-f5d8-42af-a055-67ec8c57dc12",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T00:43:01.469236",
+    "updated_at": "2026-06-11T00:43:04.163861",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "a37aad9b-f5d8-42af-a055-67ec8c57dc12",
+      "answer": "Não encontrei informações sobre 'Sauron' ou 'Gandalf' nos documentos disponíveis.",
+      "sources": [
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_9",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "do\n\ngrupo\n\ngere\n\nvalor\n\nreal\n\npara\n\no\n\nmotorista.\n\nNo\n\nRide\n\nBuddy,\n\nisso\n\nse\n\ntraduz\n\nem\n\nauditar\n\nse\n\nas\n\nmétricas\n\nfinais\n\napresentadas\n\nna\n\ninterface\n\n(R$/km\n\nrodado\n\ne\n\nlucro\n\nlíquido\n\npor\n\nhora)\n\nsão\n\nmatematicamente\n\nexatas\n\ne\n\nfáceis\n\nde\n\ninterpretar,\n\nimpedindo\n\nque\n\no\n\nmotorista\n\ntome\n\ndecisões\n\nerradas\n\nbaseadas\n\nem\n\nrelatórios\n\nimprecisos.\n ● EDM03 (Assegurar a Otimização de Riscos): D...",
+          "similarity": 0.3045
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_3",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "(linguagem\n\nDart),\n\ncujo\n\nprincipal\n\nobjetivo\n\né\n\natuar\n\ncomo\n\numa\n\nplataforma\n\nde\n\ncontrole\n\nfinanceiro\n\ne\n\nde\n\ndespesas\n\noperacionais\n\nvoltada\n\nespecificamente\n\npara\n\nmotoristas\n\nde\n\naplicativos\n\nde\n\ntransporte\n\nautônomos\n\n(tais\n\ncomo\n\nUber,\n\n99,\n\nInDrive,\n\nentre\n\noutros).\n\nA\n\nrelevância\n\nsocial\n\ne\n\neconômica\n\ndo\n\nprojeto\n\nreside\n\nna\n\nmitigação\n\nde\n\numa\n\nassimetria\n\nde\n\ninformação\n\ncrônica\n\nna\n\n...",
+          "similarity": 0.2965
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_16",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "de\n\ncódigo\n\nDart)\n\ne\n\na\n\nplataforma\n\nFirebase\n\n(como\n\ninfraestrutura\n\nNoSQL\n\nelástica).\n\nEle\n\ncontrola\n\na\n\nhomologação\n\ne\n\ninserção\n\nde\n\npacotes\n\noficiais\n\ndo\n\necossistema\n\nDart\n\n(ex:\n cloud_firestore e firebase_auth), assegurando que a solução física construída \nespelhe\n\nexatamente\n\nos\n\nrequisitos\n\nfuncionais\n\ne\n\nas\n\nnecessidades\n\nde\n\nanálise\n\nde\n\nmargem\n\nde\n\nlucro\n\nlevantadas\n\ncom\n\na\n\ncategoria\n...",
+          "similarity": 0.2955
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_34",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Acesso\n\nem:\n\n21\n\nde\n\nmaio\n\nde\n\n2026.",
+          "similarity": 0.2939
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_17",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "de\n\nlucro\n\nlevantadas\n\ncom\n\na\n\ncategoria\n\nde\n\nmotoristas.\n ● MEA03 (Gerenciar a Conformidade com Requisitos Externos): Garante que o \naplicativo\n\nnão\n\nviole\n\nleis\n\nvigentes.\n\nNo\n\ncontexto\n\ndo\n\nRide\n\nBuddy,\n\neste\n\nprocesso\n\nfaz\n\na\n\nverificação\n\ncontínua\n\ndas\n\ntelas\n\ne\n\nfluxos\n\nde\n\ndados\n\npara\n\nassegurar\n\nconformidade\n\ntotal\n\ncom\n\na\n\nLGPD,\n\nmapeando\n\nse\n\no\n\nusuário\n\ndeu\n\nconsentimento\n\nclaro\n\ne\n\npos...",
+          "similarity": 0.2884
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_30",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "7. Plano de Melhorias (Roadmap de Governança de TI) \nCom o intuito de mitigar as lacunas e elevar o nível de capacidade geral dos processos \ncorporativos\n\npara\n\no\n\nNível\n\n3\n\n(Definido),\n\na\n\nequipe\n\nestabeleceu\n\no\n\nseguinte\n\nplano\n\nestratégico:\n 1. Curto Prazo (Prazo: 2 semanas): Adicionar uma tela de Onboarding em Flutter que \nexiba\n\nos\n\nTermos\n\nde\n\nUso\n\ne\n\na\n\nPolítica\n\nde\n\nPrivacidade\n\nantes\n\ndo\n...",
+          "similarity": 0.2876
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_10",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "aceita\n\nou\n\nnão\n\ncomo\n\nrisco.\n\nEle\n\ndireciona\n\na\n\nequipe\n\na\n\ndecidir\n\na\n\narquitetura\n\nde\n\ndados;\n\npor\n\nexemplo,\n\na\n\ndecisão\n\nde\n\nadotar\n\numa\n\narquitetura\n\nparadigma\n\nonline-first\n\n(armazenamento\n\nestrito\n\nno\n\naparelho)\n\né\n\numa\n\ndiretriz\n\ndeste\n\nprocesso\n\npara\n\nevitar\n\na\n\nperda\n\nde\n\ndados\n\ncaso\n\no\n\naparelho\n\nseja\n\nextraviado.\n\n3.2. Camada de Gestão \n● APO12 (Gerenciar Riscos): Atua no nível do ecos...",
+          "similarity": 0.2796
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_31",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "aceite\n\nformal.\n\nO\n\ntexto\n\ndeixa\n\nclaro\n\nque\n\nos\n\ndados\n\nnão\n\nsaem\n\ndo\n\ndispositivo\n\n(MEA03).\n 2. Médio Prazo (Garantia de Integridade): Implementação de uma suíte de testes \nunitários\n\nautomatizados\n\ndiretamente\n\nna\n\ncamada\n\nlógica\n\ndo\n\naplicativo\n\n(camada\n\nde\n\ncontrole/regras\n\nde\n\nnegócio).\n\nO\n\nfoco\n\nserá\n\nblindar\n\nmatematicamente\n\nas\n\nfunções\n\nque\n\ncalculam\n\no\n\nlucro\n\nlíquido\n\ne\n\no\n\ncusto\n\npor\n...",
+          "similarity": 0.2727
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_0",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "Relatório Técnico de Governança de TI - \nRide",
+          "similarity": 0.2712
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_5",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "como:\n\nplataforma\n\nde\n\norigem,\n\ndistância\n\npercorrida\n\nem\n\nquilômetros,\n\ncoordenadas\n\nde\n\norigem\n\ne\n\ndestino,\n\nvalor\n\nbruto\n\nrecebido\n\ne\n\ndata/horário\n\nda\n\noperação.\n\n2. Alinhamento Estratégico: Objetivos de Negócio e TI \nPara estabelecer um modelo de governança corporativa sólido, o Ride Buddy passa pelo \nalinhamento\n\nestratégico\n\nentre\n\nos\n\nobjetivos\n\nda\n\natividade\n\nde\n\nextensão\n\n(o\n\nnegócio\n\ndo...",
+          "similarity": 0.2604
+        }
+      ]
+    }
+  },
+  "2f248b8d-35aa-45ee-a28b-1f7667fc3934": {
+    "task_id": "2f248b8d-35aa-45ee-a28b-1f7667fc3934",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T00:43:52.750146",
+    "updated_at": "2026-06-11T00:43:57.826932",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "2f248b8d-35aa-45ee-a28b-1f7667fc3934",
+      "answer": "Os fragmentos indicam que há \"integrantes\" no projeto, cujos \"papéis reais\" são mapeados em uma \"Matriz RACI de Responsabilidades\" para os seis processos estudados (Fragmento 8). A \"equipe\" também é mencionada como responsável por estabelecer o plano estratégico (Fragmento 2) e decidir a arquitetura de dados (Fragmento 7). Contudo, os fragmentos não fornecem os nomes dos integrantes do projeto.",
+      "sources": [
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_31",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "aceite\n\nformal.\n\nO\n\ntexto\n\ndeixa\n\nclaro\n\nque\n\nos\n\ndados\n\nnão\n\nsaem\n\ndo\n\ndispositivo\n\n(MEA03).\n 2. Médio Prazo (Garantia de Integridade): Implementação de uma suíte de testes \nunitários\n\nautomatizados\n\ndiretamente\n\nna\n\ncamada\n\nlógica\n\ndo\n\naplicativo\n\n(camada\n\nde\n\ncontrole/regras\n\nde\n\nnegócio).\n\nO\n\nfoco\n\nserá\n\nblindar\n\nmatematicamente\n\nas\n\nfunções\n\nque\n\ncalculam\n\no\n\nlucro\n\nlíquido\n\ne\n\no\n\ncusto\n\npor\n...",
+          "similarity": 0.5883
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_30",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "7. Plano de Melhorias (Roadmap de Governança de TI) \nCom o intuito de mitigar as lacunas e elevar o nível de capacidade geral dos processos \ncorporativos\n\npara\n\no\n\nNível\n\n3\n\n(Definido),\n\na\n\nequipe\n\nestabeleceu\n\no\n\nseguinte\n\nplano\n\nestratégico:\n 1. Curto Prazo (Prazo: 2 semanas): Adicionar uma tela de Onboarding em Flutter que \nexiba\n\nos\n\nTermos\n\nde\n\nUso\n\ne\n\na\n\nPolítica\n\nde\n\nPrivacidade\n\nantes\n\ndo\n...",
+          "similarity": 0.5738
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_5",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "como:\n\nplataforma\n\nde\n\norigem,\n\ndistância\n\npercorrida\n\nem\n\nquilômetros,\n\ncoordenadas\n\nde\n\norigem\n\ne\n\ndestino,\n\nvalor\n\nbruto\n\nrecebido\n\ne\n\ndata/horário\n\nda\n\noperação.\n\n2. Alinhamento Estratégico: Objetivos de Negócio e TI \nPara estabelecer um modelo de governança corporativa sólido, o Ride Buddy passa pelo \nalinhamento\n\nestratégico\n\nentre\n\nos\n\nobjetivos\n\nda\n\natividade\n\nde\n\nextensão\n\n(o\n\nnegócio\n\ndo...",
+          "similarity": 0.5189
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_32",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "garante\n\nque\n\nqualquer\n\nevolução\n\nfutura\n\nno\n\ncódigo\n\ndo\n\naplicativo\n\nnão\n\nquebre\n\nos\n\ncálculos\n\ncentrais\n\nentregues\n\nao\n\nusuário,\n\nmitigando\n\nriscos\n\nde\n\nrelatórios\n\nfinanceiros\n\ncorrompidos\n\n(APO12)\n\ne\n\nelevando\n\na\n\nmaturidade\n\nda\n\nengenharia\n\ndo\n\nsoftware\n\n(BAI03).\n\n 3. Longo Prazo (Fase de Manutenção e Expansão): Criação de um botão nativo nas \nconfigurações\n\nchamado\n\n\"Excluir\n\nMinha\n\nConta\n\ne...",
+          "similarity": 0.5125
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_3",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "(linguagem\n\nDart),\n\ncujo\n\nprincipal\n\nobjetivo\n\né\n\natuar\n\ncomo\n\numa\n\nplataforma\n\nde\n\ncontrole\n\nfinanceiro\n\ne\n\nde\n\ndespesas\n\noperacionais\n\nvoltada\n\nespecificamente\n\npara\n\nmotoristas\n\nde\n\naplicativos\n\nde\n\ntransporte\n\nautônomos\n\n(tais\n\ncomo\n\nUber,\n\n99,\n\nInDrive,\n\nentre\n\noutros).\n\nA\n\nrelevância\n\nsocial\n\ne\n\neconômica\n\ndo\n\nprojeto\n\nreside\n\nna\n\nmitigação\n\nde\n\numa\n\nassimetria\n\nde\n\ninformação\n\ncrônica\n\nna\n\n...",
+          "similarity": 0.5065
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_9",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "do\n\ngrupo\n\ngere\n\nvalor\n\nreal\n\npara\n\no\n\nmotorista.\n\nNo\n\nRide\n\nBuddy,\n\nisso\n\nse\n\ntraduz\n\nem\n\nauditar\n\nse\n\nas\n\nmétricas\n\nfinais\n\napresentadas\n\nna\n\ninterface\n\n(R$/km\n\nrodado\n\ne\n\nlucro\n\nlíquido\n\npor\n\nhora)\n\nsão\n\nmatematicamente\n\nexatas\n\ne\n\nfáceis\n\nde\n\ninterpretar,\n\nimpedindo\n\nque\n\no\n\nmotorista\n\ntome\n\ndecisões\n\nerradas\n\nbaseadas\n\nem\n\nrelatórios\n\nimprecisos.\n ● EDM03 (Assegurar a Otimização de Riscos): D...",
+          "similarity": 0.4891
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_10",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "aceita\n\nou\n\nnão\n\ncomo\n\nrisco.\n\nEle\n\ndireciona\n\na\n\nequipe\n\na\n\ndecidir\n\na\n\narquitetura\n\nde\n\ndados;\n\npor\n\nexemplo,\n\na\n\ndecisão\n\nde\n\nadotar\n\numa\n\narquitetura\n\nparadigma\n\nonline-first\n\n(armazenamento\n\nestrito\n\nno\n\naparelho)\n\né\n\numa\n\ndiretriz\n\ndeste\n\nprocesso\n\npara\n\nevitar\n\na\n\nperda\n\nde\n\ndados\n\ncaso\n\no\n\naparelho\n\nseja\n\nextraviado.\n\n3.2. Camada de Gestão \n● APO12 (Gerenciar Riscos): Atua no nível do ecos...",
+          "similarity": 0.4841
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_23",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "5. Matriz RACI de Responsabilidades \nAbaixo está descrita a distribuição de responsabilidades para os seis processos estudados, \nmapeando\n\nos\n\npapéis\n\nreais\n\ndos\n\nintegrantes\n\nbaseados\n\nno\n\nciclo\n\nde\n\nvida\n\nde",
+          "similarity": 0.467
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_17",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "de\n\nlucro\n\nlevantadas\n\ncom\n\na\n\ncategoria\n\nde\n\nmotoristas.\n ● MEA03 (Gerenciar a Conformidade com Requisitos Externos): Garante que o \naplicativo\n\nnão\n\nviole\n\nleis\n\nvigentes.\n\nNo\n\ncontexto\n\ndo\n\nRide\n\nBuddy,\n\neste\n\nprocesso\n\nfaz\n\na\n\nverificação\n\ncontínua\n\ndas\n\ntelas\n\ne\n\nfluxos\n\nde\n\ndados\n\npara\n\nassegurar\n\nconformidade\n\ntotal\n\ncom\n\na\n\nLGPD,\n\nmapeando\n\nse\n\no\n\nusuário\n\ndeu\n\nconsentimento\n\nclaro\n\ne\n\npos...",
+          "similarity": 0.4587
+        },
+        {
+          "chunk_id": "e75ffbfb-c881-4ec0-a8f4-f1642b0f2e7b_chunk_4",
+          "filename": "Relatório Técnico de Governança de TI - Ride Buddy V3.pdf",
+          "excerpt": "o\n\nfaturamento\n\nbruto\n\ndeduzido\n\ndos\n\ncustos\n\noperacionais\n\nreais\n\n(combustível,\n\nmanutenção,\n\nseguro\n\ne\n\ntaxas\n\nde\n\nintermediação).\n A arquitetura técnica do ecossistema mobile adota o paradigma online-first , garantindo que o \nmotorista\n\nde\n\naplicativo\n\nconsiga\n\nregistrar\n\nos\n\ndados\n\nde\n\nsuas\n\ncorridas\n\nde\n\nforma\n\nimediata\n\ne\n\nresiliente.\n\nA\n\npersistência\n\nlocal\n\nde\n\ndados\n\né\n\nestruturada\n\npara\n...",
+          "similarity": 0.4383
+        }
+      ]
+    }
+  },
+  "8a3ca7a9-b729-4068-850a-76a4e04b222f": {
+    "task_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f",
+    "document_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f",
+    "filename": "Resumo_Interestelar.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:53:54.789260",
+    "updated_at": "2026-06-11T00:53:54.789260",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "4892b39a-dd67-4adf-a5d4-ecd5d9193a9e": {
+    "task_id": "4892b39a-dd67-4adf-a5d4-ecd5d9193a9e",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T00:55:20.878222",
+    "updated_at": "2026-06-11T00:55:22.267886",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "4892b39a-dd67-4adf-a5d4-ecd5d9193a9e",
+      "answer": "Sim, Joseph Cooper era um ex-piloto da NASA.",
+      "sources": [
+        {
+          "chunk_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f_chunk_0",
+          "filename": "Resumo_Interestelar.pdf",
+          "excerpt": "Resumo do Filme Interestelar\nInterestelar (2014) é um filme de ficção científica dirigido por Christopher Nolan. A história se\npassa em um futuro em que a Terra enfrenta uma grave crise ambiental, com tempestades de\npoeira e escassez de alimentos ameaçando a sobrevivência da humanidade. O protagonista,\nJoseph Cooper, é um ex-piloto da NASA que vive como fazendeiro ao lado de seus filhos, Murph e\nT...",
+          "similarity": 0.5194
+        },
+        {
+          "chunk_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f_chunk_1",
+          "filename": "Resumo_Interestelar.pdf",
+          "excerpt": "espacial em busca de um novo planeta habitável para a espécie humana. A equipe viaja através de\num buraco de minhoca próximo a Saturno e explora planetas em outra galáxia. Durante a jornada,\nos astronautas enfrentam fenômenos extremos causados pelo gigantesco buraco negro\nGargantua. Um dos temas centrais do filme é a relatividade do tempo, que faz com que horas em\ndeterminados planetas corresponda...",
+          "similarity": 0.3951
+        }
+      ]
+    }
+  },
+  "305ac784-0d68-4650-bf55-c8edae801774": {
+    "task_id": "305ac784-0d68-4650-bf55-c8edae801774",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T00:57:14.026663",
+    "updated_at": "2026-06-11T00:57:16.377203",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "305ac784-0d68-4650-bf55-c8edae801774",
+      "answer": "O objetivo de Cooper durante sua viagem espacial é buscar um novo planeta habitável para a espécie humana. Ele e sua equipe viajam através de um buraco de minhoca próximo a Saturno para explorar planetas em outra galáxia.",
+      "sources": [
+        {
+          "chunk_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f_chunk_1",
+          "filename": "Resumo_Interestelar.pdf",
+          "excerpt": "espacial em busca de um novo planeta habitável para a espécie humana. A equipe viaja através de\num buraco de minhoca próximo a Saturno e explora planetas em outra galáxia. Durante a jornada,\nos astronautas enfrentam fenômenos extremos causados pelo gigantesco buraco negro\nGargantua. Um dos temas centrais do filme é a relatividade do tempo, que faz com que horas em\ndeterminados planetas corresponda...",
+          "similarity": 0.5924
+        },
+        {
+          "chunk_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f_chunk_2",
+          "filename": "Resumo_Interestelar.pdf",
+          "excerpt": "Murph cresce e se torna cientista. Ela trabalha para resolver uma equação gravitacional capaz de\npermitir que a humanidade abandone a Terra e sobreviva em colônias espaciais. A ligação\nemocional entre pai e filha é o elemento mais importante da trama. No desfecho, Cooper entra em\nGargantua e alcança uma estrutura multidimensional chamada tesserato. A partir dela, consegue\nenviar informações quânti...",
+          "similarity": 0.4751
+        }
+      ]
+    }
+  },
+  "1ff1d3ac-8e45-4d41-b406-ff741576b241": {
+    "task_id": "1ff1d3ac-8e45-4d41-b406-ff741576b241",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T00:58:20.290709",
+    "updated_at": "2026-06-11T00:58:21.978652",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "1ff1d3ac-8e45-4d41-b406-ff741576b241",
+      "answer": "Os filhos de Joseph Cooper são Murph e Tom.",
+      "sources": [
+        {
+          "chunk_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f_chunk_1",
+          "filename": "Resumo_Interestelar.pdf",
+          "excerpt": "espacial em busca de um novo planeta habitável para a espécie humana. A equipe viaja através de\num buraco de minhoca próximo a Saturno e explora planetas em outra galáxia. Durante a jornada,\nos astronautas enfrentam fenômenos extremos causados pelo gigantesco buraco negro\nGargantua. Um dos temas centrais do filme é a relatividade do tempo, que faz com que horas em\ndeterminados planetas corresponda...",
+          "similarity": 0.4491
+        },
+        {
+          "chunk_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f_chunk_0",
+          "filename": "Resumo_Interestelar.pdf",
+          "excerpt": "Resumo do Filme Interestelar\nInterestelar (2014) é um filme de ficção científica dirigido por Christopher Nolan. A história se\npassa em um futuro em que a Terra enfrenta uma grave crise ambiental, com tempestades de\npoeira e escassez de alimentos ameaçando a sobrevivência da humanidade. O protagonista,\nJoseph Cooper, é um ex-piloto da NASA que vive como fazendeiro ao lado de seus filhos, Murph e\nT...",
+          "similarity": 0.436
+        },
+        {
+          "chunk_id": "8a3ca7a9-b729-4068-850a-76a4e04b222f_chunk_2",
+          "filename": "Resumo_Interestelar.pdf",
+          "excerpt": "Murph cresce e se torna cientista. Ela trabalha para resolver uma equação gravitacional capaz de\npermitir que a humanidade abandone a Terra e sobreviva em colônias espaciais. A ligação\nemocional entre pai e filha é o elemento mais importante da trama. No desfecho, Cooper entra em\nGargantua e alcança uma estrutura multidimensional chamada tesserato. A partir dela, consegue\nenviar informações quânti...",
+          "similarity": 0.3659
+        }
+      ]
+    }
+  },
+  "144c81fc-c14d-418a-88d0-868311a5a459": {
+    "task_id": "144c81fc-c14d-418a-88d0-868311a5a459",
+    "document_id": "144c81fc-c14d-418a-88d0-868311a5a459",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T00:59:08.652106",
+    "updated_at": "2026-06-11T00:59:08.652106",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "f4a462c4-2b02-4201-8cb2-d154ac5ce7a3": {
+    "task_id": "f4a462c4-2b02-4201-8cb2-d154ac5ce7a3",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T01:00:12.269739",
+    "updated_at": "2026-06-11T01:00:14.852693",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "f4a462c4-2b02-4201-8cb2-d154ac5ce7a3",
+      "answer": "Márcio é estudante de Análise e Desenvolvimento de Sistemas, Desenvolvedor Back-end e Desenvolvedor Front-end / JavaScript.",
+      "sources": [
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_0",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "MÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000brida/remota | marciobrener.contato@gmail.com | (11) 99606-7984\nLinkedIn: www.linkedin.com/in/marcio-brener/ | GitHub: https://github.com/marcio-brener\nRESUMO PROFISSIONAL\nEstudante de Ana\u0000lise e Desen...",
+          "similarity": 0.3947
+        }
+      ]
+    }
+  },
+  "a93ef4a1-fbb4-4547-814f-016f2208b287": {
+    "task_id": "a93ef4a1-fbb4-4547-814f-016f2208b287",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T01:04:36.011729",
+    "updated_at": "2026-06-11T01:05:13.748258",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "a93ef4a1-fbb4-4547-814f-016f2208b287",
+      "answer": "As experiências profissionais de Márcio são:\n\n*   **Magon Confecção e Comércio Ltda** – Operador de Máquina II (Abr/2024 – Atual)\n*   **Everlux & Masterlux** – Operador de Produção (Jan/2023 – Out/2023)\n*   **Team Leasing Brasil** – Alimentador de Linha de Produção (Mar/2022 – Out/2022)\n*   **Santher** – Auxiliar de Logística (Abr/2020 – Fev/2022)",
+      "sources": [
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_5",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Banco de dados: MongoDB e bancos de dados relacionais\nFerramentas: Git, GitHub, VS Code e Pacote Office (intermedia\u0000rio)\nConceitos: Lo\u0000gica de programaça\u0000o, APIs REST e ana\u0000lise de dados\nSOFT SKILLS\n• Aprendizado cont\u0000\u0000nuo\n• Pensamento anal\u0000\u0000tico\n• Proatividade\n• Boa comunicaça\u0000o\n• Trabalho em equipe\n• Comprometimento\n• Flexibilidade\n• Resilie\u0000ncia\n• Intelige\u0000ncia emocional\nEXPERIÊNCIA PROFISSIONA...",
+          "similarity": 0.658
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_0",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "MÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000brida/remota | marciobrener.contato@gmail.com | (11) 99606-7984\nLinkedIn: www.linkedin.com/in/marcio-brener/ | GitHub: https://github.com/marcio-brener\nRESUMO PROFISSIONAL\nEstudante de Ana\u0000lise e Desen...",
+          "similarity": 0.4036
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_8",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Elaboraça\u0000o de relato\u0000rios e ana\u0000lise de dados operacionais.\n• Apoio a\u0000 automaça\u0000o de processos internos e melhoria de rotinas operacionais.\n• Suporte ao controle de atividades log\u0000\u0000sticas com foco em organizaça\u0000o e eficie\u0000ncia.",
+          "similarity": 0.3501
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_3",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Criaça\u0000o de funcionalidades de cadastro, atualizaça\u0000o e exclusa\u0000o de tarefas (CRUD).\n• Aplicaça\u0000o de boas pra\u0000ticas de organizaça\u0000o e estruturaça\u0000o de co\u0000digo.\n• Versionamento do projeto com Git e GitHub.\nRideBuddy – Aplicativo de controle financeiro para motoristas de aplicativo\n• Desenvolvimento de aplicativo mobile para gesta\u0000o financeira, fluxo de caixa e controle de despesas de motoristas \n...",
+          "similarity": 0.3378
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_2",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "de software.\nFORMAÇÃO ACADÊMICA\nTecno\u0000logo em Ana\u0000lise e Desenvolvimento de Sistemas – Instituto Federal de Sa\u0000o Paulo (IFSP)Ago/2023 – Jul/2027 \n(previsa\u0000o)\nPROJETOS ACADÊMICOS / PESSOAIS\nTaskManager – Sistema de gerenciamento de tarefas\n• Desenvolvimento de aplicaça\u0000o para gerenciamento e organizaça\u0000o de tarefas.\n• Implementaça\u0000o do back-end em Python.\n• Integraça\u0000o com MongoDB para armazenament...",
+          "similarity": 0.334
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_1",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "conhecimentos em Python, JavaScript, SQL, Dart, Flutter e HTML, ale\u0000m de experie\u0000ncia com ana\u0000lise de dados \noperacionais, elaboraça\u0000o de relato\u0000rios e apoio a\u0000 automaça\u0000o de processos internos. Tenho vive\u0000ncia em projetos \nacade\u0000micos e pessoais com Git/GitHub, MongoDB e operaço\u0000es CRUD. Busco oportunidade de esta\u0000gio ou posiça\u0000o \nju\u0000nior em Tecnologia da Informaça\u0000o para aplicar e desenvolver co...",
+          "similarity": 0.3177
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_6",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Abr/2024 – Atual\n• Operaça\u0000o de linha de produça\u0000o e acompanhamento do fluxo operacional.\n• Operaça\u0000o e monitoramento de ma\u0000quinas automatizadas.\n• Controle de qualidade e cumprimento de procedimentos produtivos.\n• Atuaça\u0000o com foco em organizaça\u0000o, produtividade e atença\u0000o aos processos.\nEverlux & Masterlux – Operador de Produção\nJan/2023 – Out/2023\n• Operaça\u0000o de linha de produça\u0000o e suporte a\u0000s...",
+          "similarity": 0.2739
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_7",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Operaça\u0000o de ma\u0000quinas automatizadas seguindo padro\u0000es de qualidade.\n• Apoio no controle e organizaça\u0000o do fluxo de produça\u0000o.\nTeam Leasing Brasil – Alimentador de Linha de Produção\nMar/2022 – Out/2022\n• Operaça\u0000o de ma\u0000quinas e apoio a\u0000 linha de produça\u0000o.\n• Confere\u0000ncia e organizaça\u0000o de produtos.\n• Cumprimento de processos operacionais e controle das atividades da a\u0000rea.\nSanther – Auxiliar de...",
+          "similarity": 0.259
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_4",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "e entregadores auto\u0000nomos (Uber, 99 e iFood).\n• Criaça\u0000o de interface multiplataforma responsiva com Flutter e Dart.\n• Implementaça\u0000o de funcionalidades para registro de despesas operacionais, como combust\u0000\u0000vel, manutença\u0000o e \ntaxas.\n• Ca\u0000lculo automatizado de lucro l\u0000\u0000quido e acompanhamento financeiro dia\u0000rio.\n• Aplicaça\u0000o de boas pra\u0000ticas de usabilidade (UI/UX).\n• Versionamento do projeto com G...",
+          "similarity": 0.2573
+        }
+      ]
+    }
+  },
+  "1f28e535-4a5c-4515-a700-fa198dad2709": {
+    "task_id": "1f28e535-4a5c-4515-a700-fa198dad2709",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T01:05:24.509299",
+    "updated_at": "2026-06-11T01:05:24.566792",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "1f28e535-4a5c-4515-a700-fa198dad2709",
+      "answer": "As experiências profissionais de Márcio são:\n\n*   **Magon Confecção e Comércio Ltda** – Operador de Máquina II (Abr/2024 – Atual)\n*   **Everlux & Masterlux** – Operador de Produção (Jan/2023 – Out/2023)\n*   **Team Leasing Brasil** – Alimentador de Linha de Produção (Mar/2022 – Out/2022)\n*   **Santher** – Auxiliar de Logística (Abr/2020 – Fev/2022)",
+      "sources": [
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_5",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Banco de dados: MongoDB e bancos de dados relacionais\nFerramentas: Git, GitHub, VS Code e Pacote Office (intermedia\u0000rio)\nConceitos: Lo\u0000gica de programaça\u0000o, APIs REST e ana\u0000lise de dados\nSOFT SKILLS\n• Aprendizado cont\u0000\u0000nuo\n• Pensamento anal\u0000\u0000tico\n• Proatividade\n• Boa comunicaça\u0000o\n• Trabalho em equipe\n• Comprometimento\n• Flexibilidade\n• Resilie\u0000ncia\n• Intelige\u0000ncia emocional\nEXPERIÊNCIA PROFISSIONA...",
+          "similarity": 0.658
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_0",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "MÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000brida/remota | marciobrener.contato@gmail.com | (11) 99606-7984\nLinkedIn: www.linkedin.com/in/marcio-brener/ | GitHub: https://github.com/marcio-brener\nRESUMO PROFISSIONAL\nEstudante de Ana\u0000lise e Desen...",
+          "similarity": 0.4036
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_8",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Elaboraça\u0000o de relato\u0000rios e ana\u0000lise de dados operacionais.\n• Apoio a\u0000 automaça\u0000o de processos internos e melhoria de rotinas operacionais.\n• Suporte ao controle de atividades log\u0000\u0000sticas com foco em organizaça\u0000o e eficie\u0000ncia.",
+          "similarity": 0.3501
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_3",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Criaça\u0000o de funcionalidades de cadastro, atualizaça\u0000o e exclusa\u0000o de tarefas (CRUD).\n• Aplicaça\u0000o de boas pra\u0000ticas de organizaça\u0000o e estruturaça\u0000o de co\u0000digo.\n• Versionamento do projeto com Git e GitHub.\nRideBuddy – Aplicativo de controle financeiro para motoristas de aplicativo\n• Desenvolvimento de aplicativo mobile para gesta\u0000o financeira, fluxo de caixa e controle de despesas de motoristas \n...",
+          "similarity": 0.3378
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_2",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "de software.\nFORMAÇÃO ACADÊMICA\nTecno\u0000logo em Ana\u0000lise e Desenvolvimento de Sistemas – Instituto Federal de Sa\u0000o Paulo (IFSP)Ago/2023 – Jul/2027 \n(previsa\u0000o)\nPROJETOS ACADÊMICOS / PESSOAIS\nTaskManager – Sistema de gerenciamento de tarefas\n• Desenvolvimento de aplicaça\u0000o para gerenciamento e organizaça\u0000o de tarefas.\n• Implementaça\u0000o do back-end em Python.\n• Integraça\u0000o com MongoDB para armazenament...",
+          "similarity": 0.334
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_1",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "conhecimentos em Python, JavaScript, SQL, Dart, Flutter e HTML, ale\u0000m de experie\u0000ncia com ana\u0000lise de dados \noperacionais, elaboraça\u0000o de relato\u0000rios e apoio a\u0000 automaça\u0000o de processos internos. Tenho vive\u0000ncia em projetos \nacade\u0000micos e pessoais com Git/GitHub, MongoDB e operaço\u0000es CRUD. Busco oportunidade de esta\u0000gio ou posiça\u0000o \nju\u0000nior em Tecnologia da Informaça\u0000o para aplicar e desenvolver co...",
+          "similarity": 0.3177
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_6",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Abr/2024 – Atual\n• Operaça\u0000o de linha de produça\u0000o e acompanhamento do fluxo operacional.\n• Operaça\u0000o e monitoramento de ma\u0000quinas automatizadas.\n• Controle de qualidade e cumprimento de procedimentos produtivos.\n• Atuaça\u0000o com foco em organizaça\u0000o, produtividade e atença\u0000o aos processos.\nEverlux & Masterlux – Operador de Produção\nJan/2023 – Out/2023\n• Operaça\u0000o de linha de produça\u0000o e suporte a\u0000s...",
+          "similarity": 0.2739
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_7",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Operaça\u0000o de ma\u0000quinas automatizadas seguindo padro\u0000es de qualidade.\n• Apoio no controle e organizaça\u0000o do fluxo de produça\u0000o.\nTeam Leasing Brasil – Alimentador de Linha de Produção\nMar/2022 – Out/2022\n• Operaça\u0000o de ma\u0000quinas e apoio a\u0000 linha de produça\u0000o.\n• Confere\u0000ncia e organizaça\u0000o de produtos.\n• Cumprimento de processos operacionais e controle das atividades da a\u0000rea.\nSanther – Auxiliar de...",
+          "similarity": 0.259
+        },
+        {
+          "chunk_id": "144c81fc-c14d-418a-88d0-868311a5a459_chunk_4",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "e entregadores auto\u0000nomos (Uber, 99 e iFood).\n• Criaça\u0000o de interface multiplataforma responsiva com Flutter e Dart.\n• Implementaça\u0000o de funcionalidades para registro de despesas operacionais, como combust\u0000\u0000vel, manutença\u0000o e \ntaxas.\n• Ca\u0000lculo automatizado de lucro l\u0000\u0000quido e acompanhamento financeiro dia\u0000rio.\n• Aplicaça\u0000o de boas pra\u0000ticas de usabilidade (UI/UX).\n• Versionamento do projeto com G...",
+          "similarity": 0.2573
+        }
+      ]
+    }
   }
 }

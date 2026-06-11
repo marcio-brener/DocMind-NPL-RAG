@@ -183,7 +183,7 @@ class RabbitMQService:
         task_id: str,
         request_id: str,
         question: str,
-        limit: int = 4,
+        limit: int = settings.DEFAULT_CONTEXT_CHUNKS,
         filter_document_id: Optional[str] = None
     ) -> bool:
         """
@@ -202,9 +202,13 @@ class RabbitMQService:
             "filter_document_id": filter_document_id,
             "timestamp": datetime.utcnow().isoformat()
         }
+        BaseLogger.info(
+            f"[RABBITMQ_PRODUCER] limit={limit}"
+        )
 
         try:
             BaseLogger.info(f"[PRODUCER] Publicando pergunta RAG | task_id={task_id} | filter_document_id={filter_document_id}")
+
             
             message = aio_pika.Message(
                 body=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
@@ -287,10 +291,14 @@ async def process_rag_request(message: AbstractIncomingMessage) -> None:
         task_id = payload.get("task_id")
         request_id = payload.get("request_id")
         question = payload.get("question")
-        limit = payload.get("limit", 4)
+        limit = payload.get("limit", settings.DEFAULT_CONTEXT_CHUNKS)
+        BaseLogger.info(
+            f"[RABBITMQ_CONSUMER] payload.limit={payload.get('limit')}"
+        )
         filter_document_id = payload.get("filter_document_id")
 
         target_id = task_id or request_id
+
 
         if not target_id or not question:
             raise ValueError("Campos obrigatórios ausentes na mensagem ('task_id'/'request_id' ou 'question')")

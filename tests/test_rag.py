@@ -435,3 +435,84 @@ def test_rag_service_new_features() -> None:
         assert response_fallback.sources[0].chunk_id == "c1"
         assert response_fallback.sources[1].chunk_id == "c2"
         assert response_fallback.sources[2].chunk_id == "c3"
+
+
+def test_rag_service_is_summary_query_detection() -> None:
+    """
+    Testa se a detecção de pergunta de resumo (is_summary_query) funciona de forma robusta.
+    """
+    from app.services.rag_service import is_summary_query
+    
+    assert is_summary_query("Qual o resumo do projeto?") is True
+    assert is_summary_query("Resuma o documento inteiro para mim.") is True
+    assert is_summary_query("Explique a arquitetura geral do sistema.") is True
+    assert is_summary_query("Quais as tecnologias e visão geral?") is True
+    
+    assert is_summary_query("Quem é o autor do arquivo?") is False
+    assert is_summary_query("O que é inteligência artificial?") is False
+
+
+def test_rag_service_jaccard_diversity_filtering() -> None:
+    """
+    Testa se chunks com similaridade de palavras excessiva (> 0.65)
+    são descartados para garantir diversidade semântica de tópicos.
+    """
+    service = RAGService()
+    service._llm_chain = None
+    
+    mock_results = [
+        # Primeiro chunk
+        {"chunk_id": "c1", "text": "Este é o primeiro fragmento de texto de teste contendo informações cruciais sobre a arquitetura do DocMind.", "similarity": 0.90, "metadata": {"filename": "a.md"}},
+        # Segundo chunk: extremamente similar ao primeiro (mesmas palavras com pequena alteração)
+        {"chunk_id": "c2", "text": "Este é o primeiro fragmento de texto de teste contendo informações muito cruciais sobre arquitetura do DocMind.", "similarity": 0.85, "metadata": {"filename": "a.md"}},
+        # Terceiro chunk: conteúdo totalmente diferente
+        {"chunk_id": "c3", "text": "O coelho correu pela floresta e encontrou uma cenoura no caminho de volta para sua toca na montanha.", "similarity": 0.80, "metadata": {"filename": "b.md"}},
+    ]
+    
+    with patch("app.services.rag_service.vector_store") as mock_vs, \
+         patch("app.services.rag_service.cache_service.get", return_value=None), \
+         patch("app.services.rag_service.cache_service.set", return_value=True):
+        mock_vs.similarity_search.return_value = mock_results
+        
+        import asyncio
+        request = RAGRequest(question="Qual o resumo do projeto?", limit=3)
+        response = asyncio.run(service.answer(request))
+        
+    # c2 deve ser descartado por diversidade (Jaccard > 0.65 com c1). c3 deve passar.
+    assert response.context_found is True
+    sources_ids = [s.chunk_id for s in response.sources]
+    assert "c1" in sources_ids
+    assert "c2" not in sources_ids
+    assert "c3" in sources_ids
+
+
+def test_rag_service_token_limit_handling() -> None:
+    """
+    Testa se o pipeline RAG respeita o limite MAX_CONTEXT_TOKENS (1 token ≈ 4 chars).
+    """
+    service = RAGService()
+    service._llm_chain = None
+    
+    # 4 chunks grandes: cada um com 8000 caracteres (~2000 tokens)
+    mock_results = [
+        {"chunk_id": f"c{i}", "text": f"Texto grande de teste {i} " * 400, "similarity": 0.90 - i * 0.05, "metadata": {"filename": "a.md"}}
+        for i in range(4)
+    ]
+    
+    # Com limite de tokens baixo (p.ex. 3000 tokens), apenas 1 ou 2 chunks devem caber
+    with patch("app.services.rag_service.vector_store") as mock_vs, \
+         patch("app.services.rag_service.cache_service.get", return_value=None), \
+         patch("app.services.rag_service.cache_service.set", return_value=True), \
+         patch("app.core.config.settings.MAX_CONTEXT_TOKENS", 3000):
+        mock_vs.similarity_search.return_value = mock_results
+        
+        import asyncio
+        request = RAGRequest(question="Qual o resumo do projeto?", limit=4)
+        response = asyncio.run(service.answer(request))
+        
+    # Cada chunk tem cerca de 2000 tokens. Apenas o primeiro cabe (total 2000 tokens < 3000).
+    # O segundo chunk faria o total ir para 4000 tokens (> 3000), então é descartado.
+    assert response.context_found is True
+    assert len(response.sources) == 1
+    assert response.sources[0].chunk_id == "c0"
+

@@ -64,7 +64,14 @@ class Settings(BaseSettings):
     LLM_MAX_TOKENS: int = 2048
 
     # RAG Pipeline
-    RAG_CONTEXT_CHUNKS: int = 12
+    DEFAULT_CONTEXT_CHUNKS: int = 10
+    MIN_CONTEXT_CHUNKS: int = 3
+    MAX_CONTEXT_CHUNKS: int = 10
+    MIN_CV_CONTEXT_CHUNKS: int = 10
+    MAX_CV_CONTEXT_CHUNKS: int = 12
+    MIN_SUMMARY_CONTEXT_CHUNKS: int = 10
+    MAX_SUMMARY_CONTEXT_CHUNKS: int = 12
+    MAX_CONTEXT_TOKENS: int = 12000
     RAG_MIN_SIMILARITY: float = 0.25
     EXCERPT_LENGTH: int = 400
 
