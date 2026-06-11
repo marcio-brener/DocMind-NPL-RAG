@@ -3507,5 +3507,205 @@
         }
       ]
     }
+  },
+  "1de797ae-9f5d-43fa-bb01-09de8e5f7644": {
+    "task_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644",
+    "document_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644",
+    "filename": "Curriculo_Marcio_Brener.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T01:13:30.101574",
+    "updated_at": "2026-06-11T01:13:30.101574",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "010ef1fc-4393-4859-b0e8-c5e9f7545f13": {
+    "task_id": "010ef1fc-4393-4859-b0e8-c5e9f7545f13",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T01:14:15.747261",
+    "updated_at": "2026-06-11T23:05:56.371742",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "010ef1fc-4393-4859-b0e8-c5e9f7545f13",
+      "answer": "Não encontrei informações suficientes nos documentos para responder essa pergunta.",
+      "sources": []
+    }
+  },
+  "e25fdbba-b83a-49de-b102-0610b2381f11": {
+    "task_id": "e25fdbba-b83a-49de-b102-0610b2381f11",
+    "document_id": null,
+    "filename": null,
+    "status": "COMPLETED",
+    "progress": 100,
+    "message": "Resposta gerada com sucesso",
+    "created_at": "2026-06-11T23:09:04.171052",
+    "updated_at": "2026-06-11T23:09:07.819132",
+    "error_detail": null,
+    "error": null,
+    "result": {
+      "request_id": "e25fdbba-b83a-49de-b102-0610b2381f11",
+      "answer": "Márcio Brener de Moraes possui os seguintes projetos acadêmicos e pessoais em seu portfólio:\n\n1.  **TaskManager – Sistema de gerenciamento de tarefas:**\n    *   Desenvolvimento de aplicação para gerenciamento e organização de tarefas.\n    *   Implementação do back-end em Python.\n    *   Integração com MongoDB para armazenamento e gerenciamento de dados.\n    *   Criação de funcionalidades de cadastro, atualização e exclusão de tarefas (CRUD).\n    *   Aplicação de boas práticas de organização e estruturação de código.\n    *   Versionamento do projeto com Git e GitHub.\n\n2.  **RideBuddy – Aplicativo de controle financeiro para motoristas de aplicativo:**\n    *   Desenvolvimento de aplicativo mobile para gestão financeira, fluxo de caixa e controle de despesas de motoristas e entregadores autônomos (Uber, 99 e iFood).\n    *   Criação de funcionalidades de cadastro, atualização e exclusão de tarefas (CRUD).\n    *   Aplicação de boas práticas de organização e estruturação de código.\n    *   Versionamento do projeto com Git e GitHub.",
+      "sources": [
+        {
+          "chunk_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644_chunk_8",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Elaboraça\u0000o de relato\u0000rios e ana\u0000lise de dados operacionais.\n• Apoio a\u0000 automaça\u0000o de processos internos e melhoria de rotinas operacionais.\n• Suporte ao controle de atividades log\u0000\u0000sticas com foco em organizaça\u0000o e eficie\u0000ncia.",
+          "similarity": 0.4358
+        },
+        {
+          "chunk_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644_chunk_0",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "MÁRCIO BRENER DE MORAES\nEstudante de Análise e Desenvolvimento de Sistemas | Desenvolvedor Back-end | Desenvolvedor Front-end / JavaScript \n| Python | SQL\nBragança Paulista – SP | Disponibilidade h\u0000\u0000brida/remota | marciobrener.contato@gmail.com | (11) 99606-7984\nLinkedIn: www.linkedin.com/in/marcio-brener/ | GitHub: https://github.com/marcio-brener\nRESUMO PROFISSIONAL\nEstudante de Ana\u0000lise e Desen...",
+          "similarity": 0.4329
+        },
+        {
+          "chunk_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644_chunk_6",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Abr/2024 – Atual\n• Operaça\u0000o de linha de produça\u0000o e acompanhamento do fluxo operacional.\n• Operaça\u0000o e monitoramento de ma\u0000quinas automatizadas.\n• Controle de qualidade e cumprimento de procedimentos produtivos.\n• Atuaça\u0000o com foco em organizaça\u0000o, produtividade e atença\u0000o aos processos.\nEverlux & Masterlux – Operador de Produção\nJan/2023 – Out/2023\n• Operaça\u0000o de linha de produça\u0000o e suporte a\u0000s...",
+          "similarity": 0.4124
+        },
+        {
+          "chunk_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644_chunk_3",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Criaça\u0000o de funcionalidades de cadastro, atualizaça\u0000o e exclusa\u0000o de tarefas (CRUD).\n• Aplicaça\u0000o de boas pra\u0000ticas de organizaça\u0000o e estruturaça\u0000o de co\u0000digo.\n• Versionamento do projeto com Git e GitHub.\nRideBuddy – Aplicativo de controle financeiro para motoristas de aplicativo\n• Desenvolvimento de aplicativo mobile para gesta\u0000o financeira, fluxo de caixa e controle de despesas de motoristas \n...",
+          "similarity": 0.3902
+        },
+        {
+          "chunk_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644_chunk_2",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "de software.\nFORMAÇÃO ACADÊMICA\nTecno\u0000logo em Ana\u0000lise e Desenvolvimento de Sistemas – Instituto Federal de Sa\u0000o Paulo (IFSP)Ago/2023 – Jul/2027 \n(previsa\u0000o)\nPROJETOS ACADÊMICOS / PESSOAIS\nTaskManager – Sistema de gerenciamento de tarefas\n• Desenvolvimento de aplicaça\u0000o para gerenciamento e organizaça\u0000o de tarefas.\n• Implementaça\u0000o do back-end em Python.\n• Integraça\u0000o com MongoDB para armazenament...",
+          "similarity": 0.3787
+        },
+        {
+          "chunk_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644_chunk_7",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "• Operaça\u0000o de ma\u0000quinas automatizadas seguindo padro\u0000es de qualidade.\n• Apoio no controle e organizaça\u0000o do fluxo de produça\u0000o.\nTeam Leasing Brasil – Alimentador de Linha de Produção\nMar/2022 – Out/2022\n• Operaça\u0000o de ma\u0000quinas e apoio a\u0000 linha de produça\u0000o.\n• Confere\u0000ncia e organizaça\u0000o de produtos.\n• Cumprimento de processos operacionais e controle das atividades da a\u0000rea.\nSanther – Auxiliar de...",
+          "similarity": 0.3774
+        },
+        {
+          "chunk_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644_chunk_5",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "Banco de dados: MongoDB e bancos de dados relacionais\nFerramentas: Git, GitHub, VS Code e Pacote Office (intermedia\u0000rio)\nConceitos: Lo\u0000gica de programaça\u0000o, APIs REST e ana\u0000lise de dados\nSOFT SKILLS\n• Aprendizado cont\u0000\u0000nuo\n• Pensamento anal\u0000\u0000tico\n• Proatividade\n• Boa comunicaça\u0000o\n• Trabalho em equipe\n• Comprometimento\n• Flexibilidade\n• Resilie\u0000ncia\n• Intelige\u0000ncia emocional\nEXPERIÊNCIA PROFISSIONA...",
+          "similarity": 0.3566
+        },
+        {
+          "chunk_id": "1de797ae-9f5d-43fa-bb01-09de8e5f7644_chunk_1",
+          "filename": "Curriculo_Marcio_Brener.pdf",
+          "excerpt": "conhecimentos em Python, JavaScript, SQL, Dart, Flutter e HTML, ale\u0000m de experie\u0000ncia com ana\u0000lise de dados \noperacionais, elaboraça\u0000o de relato\u0000rios e apoio a\u0000 automaça\u0000o de processos internos. Tenho vive\u0000ncia em projetos \nacade\u0000micos e pessoais com Git/GitHub, MongoDB e operaço\u0000es CRUD. Busco oportunidade de esta\u0000gio ou posiça\u0000o \nju\u0000nior em Tecnologia da Informaça\u0000o para aplicar e desenvolver co...",
+          "similarity": 0.3506
+        }
+      ]
+    }
+  },
+  "f4082e51-2b1f-4366-80a2-743a0316c936": {
+    "task_id": "f4082e51-2b1f-4366-80a2-743a0316c936",
+    "document_id": "f4082e51-2b1f-4366-80a2-743a0316c936",
+    "filename": "documento_teste.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T23:20:04.385333",
+    "updated_at": "2026-06-11T23:20:04.385333",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "c5af71bd-adac-46ce-88cf-81fede602f4e": {
+    "task_id": "c5af71bd-adac-46ce-88cf-81fede602f4e",
+    "document_id": "c5af71bd-adac-46ce-88cf-81fede602f4e",
+    "filename": "manual_corporativo.pdf",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T23:20:04.403633",
+    "updated_at": "2026-06-11T23:20:04.403633",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "b6421d84-f398-454e-b021-5b7d485dfea2": {
+    "task_id": "b6421d84-f398-454e-b021-5b7d485dfea2",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T23:20:04.923432",
+    "updated_at": "2026-06-11T23:20:04.923432",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "efb4c566-e0a8-477c-9b46-9f6082224058": {
+    "task_id": "efb4c566-e0a8-477c-9b46-9f6082224058",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T23:20:04.949177",
+    "updated_at": "2026-06-11T23:20:04.949177",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "84505dfc-39f8-48db-952f-0bf140a5b9ce": {
+    "task_id": "84505dfc-39f8-48db-952f-0bf140a5b9ce",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T23:20:05.281856",
+    "updated_at": "2026-06-11T23:20:05.281856",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "ea3832a2-ab79-42e6-b3dc-7834b753dd96": {
+    "task_id": "ea3832a2-ab79-42e6-b3dc-7834b753dd96",
+    "document_id": "ea3832a2-ab79-42e6-b3dc-7834b753dd96",
+    "filename": "fundamentos_ml.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T23:20:05.316905",
+    "updated_at": "2026-06-11T23:20:05.316905",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "a11a1f4b-165d-495b-94da-5330083a649a": {
+    "task_id": "a11a1f4b-165d-495b-94da-5330083a649a",
+    "document_id": null,
+    "filename": null,
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T23:20:05.487546",
+    "updated_at": "2026-06-11T23:20:05.487546",
+    "error_detail": null,
+    "error": null,
+    "result": null
+  },
+  "d9b9fc0d-0a6c-40d9-a3d4-f75e31a1ecee": {
+    "task_id": "d9b9fc0d-0a6c-40d9-a3d4-f75e31a1ecee",
+    "document_id": "d9b9fc0d-0a6c-40d9-a3d4-f75e31a1ecee",
+    "filename": "arquitetura.md",
+    "status": "QUEUED",
+    "progress": 0,
+    "message": "Tarefa enfileirada aguardando processamento.",
+    "created_at": "2026-06-11T23:20:06.531387",
+    "updated_at": "2026-06-11T23:20:06.531387",
+    "error_detail": null,
+    "error": null,
+    "result": null
   }
 }
