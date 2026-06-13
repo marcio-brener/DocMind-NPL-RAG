@@ -27,7 +27,7 @@ from app.core.logging import BaseLogger, setup_logging
 from app.schemas.document import DocumentMetadata
 from app.schemas.task import TaskCreate, TaskStatus
 from app.services.document_processor import document_processor
-from app.services.rabbitmq_service import rabbitmq_service
+from app.services.rabbitmq_service import rabbitmq_service, process_rag_request
 from app.services.semantic_processor import semantic_processor
 from app.services.task_service import task_service
 from app.services.vector_store import vector_store
@@ -299,7 +299,7 @@ class DocumentWorker:
             await message.reject(requeue=False)
 
     async def start(self) -> None:
-        """Inicia o consumo contínuo de mensagens da fila principal."""
+        """Inicia o consumo contínuo de mensagens das filas principal e RAG."""
         setup_logging()
         self._setup_signal_handlers()
         self._running = True
@@ -307,6 +307,7 @@ class DocumentWorker:
         BaseLogger.info("=" * 60)
         BaseLogger.info("[Worker] DocMind Asynchronous Document Worker Iniciado.")
         BaseLogger.info(f"[Worker] Fila Principal: '{settings.RABBITMQ_QUEUE}'")
+        BaseLogger.info(f"[Worker] Fila RAG: '{settings.RABBITMQ_RAG_QUEUE}'")
         BaseLogger.info(f"[Worker] Fila DLQ: 'document_dlq'")
         BaseLogger.info("=" * 60)
 
@@ -319,11 +320,18 @@ class DocumentWorker:
                     await asyncio.sleep(5)
                     continue
 
-                # Inicia o consumo com o callback definido
+                # Registra consumidores para ambas as filas
                 await rabbitmq_service.consume_messages(
                     queue_name=settings.RABBITMQ_QUEUE,
                     callback=self._on_message
                 )
+                BaseLogger.info(f"[WORKER] Consumidor ativado para fila: {settings.RABBITMQ_QUEUE}")
+
+                await rabbitmq_service.consume_messages(
+                    queue_name=settings.RABBITMQ_RAG_QUEUE,
+                    callback=process_rag_request
+                )
+                BaseLogger.info(f"[WORKER] Consumidor ativado para fila: {settings.RABBITMQ_RAG_QUEUE}")
 
                 # Mantém o worker rodando indefinidamente
                 while self._running and rabbitmq_service.is_connected:
