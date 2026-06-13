@@ -16,8 +16,33 @@ services:
       RABBITMQ_DEFAULT_VHOST: /
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis Cache ──────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: docmind-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -33,6 +58,8 @@ services:
       - "8000:8000"
     environment:
       - APP_ENV=production
+      - DEBUG=false
+      - REDIS_URL=redis://redis:6379/0
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
       - RABBITMQ_QUEUE=document_processing_queue
       - RABBITMQ_EXCHANGE=document_exchange
@@ -41,10 +68,17 @@ services:
       - UPLOAD_DIR=/app/data/uploads
     volumes:
       - ./data:/app/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
     depends_on:
       rabbitmq:
         condition: service_healthy
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+      redis:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --log-level warning
 
   # ── Document Worker ───────────────────────────────────────────────────────────
   worker:
@@ -55,6 +89,8 @@ services:
     restart: unless-stopped
     environment:
       - APP_ENV=production
+      - DEBUG=false
+      - REDIS_URL=redis://redis:6379/0
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
       - RABBITMQ_QUEUE=document_processing_queue
       - RABBITMQ_EXCHANGE=document_exchange
@@ -63,11 +99,20 @@ services:
       - UPLOAD_DIR=/app/data/uploads
     volumes:
       - ./data:/app/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
     depends_on:
       rabbitmq:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     command: python -m workers.document_worker
 
 volumes:
   rabbitmq_data:
+    driver: local
+  redis_data:
     driver: local
