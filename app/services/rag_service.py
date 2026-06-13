@@ -256,11 +256,12 @@ class RAGService:
         # ── 5. Log de Chunks recuperados do ChromaDB ───────────────────────────
         BaseLogger.info("===== CHUNKS RECUPERADOS DO CHROMADB =====")
         for idx, r in enumerate(raw_results, 1):
+            normalized_text = r['text'].strip().replace('\n', ' ')[:80]
             BaseLogger.info(
                 f"[{idx}] Chunk ID: {r['chunk_id']} | "
                 f"Cosine Similarity: {r['similarity']} | "
                 f"Arquivo: {r.get('metadata', {}).get('filename', 'desconhecido')} | "
-                f"Texto inicial: {r['text'].strip().replace('\n', ' ')[:80]}..."
+                f"Texto inicial: {normalized_text}..."
             )
 
         # ── 6. Remoção de Chunks Duplicados ──────────────────────────────────
@@ -404,11 +405,12 @@ class RAGService:
             BaseLogger.info("Nenhum chunk descartado.")
         else:
             for idx, r in enumerate(rejected, 1):
+                texto_inicial = r['text'].strip().replace('\n', ' ')[:80]
                 BaseLogger.info(
                     f"[{idx}] Chunk ID: {r['chunk_id']} | "
                     f"Score Hibrido: {r.get('hybrid_score', 0.0):.4f} | "
                     f"Arquivo: {r.get('metadata', {}).get('filename', 'desconhecido')} | "
-                    f"Texto inicial: {r['text'].strip().replace('\n', ' ')[:80]}..."
+                    f"Texto inicial: {texto_inicial}..."
                 )
 
         BaseLogger.info(
@@ -476,11 +478,12 @@ class RAGService:
         # Log dos chunks enviados ao Gemini
         BaseLogger.info("===== CHUNKS ENVIADOS AO GEMINI =====")
         for idx, r in enumerate(safe_chunks, 1):
+            texto_inicial = r['text'].strip().replace('\n', ' ')[:80]
             BaseLogger.info(
                 f"[{idx}] Chunk ID: {r['chunk_id']} | "
                 f"Score Hibrido: {r.get('hybrid_score', 0.0):.4f} | "
                 f"Arquivo: {r.get('metadata', {}).get('filename', 'desconhecido')} | "
-                f"Texto inicial: {r['text'].strip().replace('\n', ' ')[:80]}..."
+                f"Texto inicial: {texto_inicial}..."
             )
 
         # Construir referências de fontes (com tamanho de trecho configurável)
