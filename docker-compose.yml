@@ -67,6 +67,7 @@ services:
       - CHROMADB_PATH=/app/data/chromadb
       - UPLOAD_DIR=/app/data/uploads
     volumes:
+      - ./app:/app/app
       - ./data:/app/data
     logging:
       driver: "json-file"
@@ -98,6 +99,8 @@ services:
       - CHROMADB_PATH=/app/data/chromadb
       - UPLOAD_DIR=/app/data/uploads
     volumes:
+      - ./app:/app/app
+      - ./workers:/app/workers
       - ./data:/app/data
     logging:
       driver: "json-file"
