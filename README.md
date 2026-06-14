@@ -1,631 +1,602 @@
-# 🧠 DocMind — Plataforma NLP RAG Enterprise
+# DocMind — Plataforma NLP RAG Enterprise
 
-> **Plataforma Corporativa de Processamento de Linguagem Natural com RAG, Cache Semântico e Arquitetura Orientada a Eventos (EDA).**
+> **Plataforma Corporativa de Processamento de Linguagem Natural com RAG e Mensageria Assíncrona**
 
-DocMind é uma solução corporativa de alta performance construída para simplificar a busca semântica e a extração de inteligência de grandes volumes de documentos de formato **PDF** e **Markdown**. A plataforma utiliza uma arquitetura baseada em eventos (EDA) com **RabbitMQ** para o desacoplamento de uploads, banco de dados vetorial **ChromaDB** para o armazenamento de embeddings locais gerados com **HuggingFace**, **Redis** para caching de respostas de geração aumentada (RAG), e **Google Gemini** para geração final de respostas contextualizadas com rastreabilidade total de fontes.
-
----
-
-## 📋 Índice
-
-- [1. Visão Geral do Projeto](#1-visão-geral-do-projeto)
-- [2. Objetivo da Aplicação](#2-objetivo-da-aplicação)
-- [3. Arquitetura da Solução](#3-arquitetura-da-solução)
-- [4. Fluxo Completo de Processamento de Documentos](#4-fluxo-completo-de-processamento-de-documentos)
-- [5. Fluxo do Pipeline RAG](#5-fluxo-do-pipeline-rag)
-- [6. Fluxo do NLP Event Worker](#6-fluxo-do-nlp-event-worker)
-- [7. Fluxo de Mensageria (RabbitMQ)](#7-fluxo-de-mensageria-rabbitmq)
-- [8. Fluxo de Caching (Redis)](#8-fluxo-de-caching-redis)
-- [9. Fluxo do Banco Vetorial (ChromaDB)](#9-fluxo-do-banco-vetorial-chromadb)
-- [10. Estrutura do Projeto](#10-estrutura-do-projeto)
-- [11. Tecnologias Utilizadas](#11-tecnologias-utilizadas)
-- [12. Variáveis de Ambiente](#12-variáveis-de-ambiente)
-- [13. Como Executar Localmente](#13-como-executar-localmente)
-- [14. Execução via Docker e Docker Compose](#14-execução-via-docker-e-docker-compose)
-- [15. Orquestração com Docker Swarm](#15-orquestração-com-docker-swarm)
-- [16. Como Executar os Testes](#16-como-executar-os-testes)
-- [17. Endpoints da API (v1)](#17-endpoints-da-api-v1)
-- [18. Exemplos Práticos de Uso (cURL)](#18-exemplos-práticos-de-uso-curl)
-- [19. Métricas e Observabilidade](#19-métricas-e-observabilidade)
-- [20. Estratégia de Caching Semântico](#20-estratégia-de-caching-semântico)
-- [21. Estratégia de Recuperação e Re-ranking Híbrido](#21-estratégia-de-recuperação-e-re-ranking-híbrido)
-- [22. Checklist antes do Push para o GitHub](#22-checklist-antes-do-push-para-o-github)
-- [23. Variáveis Obrigatórias para Produção](#23-variáveis-obrigatórias-para-produção)
-- [24. Controle de Inconsistências e Segurança](#24-controle-de-inconsistências-e-segurança)
-- [25. Melhorias Futuras (Roadmap)](#25-melhorias-futuras-roadmap)
+[![Python](https://img.shields.io/badge/Python-3.10-blue)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green)](https://fastapi.tiangolo.com)
+[![RabbitMQ](https://img.shields.io/badge/RabbitMQ-3--management-orange)](https://rabbitmq.com)
+[![Redis](https://img.shields.io/badge/Redis-7--alpine-red)](https://redis.io)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5+-purple)](https://trychroma.com)
+[![Gemini](https://img.shields.io/badge/Gemini-2.5--flash-yellow)](https://ai.google.dev)
 
 ---
 
-## 🎯 1. Visão Geral do Projeto
+## Visão Geral
 
-A DocMind é estruturada em torno de microserviços assíncronos. A API REST expõe endpoints rápidos que aceitam cargas úteis, persistem fisicamente os documentos em disco local para fins de auditoria técnica, registram o progresso em um banco de dados de tarefas e repassam os fluxos pesados de NLP para filas gerenciadas. Workers dedicados realizam a extração de dados, limpeza estrutural, chunking e indexação vetorial. As perguntas submetidas ao pipeline de RAG consultam o cache Redis antes de disparar embeddings do HuggingFace e buscar blocos de texto por similaridade de cosseno no ChromaDB, que posteriormente abastecem o prompt do Google Gemini.
+### Objetivo do Sistema
 
----
+O **DocMind** é uma plataforma de **Processamento de Linguagem Natural (NLP)** com arquitetura **RAG (Retrieval-Augmented Generation)** orientada a eventos. O sistema permite que usuários corporativos façam upload de documentos (PDF e Markdown), processem-nos semanticamente e façam perguntas em linguagem natural, recebendo respostas geradas pelo **Google Gemini** fundamentadas exclusivamente no conteúdo dos documentos ingeridos.
 
-## 🚀 2. Objetivo da Aplicação
+### Problema Resolvido
 
-O objetivo principal da DocMind é fornecer uma infraestrutura de NLP e busca corporativa que seja resiliente, desacoplada e veloz. Ela foi projetada para sanar os problemas comuns de sistemas RAG monolíticos convencionais:
-1. **Gargalo no upload de arquivos:** A API responde em milissegundos informando que o arquivo foi recebido, enquanto o processamento de texto e geração de embeddings (que exige processamento computacional elevado) roda de forma assíncrona.
-2. **Custos elevados de chamada ao LLM:** Utilização de cache estruturado para evitar chamadas redundantes de perguntas idênticas ou semanticamente mapeadas.
-3. **Falhas por timeout ou sobrecarga:** Filas com controle de prefetch, retentativas exponenciais automáticas e redirecionamento para DLQ em caso de arquivos corrompidos.
-4. **Precisão de resposta:** Recuperação de dados aprimorada com filtragem por threshold dinâmico e re-ranking de tokens.
+Empresas acumulam grandes volumes de documentos técnicos, currículos, manuais, relatórios e contratos. Encontrar informações específicas nesse volume é lento e impreciso. O DocMind resolve isso ao:
 
----
-
-## 🏗️ 3. Arquitetura da Solução
-
-O ecossistema é composto por uma API FastAPI principal que lida com requisições síncronas de clientes, e workers em Python que realizam as operações assíncronas de NLP consumindo do RabbitMQ. A persistência baseia-se em volumes locais para armazenamento físico de arquivos e no ChromaDB (banco vetorial corporativo persistido em disco). O Redis gerencia o ciclo de cache.
-
-```mermaid
-graph TD
-    Client[Cliente / Swagger UI] <-->|HTTP REST| API[FastAPI Application]
-    
-    %% API Services Interaction
-    API <-->|Leitura/Escrita| TaskService[TaskService / tasks.json]
-    API <-->|Cache HIT/MISS| Redis[(Redis Cache)]
-    API <-->|Busca Direta| VectorStore[VectorStore ChromaDB]
-    
-    %% Messaging flow
-    API --->|Publicar Ingestão| RMQ_Doc[Fila: document_processing_queue]
-    API --->|Publicar Pergunta RAG| RMQ_Rag[Fila: rag_requests]
-    
-    %% Broker Routing
-    subgraph RabbitMQ Broker
-        RMQ_Doc
-        RMQ_Rag
-        DLQ[Fila: document_dlq]
-        RMQ_Doc -.->|Falhas Críticas| DLQ
-        RMQ_Rag -.->|Falhas Críticas| DLQ
-    end
-    
-    %% Async Processing
-    RMQ_Doc ===>|Consumir Ingestão| Worker[Document NLP Worker]
-    RMQ_Rag ===>|Consumir RAG| API
-    
-    %% Worker Internal Actions
-    Worker -->|1. Ler Físico| LocalUploads[Uploads Directory /data/uploads]
-    Worker -->|2. Chunking & Local Embeddings| HF[HuggingFace local model]
-    Worker -->|3. Upsert Chunks| VectorStore
-    Worker -->|4. Atualizar Progresso| TaskService
-    
-    %% RAG Execution Pipeline
-    API -->|1. Embed Query| HF
-    API -->|2. Busca Cosseno HNSW| VectorStore
-    API -->|3. Re-ranking & Threshold| RAGService[RAGService]
-    RAGService -->|4. Gerar Resposta| Gemini[Google Gemini LLM]
-    RAGService -->|5. Salvar Resposta| Redis
-    
-    style Client fill:#f9f,stroke:#333,stroke-width:2px
-    style API fill:#bbf,stroke:#333,stroke-width:2px
-    style Worker fill:#bfb,stroke:#333,stroke-width:2px
-    style RabbitMQ Broker fill:#ffc,stroke:#333,stroke-width:1px
-    style VectorStore fill:#fbc,stroke:#333,stroke-width:2px
-    style Redis fill:#ffb,stroke:#333,stroke-width:2px
-```
+- **Indexar documentos automaticamente** em um banco vetorial (ChromaDB) via pipeline assíncrono
+- **Responder perguntas em linguagem natural** com base no conteúdo real dos documentos
+- **Citar as fontes** dos trechos utilizados em cada resposta
+- **Cachear respostas** para consultas frequentes, reduzindo latência e custo de LLM
+- **Escalar horizontalmente** via Docker e workers assíncronos
 
 ---
 
-## 📄 4. Fluxo Completo de Processamento de Documentos
-
-A ingestão segue uma pipeline assíncrona orientada a eventos para garantir alta resiliência e evitar sobrecarga na API HTTP:
+## Arquitetura Geral
 
 ```
-[Cliente] -> POST /api/v1/document/upload
-   │
-   ▼
-[API FastAPI] 
-   ├── 1. Valida tamanho (limite configurado: MAX_FILE_SIZE_MB) e extensão (.pdf, .md)
-   ├── 2. Persiste o arquivo fisicamente em UPLOAD_DIR com prefixo de document_id (UUID)
-   ├── 3. Registra tarefa no JSON local (status = QUEUED, progresso = 0%)
-   ├── 4. Enfileira metadados e caminho do arquivo na fila 'document_processing_queue'
-   └── 5. Retorna imediatamente HTTP 202 com { document_id, status: "queued" }
-   
-                   [RabbitMQ Broker]
-                           │
-                           ▼
-[Document NLP Worker] (Consome a mensagem da fila)
-   ├── 1. Atualiza status da tarefa para PROCESSING (progresso = 10%)
-   ├── 2. Abre o arquivo local correspondente e extrai o texto bruto via pypdf (PDF) ou leitura nativa (MD)
-   ├── 3. Atualiza status para PROCESSING (progresso = 30%)
-   ├── 4. Limpa espaços adicionais, quebras de linhas desnecessárias e caracteres inválidos
-   ├── 5. Atualiza status para PROCESSING (progresso = 60%)
-   ├── 6. Divide o texto em fragmentos (chunks) usando RecursiveCharacterTextSplitter do LangChain (com CHUNK_SIZE e CHUNK_OVERLAP)
-   ├── 7. Atualiza status para PROCESSING (progresso = 80%)
-   ├── 8. Gera vetores de embedding locais em lote utilizando sentence-transformers/all-MiniLM-L6-v2
-   ├── 9. Persiste os vetores, textos e metadados no ChromaDB
-   └── 10. Atualiza tarefa para COMPLETED (progresso = 100%)
+┌─────────────┐    HTTP     ┌──────────────┐    AMQP     ┌──────────────────┐
+│   Cliente   │ ──────────► │  FastAPI API  │ ──────────► │  RabbitMQ Broker │
+└─────────────┘             └──────┬───────┘             └────────┬─────────┘
+                                   │                               │
+                            ┌──────▼───────┐             ┌────────▼─────────┐
+                            │  Redis Cache │             │  Document Worker  │
+                            └─────────────┘             └────────┬─────────┘
+                                                                  │
+                                                         ┌────────▼─────────┐
+                                                         │    ChromaDB       │
+                                                         │  (Banco Vetorial) │
+                                                         └──────────────────┘
+                                                                  │
+                                                         ┌────────▼─────────┐
+                                                         │  Google Gemini   │
+                                                         │  (LLM / Geração) │
+                                                         └──────────────────┘
 ```
 
+### Componentes Principais
+
+| Componente | Tecnologia | Papel |
+|---|---|---|
+| API REST | FastAPI 0.111+ | Interface HTTP, orquestração de fluxos |
+| Broker de Mensagens | RabbitMQ 3-management | Desacoplamento assíncrono de tarefas |
+| Cache | Redis 7-alpine | Cache de respostas RAG com TTL |
+| Banco Vetorial | ChromaDB 0.5+ | Persistência e busca vetorial por similaridade de cosseno |
+| LLM | Google Gemini 2.5-flash | Geração de respostas a partir do contexto recuperado |
+| Embeddings | sentence-transformers/all-MiniLM-L6-v2 | Vetorização de textos e queries (384 dimensões) |
+| Worker | Python asyncio + aio-pika | Consumidor assíncrono das filas RabbitMQ |
+
 ---
 
-## 🔍 5. Fluxo do Pipeline RAG
+## Funcionalidades Implementadas
 
-A busca semântica e a síntese por IA utilizam uma pipeline otimizada com re-ranking híbrido e cache Redis:
+### Upload e Ingestão de Documentos
+- Upload de arquivos **PDF** e **Markdown** (`.pdf`, `.md`)
+- Validação de tipo de arquivo e tamanho máximo (configurável, padrão 10 MB)
+- Geração de `document_id` único (UUID v4)
+- Salvamento físico em `data/uploads/` com prefixo `{document_id}_{filename}`
+- Publicação assíncrona na fila `document_processing_queue` via RabbitMQ
+- Criação de tarefa de rastreamento no `TaskService` com status `QUEUED`
+
+### Processamento Semântico Assíncrono (Worker)
+- Consumo da fila `document_processing_queue` pelo `DocumentWorker`
+- Extração de texto de PDF via `pypdf`
+- Leitura direta de arquivos Markdown
+- Limpeza de texto (normalização de espaços e quebras de linha)
+- **Chunking semântico** via `RecursiveCharacterTextSplitter` (LangChain):
+  - `CHUNK_SIZE`: 500 (configurável via `.env`)
+  - `CHUNK_OVERLAP`: 50 (configurável via `.env`)
+  - Separadores: `\n\n`, `\n`, ` `, ``
+- Geração de embeddings em lote (modelo HuggingFace local ou fallback determinístico offline)
+- Persistência no ChromaDB via `upsert` com metadados por chunk:
+  - `source_doc_id`, `filename`, `chunk_index`, `char_count`, `total_chunks`, `uploaded_at`
+- Atualização de progresso por etapas: QUEUED → PROCESSING (10%, 30%, 60%, 80%) → COMPLETED (100%)
+- Retry automático (até 3 tentativas) com cabeçalho `x-retry-count`
+- Envio para **Dead Letter Queue (DLQ)** após esgotamento de tentativas
+
+### Pipeline RAG (Retrieval-Augmented Generation)
+
+O pipeline RAG é acionado via endpoint `/api/v1/rag/ask` e executado de forma assíncrona:
+
+1. **Recepção da pergunta** → geração de `task_id` + `request_id`
+2. **Publicação na fila** `rag_requests` via RabbitMQ
+3. **Consumer** (`process_rag_request`) processa a mensagem:
+   - Detecção de tipo de pergunta (**CV/carreira** vs. **geral**)
+   - Expansão de query para perguntas de currículo/carreira
+   - **Consulta ao Redis** (cache HIT retorna imediatamente)
+   - Geração de embedding da query (384 dimensões)
+   - **Busca vetorial no ChromaDB** com limite ampliado de candidatos (5× o limite final)
+   - **Remoção de duplicados** por normalização de texto
+   - **Re-ranking híbrido**: 70% similaridade de cosseno + 30% token overlap ratio
+   - **Keyword boost** para perguntas de currículo (+0.1 por palavra-chave até +0.3)
+   - **Threshold dinâmico adaptativo**:
+     - CV: `max_score * 0.50` (garante mínimo 10 chunks)
+     - Geral (score ≥ baseline): `max(max_score * 0.70, RAG_MIN_SIMILARITY)`
+     - Geral (score < baseline): `max_score * 0.70`
+   - **Fallback Top-K**: 3 melhores chunks caso nenhum passe no threshold
+   - **Controle de janela de contexto**: limite de 25.000 caracteres totais
+   - Chamada ao **Google Gemini** via LangChain chain (Prompt → LLM → StrOutputParser)
+   - Fallback sem LLM (retorna contexto bruto quando `GOOGLE_API_KEY` não configurada)
+   - **Persistência do resultado no Redis** com chave `rag_response:{request_id}` (TTL: 3600s)
+   - Atualização do `TaskService` para `COMPLETED` com resultado
+
+### Cache Redis
+- Chave determinística via **SHA-256** de `(question_normalizada | limit | document_id)`
+- Normalização inclui: strip, lowercase, remoção de pontuação final, colapso de espaços
+- `GET`/`SET`/`DELETE`/`EXISTS`/`FLUSHDB` via `redis.asyncio`
+- Degradação graciosa (no-op) quando Redis indisponível
+- **Cache invalidado** automaticamente no reprocessamento e exclusão de documentos
+
+### Rastreamento de Tarefas
+- Persistência de estado em `data/tasks.json` (thread-safe via `threading.Lock`)
+- Estados: `QUEUED` → `PROCESSING` → `COMPLETED` | `FAILED`
+- Campos: `task_id`, `document_id`, `filename`, `status`, `progress` (0-100%), `message`, `created_at`, `updated_at`, `error_detail`, `result`
+- Compartilhado entre API e Workers via arquivo JSON
+
+### Reprocessamento em Lote
+- Endpoint `POST /api/v1/document/reprocess` varre `data/uploads/`
+- Reextrai, rechunka e reindexa todos os documentos existentes
+- Invalida o cache Redis ao final (`FLUSHDB`)
+- Script CLI equivalente: `python -m app.services.reprocess_cli`
+
+### Exclusão de Documentos
+- `DELETE /api/v1/document/{document_id}`
+- Remove todos os chunks do ChromaDB (`where source_doc_id = document_id`)
+- Remove o arquivo físico de `data/uploads/`
+- Invalida o cache Redis (`FLUSHDB`)
+- Retorna contagem de chunks removidos e status de remoção do arquivo
+
+---
+
+## Arquitetura RAG
+
+### Fluxo Completo de Recuperação
 
 ```
-[Cliente] -> POST /api/v1/rag/ask
-   │
-   ▼
-[API FastAPI]
-   ├── 1. Gera request_id (UUID) único
-   ├── 2. Cria uma tarefa no TaskService (status = QUEUED)
-   ├── 3. Publica a requisição na fila 'rag_requests'
-   └── 4. Retorna imediatamente HTTP 202 com o task_id e request_id
-   
-                   [RabbitMQ Broker]
-                           │
-                           ▼
-[Consumidor RAG (FastAPI Lifespan)] (Consome da fila 'rag_requests')
-   ├── 1. Atualiza a tarefa para PROCESSING (progresso = 50%)
-   ├── 2. Normaliza a pergunta do usuário e gera uma chave SHA-256 determinística
-   ├── 3. Consulta o Redis com a chave do cache:
-   │      ├── [CACHE HIT]
-   │      │   └── Retorna a resposta e fontes do cache Redis em milissegundos
-   │      │
-   │      └── [CACHE MISS] (Executa o pipeline completo):
-   │             ├── a. Gera embedding vetorial da pergunta usando o sentence-transformers local
-   │             ├── b. Executa a busca HNSW por similaridade de cosseno no ChromaDB (trazendo candidatos)
-   │             ├── c. Executa deduplicação de chunks exatos
-   │             ├── d. Aplica o Re-ranking Híbrido (similaridade vetorial + token overlap)
-   │             ├── e. Filtra trechos abaixo do threshold de similaridade adaptativo mínimo
-   │             ├── f. Limita quantidade de chunks para evitar estouro da janela de contexto
-   │             ├── g. Se não houver contexto acima do limiar: gera resposta padrão de fallback
-   │             ├── h. Se houver contexto: monta prompt e aciona o modelo Google Gemini
-   │             ├── i. Salva o payload de resposta no cache Redis (TTL padrão: 3600 segundos)
-   │             └── j. Atualiza a tarefa local para COMPLETED (progresso = 100%) com os resultados
+Pergunta do Usuário
+       │
+       ▼
+[Normalização + Detecção de Tipo]
+  is_cv_query() — keywords: experiência, currículo, empresa, cargo...
+       │
+       ▼
+[Consulta ao Redis Cache]
+  Chave: SHA-256(question|limit|doc_id)
+  ├── HIT  ──► Resposta imediata (latência ~1ms)
+  └── MISS ──► Continua pipeline
+       │
+       ▼
+[Geração de Embedding]
+  Modelo: sentence-transformers/all-MiniLM-L6-v2 (384 dims)
+  Expansão de query para CV queries
+  Fallback determinístico offline (hash-based)
+       │
+       ▼
+[Busca Vetorial ChromaDB]
+  n_results = max(limit × 5, 25) — até 50 para CV
+  where_filter: {source_doc_id: filter_document_id} (opcional)
+  Métrica: Cosine Similarity (hnsw:space=cosine)
+       │
+       ▼
+[Remoção de Duplicados]
+  Normalização por texto único (strip + lower)
+       │
+       ▼
+[Re-Ranking Híbrido]
+  Score = max(cosine_sim, 0.7×cosine + 0.3×token_overlap)
+  Keyword boost para CV: +0.1 por keyword (máx +0.3)
+  Ordenação decrescente por hybrid_score
+       │
+       ▼
+[Filtragem por Threshold Dinâmico]
+  Limiar adaptativo baseado no max_hybrid_score
+  Fallback Top-K (3 chunks) se nenhum passar
+  Garantia de mínimo 10 chunks para CV queries
+       │
+       ▼
+[Controle de Janela de Contexto]
+  Limite: 25.000 caracteres
+  Chunks descartados se excederem o limite
+       │
+       ▼
+[Chamada ao Gemini]
+  Modelo: gemini-2.5-flash
+  Temperatura: 0.2
+  Max tokens: 2048
+  Prompt corporativo em Português com regras obrigatórias
+  Fallback: contexto bruto se sem API key
+       │
+       ▼
+[Persistência no Redis + Resposta]
+  TTL: 3600 segundos (1 hora)
 ```
 
----
+### Embeddings
+- **Modelo**: `sentence-transformers/all-MiniLM-L6-v2`
+- **Dimensão**: 384
+- **Normalização**: L2 (embeddings normalizados para consistência de cosseno)
+- **Processamento em lote**: `embed_documents(texts)` para indexação
+- **Fallback offline**: embedding determinístico via SHA-256 + seed RNG (sem internet/GPU)
 
-## ⚙️ 6. Fluxo do NLP Event Worker
+### Chunking
+- **Estratégia**: `RecursiveCharacterTextSplitter` (LangChain)
+- **CHUNK_SIZE**: 500 chars (padrão `.env`, configurável)
+- **CHUNK_OVERLAP**: 50 chars (padrão `.env`, configurável)
+- **Separadores**: `\n\n`, `\n`, ` `, `""`
+- **Metadados por chunk**: `source_doc_id`, `filename`, `chunk_index`, `char_count`, `total_chunks`, `uploaded_at`
 
-O worker standalone (`document_worker.py`) é construído com base na biblioteca `aio-pika` para operações assíncronas completas.
-- **Tratamento de Sinais:** Captura interrupções como `SIGINT` e `SIGTERM` para fechar conexões graciosamente sem derrubar mensagens pendentes do broker.
-- **Thread Pool Execution:** As operações síncronas pesadas do PDF (extração de texto, geração local de embeddings em CPU e operações vetoriais de escrita) são envelopadas em thread pools do asyncio (`asyncio.to_thread`) para evitar o congelamento do loop de eventos principal, garantindo que o worker continue consumindo e gerenciando o canal RabbitMQ simultaneamente.
-- **Redirecionamento Automático:** Caso ocorra alguma falha crítica durante as etapas do processamento do documento, o worker incrementa os cabeçalhos de tentativa da mensagem (`x-retry-count`). Após **3 retentativas**, a mensagem é rejeitada sem requeue, o que ativa o comportamento de Dead Letter Exchange (DLX) do RabbitMQ, desviando a mensagem para a fila de segurança de falhas permanentes (`document_dlq`).
+### Re-Ranking Híbrido
+O pipeline aplica um re-ranking em duas etapas após a recuperação inicial do ChromaDB:
 
----
+1. **Score Híbrido**: combina similaridade vetorial com sobreposição de tokens da query
+2. **Threshold Dinâmico**: limiar adaptativo baseado no melhor score encontrado
 
-## 📬 7. Fluxo de Mensageria (RabbitMQ)
-
-A topologia do RabbitMQ no DocMind é configurada de forma idempotente no startup do sistema:
-
-- **Exchanges Declaradas:**
-  - `document_exchange`: Exchange do tipo `direct` (durable = True).
-  - `document_exchange.dlx`: Exchange de Dead Letter (tipo `direct`, durable = True).
-
-- **Filas Declaradas:**
-  - `document_processing_queue`: Fila principal de processamento de documentos vinculada à `document_exchange` pela chave de roteamento `document.process`. Configura o argumento `"x-dead-letter-exchange": "document_exchange.dlx"` e `"x-dead-letter-routing-key": "document_dlq"`.
-  - `rag_requests`: Fila de requisições do RAG para processamento assíncrono de IA, vinculada à exchange padrão com redirecionamento de falhas para a DLX.
-  - `document_dlq`: Fila de mensagens mortas vinculada à exchange `document_exchange.dlx` pela routing key `document_dlq`. Mensagens que falharem permanentemente são depositadas aqui para análise posterior.
-
-- **Configurações Adicionais:**
-  - **QoS Prefetch = 1:** Evita que um worker sobrecarregue enquanto outros estão ociosos. O RabbitMQ distribui as mensagens conforme a disponibilidade (Fair Dispatch).
-  - **Mensagens Persistentes (`delivery_mode=2`):** Garante que as mensagens sobrevivam a reinicializações bruscas do broker.
+**Stop Words**: conjunto bilíngue (PT-BR + EN) para filtrar tokens irrelevantes no cálculo de overlap.
 
 ---
 
-## 💾 8. Fluxo de Caching (Redis)
+## Observabilidade
 
-O DocMind integra um cache Redis robusto para as respostas de perguntas do RAG:
-- **Chave de Cache Determinística:** A chave de cache é gerada através do SHA-256 da string normalizada da pergunta, concatenada com o limite de chunks e o ID do documento de filtro (caso exista). A normalização remove quebras de linha duplicadas, pontuações no fim da frase e converte todos os caracteres para minúsculo.
-- **Operação de Fallback (No-Op):** O `CacheService` possui tratamento de erro global. Se o servidor Redis estiver inativo ou a biblioteca de conexão não estiver instalada, o sistema gera logs de alerta, desativa o cache e opera normalmente em modo degradado direto na base de dados, sem interromper as operações do usuário.
-- **Invalidação Dinâmica:** Sempre que uma exclusão física de documento ocorre (`DELETE /api/v1/document/{id}`) ou uma rotina de reprocessamento em lote é solicitada (`POST /api/v1/document/reprocess`), o cache do Redis é limpo (`FLUSHDB`) de forma a assegurar que nenhuma resposta desatualizada seja entregue ao usuário final.
+Todos os logs são emitidos via **Loguru** com interceptação de logs do Uvicorn/FastAPI.
+
+### Formato de Log
+```
+2026-06-14 14:11:20.236 | INFO     | module:function:line - Mensagem
+```
+- **Desenvolvimento**: colorido, formato legível
+- **Produção**: JSON estruturado serializado (`serialize=True`)
+
+### Logs de Recuperação RAG
+O pipeline emite logs detalhados em cada etapa:
+```
+[RETRIEVAL] Iniciando busca vetorial... Limite de candidatos: 50
+===== CHUNKS RECUPERADOS DO CHROMADB =====
+[1] Chunk ID: ... | Cosine Similarity: 0.82 | Arquivo: ... | Texto: ...
+[RETRIEVAL] Remoção de duplicados: 50 -> 45 chunks únicos
+===== CHUNKS ANTES DO RE-RANKING =====
+chunk_id=... | similarity=0.82 | overlap=0.45 | hybrid_score=0.71
+===== CHUNKS APÓS O RE-RANKING =====
+[RETRIEVAL] Score máx: 0.82 | Threshold: 0.57 | Passaram: 12/45 chunks
+===== CHUNKS DESCARTADOS =====
+===== CHUNKS ENVIADOS AO GEMINI =====
+```
+
+### Log de Observabilidade (Resumo RAG)
+```
+[OBSERVABILIDADE] Resumo RAG Pipeline:
+- Question: ...
+- Limit: 10
+- Document ID: None
+- Chunks Recuperados (ChromaDB): 45
+- Chunks Filtrados (Threshold): 12
+- Threshold Final: 0.5740
+- Scores: [0.82, 0.79, ...]
+- Tempo Execucao (Total): 1243.56ms
+- Cache: MISS
+```
+
+### Métricas de Cache
+```
+[REDIS] Cache HIT  → chave: 3f4a1b2c...
+[REDIS] Cache MISS → chave: 3f4a1b2c...
+[REDIS] Salvando resposta → chave: 3f4a1b2c... | TTL: 3600s
+```
+
+### Métricas de Tempo
+- `vector_search_ms`: tempo da busca vetorial no ChromaDB
+- `llm_ms`: tempo da chamada ao Gemini
+- `latency_ms`: tempo total do pipeline RAG
+- `elapsed_ms` no cache hit: latência de recuperação do Redis
 
 ---
 
-## 🗄️ 9. Fluxo do Banco Vetorial (ChromaDB)
-
-- **Coleção de Dados:** Coleção persistente nomeada `nlp_rag_collection`.
-- **Métrica de Distância:** Configurada via metadados HNSW para similaridade de cosseno (`"hnsw:space": "cosine"`). O ChromaDB calcula o score através da fórmula: $1.0 - \text{cossine\_distance}$.
-- **Geração de Embeddings:** O sentence-transformers local (`all-MiniLM-L6-v2`) gera vetores de **384 dimensões**.
-- **Metadados Anexados:** Cada vetor possui metadados estruturados que facilitam filtros rápidos e auditoria:
-  - `source_doc_id`: UUID do documento original.
-  - `filename`: Nome original do arquivo importado.
-  - `chunk_index`: Índice sequencial do fragmento no documento.
-  - `char_count`: Tamanho do fragmento em caracteres.
-  - `total_chunks`: Quantidade de fragmentos gerados para o documento.
-  - `uploaded_at`: ISO timestamp da data de upload.
-
----
-
-## 📁 10. Estrutura do Projeto
+## Estrutura de Pastas
 
 ```
 DocMind/
-│
-├── app/                          # Código-fonte principal da aplicação
+├── app/
 │   ├── __init__.py
-│   ├── main.py                   # Ponto de entrada do FastAPI, rotas de redirecionamento e Lifespan
-│   │
-│   ├── api/                      # Camada de Endpoints REST
+│   ├── main.py                        # Entrypoint FastAPI + lifespan (RabbitMQ consumer)
+│   ├── api/
 │   │   ├── __init__.py
-│   │   ├── router.py             # Roteador raiz que inclui a versão 1
+│   │   ├── router.py                  # Roteador raiz (/api/v1)
 │   │   └── v1/
 │   │       ├── __init__.py
-│   │       ├── router.py         # Mapeia os prefixos dos endpoints da v1
-│   │       └── endpoints/        # Rotas individuais por domínio
+│   │       ├── router.py              # Inclusão de todos os routers v1
+│   │       └── endpoints/
 │   │           ├── __init__.py
-│   │           ├── health.py     # Checagem de integridade (/health)
-│   │           ├── document.py   # Upload, processamento síncrono, exclusão e reprocessamento
-│   │           ├── query.py      # Busca semântica direta no ChromaDB
-│   │           ├── rag.py        # Pergunta RAG (/ask) e consulta Redis (/result/{id})
-│   │           └── tasks.py      # Acompanhamento do progresso das tarefas (/tasks/{id})
-│   │
-│   ├── core/                     # Configurações globais e utilitários de infraestrutura
+│   │           ├── document.py        # Upload, process, reprocess, delete
+│   │           ├── health.py          # Health check
+│   │           ├── query.py           # Busca semântica direta
+│   │           ├── rag.py             # RAG ask + result
+│   │           └── tasks.py           # Consulta de status de tarefas
+│   ├── core/
 │   │   ├── __init__.py
-│   │   ├── config.py             # Settings do Pydantic carregando o arquivo .env
-│   │   └── logging.py            # Loguru estruturado para desenvolvimento e produção
-│   │
-│   ├── schemas/                  # Validação e documentação de payloads Pydantic
+│   │   ├── config.py                  # Settings (pydantic-settings, .env)
+│   │   └── logging.py                 # Loguru + InterceptHandler
+│   ├── schemas/
 │   │   ├── __init__.py
-│   │   ├── document.py           # Respostas de upload, reprocessamento e metadados
-│   │   ├── health.py             # Respostas e latency models para o healthcheck
-│   │   ├── rag.py                # Request e response models do pipeline RAG
-│   │   ├── search.py             # Filtros e respostas da busca semântica
-│   │   ├── semantic.py           # Estruturação de chunks e vetores de embeddings
-│   │   └── task.py               # Estruturação de tarefas no TaskService
-│   │
-│   └── services/                 # Regras de Negócio e Serviços Externos
-│       ├── __init__.py
-│       ├── cache_service.py      # Cache Redis assíncrono degradável
-│       ├── document_processor.py # Processador de texto, limpezas e parser PDF/Markdown
-│       ├── embedding_service.py  # Gerador de embeddings locais com fallback determinístico
-│       ├── rabbitmq_service.py   # Conector Robust do aio-pika, topologia e fila de RAG
-│       ├── rag_service.py        # Pipeline RAG: re-ranking híbrido, threshold e LangChain
-│       ├── reprocess_cli.py      # Script CLI standalone para reindexação geral do banco
-│       ├── semantic_processor.py # Divisor de chunks semânticos e gerador de lote
-│       ├── task_service.py       # CRUD Thread-Safe em arquivo JSON para progresso assíncrono
-│       └── vector_store.py       # Gerenciador da coleção e comandos do ChromaDB
-│
-├── workers/                      # Diretorio de Workers assíncronos da aplicação
+│   │   ├── document.py                # DocumentMetadata, UploadResponse, etc.
+│   │   ├── health.py                  # HealthResponse, ServiceStatus
+│   │   ├── rag.py                     # RAGRequest, RAGResponse, RAGAskResponse, etc.
+│   │   ├── search.py                  # SearchRequest, SearchResponse, SearchResultItem
+│   │   ├── semantic.py                # Chunk, SemanticProcessResponse
+│   │   └── task.py                    # TaskStatus, TaskCreate, TaskResponse
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── cache_service.py           # Redis async (get, set, delete, exists, clear)
+│   │   ├── document_processor.py     # Extração PDF/MD, limpeza de texto
+│   │   ├── embedding_service.py      # HuggingFace embeddings + fallback offline
+│   │   ├── rabbitmq_service.py       # aio-pika: connect, publish, consume, DLQ
+│   │   ├── rag_service.py            # Pipeline RAG completo (re-ranking, Gemini)
+│   │   ├── reprocess_cli.py          # CLI standalone de reprocessamento em lote
+│   │   ├── semantic_processor.py     # Chunking (LangChain) + embedding em lote
+│   │   ├── task_service.py           # Rastreamento de tarefas via JSON (thread-safe)
+│   │   └── vector_store.py           # ChromaDB: upsert, query, delete, stats
+│   └── workers/
+│       └── __init__.py
+├── workers/
+│   └── document_worker.py            # Worker standalone (asyncio + aio-pika)
+├── tests/
 │   ├── __init__.py
-│   └── document_worker.py        # Standalone consumer de ingestão de arquivos
-│
-├── tests/                        # Coleção de testes integrados e unitários
-│   ├── __init__.py
-│   ├── conftest.py               # Fixture para instanciar o TestClient do FastAPI
-│   ├── test_cv_recall.py         # Teste de recall de termos em currículos
-│   ├── test_document.py          # Teste de arquivos muito grandes e extração
-│   ├── test_filter_propagation.py# Teste de propagação de filtros no banco
-│   ├── test_health.py            # Teste de retorno do endpoint de saúde
-│   ├── test_rag.py               # Testes das regras do pipeline RAG e do endpoint RAG
-│   └── test_vector_store.py      # Testes de upserts e remoção no ChromaDB
-│
-├── data/                         # Volumes de armazenamento (gerados em runtime — ignore no git!)
-│   ├── chromadb/                 # Arquivos persistidos do banco ChromaDB
-│   ├── uploads/                  # Arquivos físicos mantidos no servidor
-│   └── tasks.json                # Banco de dados de progresso das tarefas locais
-│
-├── docker-compose.yml            # Orquestração do ambiente de desenvolvimento Docker
-├── requirements.txt              # Bibliotecas de dependências do Python
-├── .env.example                  # Template com chaves e opções padrão
-├── .env                          # Arquivo local com chaves de produção (Não commitar!)
-└── .gitignore                    # Regras de exclusão de arquivos no repositório
+│   ├── conftest.py                    # Fixture TestClient
+│   ├── test_cv_recall.py             # Testes de recall para perguntas de currículo
+│   ├── test_document.py              # Testes de upload, processamento e exclusão
+│   ├── test_filter_propagation.py   # Testes de propagação do filtro de documento
+│   ├── test_health.py               # Testes do endpoint de health
+│   ├── test_rag.py                   # Testes do pipeline RAG (unitários + integração)
+│   └── test_vector_store.py         # Testes do ChromaDB VectorStore
+├── data/
+│   ├── chromadb/                     # Persistência ChromaDB (gerado em runtime)
+│   ├── uploads/                      # Arquivos físicos enviados (gerado em runtime)
+│   └── tasks.json                    # Estado das tarefas (gerado em runtime)
+├── .env                              # Variáveis de ambiente (desenvolvimento)
+├── .env.example                      # Template de variáveis de ambiente
+├── .gitignore
+├── .dockerignore
+├── Dockerfile                        # Imagem base Python 3.10-slim
+├── docker-compose.yml               # Orquestração local: api, worker, rabbitmq, redis
+├── requirements.txt
+├── README.md
+└── README_EVENT_DRIVEN.md
 ```
 
 ---
 
-## 🛠️ 11. Tecnologias Utilizadas
+## Instalação
 
-O ecossistema do DocMind utiliza tecnologias modernas voltadas para aplicações de IA distribuídas:
+### Pré-requisitos
+- Python 3.10+
+- Docker e Docker Compose (para ambiente containerizado)
+- Conta Google AI Studio com API Key (para respostas via Gemini)
 
-- **FastAPI (v0.111.0+)**: Framework web assíncrono em Python para construção de APIs eficientes com validação automática de dados OpenAPI e documentação imediata via Swagger UI.
-- **Uvicorn (v0.29.0+)**: Servidor ASGI de alta performance para execução da aplicação FastAPI.
-- **Pydantic (v2.7.0+) & Pydantic-Settings**: Validação robusta de tipos e carregamento de configurações de ambiente estruturadas de forma segura.
-- **ChromaDB (v0.5.0+)**: Banco de dados vetorial embutido e persistente, operando com busca HNSW de similaridade por cosseno.
-- **HuggingFace Embeddings & Sentence-Transformers (v2.6.0+)**: Gerador local de vetores densos usando o modelo `all-MiniLM-L6-v2` sem necessidade de requisições de rede.
-- **LangChain (v0.2.1+) & LangChain-Google-Genai (v1.0.6+)**: Orquestrador de pipelines RAG, templates de prompt estruturados e gerador de respostas via Gemini.
-- **Google GenerativeAI (v0.5.4+)**: Biblioteca oficial para conexões e chamadas à API do modelo Gemini.
-- **Redis (v5.0.4+)**: Utilizado para armazenamento em cache de respostas prontas e redução de latência/custos de infraestrutura.
-- **RabbitMQ (v3-management)**: Broker de mensageria assíncrona que gerencia e distribui tarefas por tópicos e filas confiáveis.
-- **aio-pika (v9.4.1+) & pika**: Biblioteca de conexões e gerenciamento do RabbitMQ de forma totalmente assíncrona.
-- **PyPDF (v4.2.0+)**: Parser e extrator local de fluxos de dados textuais e metadados de arquivos em formato PDF.
-- **Pytest (v8.1.1+) & pytest-asyncio**: Framework de execução de testes unitários e de integração assíncronos.
-- **Loguru (v0.7.2+)**: Gerenciador de logs coloridos, estruturados e rotativos para auditoria de requests e observabilidade em tempo real.
+### Ambiente Local (sem Docker)
 
----
-
-## ⚙️ 12. Variáveis de Ambiente
-
-Todas as variáveis que regem o comportamento da DocMind estão declaradas no arquivo `.env.example`:
-
-| Variável | Padrão | Tipo | Descrição |
-|---|---|---|---|
-| `APP_NAME` | `"Plataforma NLP RAG Enterprise"` | `str` | Nome da aplicação exibido na documentação Swagger. |
-| `APP_ENV` | `development` | `str` | Ambiente ativo (`development`, `staging`, `production`). |
-| `DEBUG` | `true` | `bool` | Ativa depuração de erros. |
-| `API_V1_STR` | `/api/v1` | `str` | Prefixo global dos endpoints REST. |
-| `SECRET_KEY` | `super-secret-key-change-in-production` | `str` | Chave criptográfica usada para autenticação JWT e hashes. |
-| `HOST` | `0.0.0.0` | `str` | Endereço de escuta do servidor Uvicorn. |
-| `PORT` | `8000` | `int` | Porta TCP para requisições HTTP. |
-| `BACKEND_CORS_ORIGINS` | `["http://localhost:3000"]` | `list` | Origens autorizadas a realizar chamadas CORS (JSON array). |
-| `CHROMADB_PATH` | `./data/chromadb` | `str` | Diretório físico dos dados vetoriais do ChromaDB. |
-| `UPLOAD_DIR` | `./data/uploads` | `str` | Diretório físico de armazenamento dos arquivos locais. |
-| `MAX_FILE_SIZE_MB` | `10` | `int` | Limite de tamanho máximo de arquivo de upload (MB). |
-| `CHUNK_SIZE` | `1000` | `int` | Tamanho máximo de caracteres por chunk de texto. |
-| `CHUNK_OVERLAP` | `150` | `int` | Sobreposição de caracteres entre chunks adjacentes. |
-| `EMBEDDING_MODEL_NAME`| `sentence-transformers/all-MiniLM-L6-v2` | `str` | Nome do modelo sentence-transformers para embeddings. |
-| `REDIS_URL` | `redis://localhost:6379/0` | `str` | String de conexão para o servidor de caching Redis. |
-| `CACHE_TTL_SECONDS` | `3600` | `int` | Tempo de expiração do cache no Redis em segundos. |
-| `RABBITMQ_URL` | `amqp://guest:guest@localhost:5672/` | `str` | URL de conexão com o broker RabbitMQ. |
-| `RABBITMQ_QUEUE` | `document_processing_queue` | `str` | Fila principal de processamento assíncrono. |
-| `RABBITMQ_EXCHANGE` | `document_exchange` | `str` | Exchange para direcionar as mensagens de ingestão. |
-| `RABBITMQ_ROUTING_KEY`| `document.process` | `str` | Chave de roteamento para associar exchange e fila. |
-| `RABBITMQ_RAG_QUEUE` | `rag_requests` | `str` | Fila assíncrona de requisições de perguntas RAG. |
-| `GOOGLE_API_KEY` | `""` | `str` | Chave de acesso à API do Google Gemini. |
-| `GEMINI_MODEL` | `gemini-2.5-flash` | `str` | Modelo LLM do Google usado nas respostas. |
-| `LLM_TEMPERATURE` | `0.2` | `float` | Temperatura de geração do LLM (criatividade). |
-| `LLM_MAX_TOKENS` | `2048` | `int` | Quantidade máxima de tokens gerados pelo LLM. |
-| `DEFAULT_CONTEXT_CHUNKS`| `10` | `int` | Quantidade recomendada de chunks enviados ao LLM. |
-| `RAG_MIN_SIMILARITY` | `0.25` | `float` | Score de corte mínimo de similaridade para RAG. |
-| `EXCERPT_LENGTH` | `400` | `int` | Tamanho máximo do trecho da fonte na resposta (chars). |
-
----
-
-## 💻 13. Como Executar Localmente
-
-### 1. Requisitos Prévios
-Certifique-se de possuir o Python 3.10 ou superior instalado na máquina, bem como o Docker para iniciar a infraestrutura de mensageria e caching.
-
-### 2. Configurar Ambiente Virtual
-No diretório raiz da aplicação, execute:
+#### 1. Clone e configure o ambiente virtual
 ```bash
-# Windows
+git clone <repo-url>
+cd DocMind
 python -m venv venv
+# Windows:
 venv\Scripts\activate
-
-# Linux / macOS
-python -m venv venv
+# Linux/Mac:
 source venv/bin/activate
 ```
 
-### 3. Instalar Dependências
+#### 2. Instale as dependências
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configurar Variáveis de Ambiente
-Copie o template do arquivo e preencha com a sua chave do Gemini (`GOOGLE_API_KEY`):
+#### 3. Configure as variáveis de ambiente
 ```bash
 cp .env.example .env
+# Edite o .env e configure:
+# GOOGLE_API_KEY=sua-chave-real-aqui
+# RABBITMQ_URL=amqp://guest:guest@localhost:5672/
+# REDIS_URL=redis://localhost:6379/0
 ```
 
-### 5. Subir a Infraestrutura (Containers)
-Inicie o RabbitMQ local via Docker:
+#### 4. Inicie RabbitMQ e Redis via Docker (separadamente)
 ```bash
-docker run -d --name docmind-rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
-```
-*(Opcional)* Inicie o Redis local via Docker:
-```bash
-docker run -d --name docmind-redis -p 6379:6379 redis:alpine
+docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+docker run -d --name redis -p 6379:6379 redis:7-alpine
 ```
 
-### 6. Executar o Servidor FastAPI
+---
+
+## Execução
+
+### API (FastAPI)
 ```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload
+# Acesse: http://localhost:8000/docs
 ```
 
-### 7. Executar o Worker de Processamento
-Em um segundo terminal (com o ambiente virtual ativo), inicie o worker:
+A API inicializa automaticamente o consumer da fila `rag_requests` no startup (via `lifespan`).
+
+### Worker de Documentos (standalone)
 ```bash
 python -m workers.document_worker
 ```
 
-### 8. Executar Reprocessamento via CLI
-Caso altere variáveis como `CHUNK_SIZE` ou `CHUNK_OVERLAP` no `.env` e queira reindexar todos os documentos que estão na pasta de uploads local para o ChromaDB, execute a ferramenta CLI integrada:
+O worker consome duas filas simultaneamente:
+- `document_processing_queue` — processamento de documentos
+- `rag_requests` — pipeline RAG assíncrono
+
+### Reprocessamento em Lote (CLI)
 ```bash
 python -m app.services.reprocess_cli
 ```
 
----
-
-## 🐳 14. Execução via Docker e Docker Compose
-
-O arquivo `docker-compose.yml` orquestra a aplicação em um único comando.
-
-### Executando em Segundo Plano
+### Docker Compose (Ambiente Completo)
 ```bash
+# Iniciar todos os serviços
 docker-compose up -d
-```
 
-### Escalonando Workers
-Para aumentar a vazão de processamento de documentos sob alta carga de uploads, você pode escalar a quantidade de containers workers que consomem da fila RabbitMQ:
-```bash
-docker-compose up -d --scale worker=3
-```
-
-### Gerenciando e Derrubando o Ambiente
-```bash
-# Exibir os logs em tempo real
+# Acompanhar logs
 docker-compose logs -f
 
-# Derrubar a infraestrutura e remover volumes temporários
+# Parar todos os serviços
 docker-compose down
 ```
 
----
+Serviços no Docker Compose:
+| Serviço | Porta | Descrição |
+|---|---|---|
+| `api` | 8000 | FastAPI Application |
+| `worker` | — | Document Worker (sem porta exposta) |
+| `rabbitmq` | 5672 / 15672 | AMQP + Management UI |
+| `redis` | 6379 | Cache |
 
-## 🕸️ 15. Orquestração com Docker Swarm
-
-Para implantar a DocMind em ambientes distribuídos corporativos multicontêineres usando **Docker Swarm**:
-
-### 1. Inicializar o Cluster Swarm
-```bash
-docker swarm init
+### Gerenciamento via RabbitMQ Management UI
 ```
-
-### 2. Implantar a Stack
-A stack lê o arquivo `docker-compose.yml` e o distribui nos nós do cluster.
-```bash
-docker stack deploy -c docker-compose.yml docmind_stack
-```
-
-### 3. Escalar Serviços no Swarm
-Aumente o número de réplicas do worker de NLP de forma dinâmica:
-```bash
-docker service scale docmind_stack_worker=5
-```
-
-### 4. Remover a Stack do Cluster
-```bash
-docker stack rm docmind_stack
+URL: http://localhost:15672
+User: guest
+Password: guest
 ```
 
 ---
 
-## 🧪 16. Como Executar os Testes
+## Testes
 
-A DocMind possui testes unitários e de integração completos com Pytest. Devido a conflitos na criação do executável direto do pytest em alguns sistemas Windows, é recomendado chamar os testes utilizando a flag de módulo do executável do Python:
-
+### Como Executar
 ```bash
-# Executar a suíte completa de testes de forma detalhada
-.\venv\Scripts\python -m pytest tests/ -v
+# Todos os testes
+pytest tests/ -v
 
-# Executar apenas um arquivo de testes específico
-.\venv\Scripts\python -m pytest tests/test_health.py -v
-.\venv\Scripts\python -m pytest tests/test_document.py -v
-.\venv\Scripts\python -m pytest tests/test_vector_store.py -v
-.\venv\Scripts\python -m pytest tests/test_rag.py -v
+# Suite específica
+pytest tests/test_rag.py -v
+pytest tests/test_document.py -v
+pytest tests/test_health.py -v
+pytest tests/test_vector_store.py -v
+pytest tests/test_filter_propagation.py -v
+pytest tests/test_cv_recall.py -v
 ```
+
+### Estrutura da Suíte
+
+| Arquivo | Cobertura |
+|---|---|
+| `conftest.py` | Fixture `TestClient` (escopo de módulo) |
+| `test_health.py` | Endpoint GET `/health` |
+| `test_document.py` | Upload, processamento semântico, exclusão, reprocessamento |
+| `test_rag.py` | Pipeline RAG unitário e integração via API |
+| `test_vector_store.py` | ChromaDB upsert, busca, deleção |
+| `test_filter_propagation.py` | Propagação correta do `filter_document_id` |
+| `test_cv_recall.py` | Recall e completude para perguntas de currículo/carreira |
+
+### Casos de Teste do Pipeline RAG (`test_rag.py`)
+- Fallback sem contexto (banco vetorial vazio)
+- Fallback sem LLM (retorna contexto bruto)
+- Filtro por similaridade mínima
+- Pipeline completo com LLM mockado
+- Validação de payload incompleto (422)
+- Validação de pergunta muito curta (422)
+- Threshold dinâmico e filtro de `filter_document_id`
+- Novas features: threshold adaptativo, fallback Top-K, busca com/sem filtro
+- Detecção de query de resumo (`is_summary_query`)
+- Filtro de diversidade Jaccard
+- Controle de limite de tokens (MAX_CONTEXT_TOKENS)
 
 ---
 
-## 📡 17. Endpoints da API (v1)
+## Endpoints
 
-Todos os endpoints estão documentados no OpenAPI/Swagger na rota `/docs`.
+### Health
 
-### 🏥 Health
-- **`GET /api/v1/health`**: Verifica a integridade da API FastAPI e exibe o estado de conexão e latência dos serviços integrados (ChromaDB, Redis, RabbitMQ).
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/health` | Status da API e componentes de infraestrutura |
 
-### 📄 Documents
-- **`POST /api/v1/document/upload`**: Recebe arquivos PDF ou MD via form-data. Envia para uploads físicos, cadastra a tarefa no TaskService e publica no RabbitMQ. Retorna o ID da tarefa para acompanhamento assíncrono.
-- **`POST /api/v1/document/{document_id}/process`**: Ingestão síncrona manual de arquivo. Processa o arquivo físico correspondente gerando chunks e embeddings locais, atualizando o banco vetorial diretamente. Utilizado para fallbacks técnicos de depuração.
-- **`POST /api/v1/document/reprocess`**: Varre o diretório `/data/uploads`, apaga os dados antigos correspondentes do ChromaDB, re-computa chunks e embeddings sob novas configurações do `.env` e limpa o cache Redis.
-- **`DELETE /api/v1/document/{document_id}`**: Exclui fisicamente o arquivo em disco, deleta todos os chunks associados do ChromaDB e executa a limpeza no cache Redis.
-
-### 🔎 Search
-- **`POST /api/v1/query/search`**: Executa uma pesquisa vetorial baseada na similaridade de cosseno diretamente no ChromaDB a partir de uma frase de entrada e do limite solicitado. Útil para buscas brutas sem processamento do LLM Gemini. Aceita o campo opcional `filter_document_id` no payload.
-
-### 🤖 RAG Pipeline
-- **`POST /api/v1/rag/ask`**: Aceita uma pergunta do usuário no payload. Enfileira a pergunta na fila assíncrona do RabbitMQ e retorna imediatamente o identificador único da tarefa para checagem.
-- **`GET /api/v1/rag/result/{request_id}`**: Endpoint síncrono rápido que lê do Redis pelo ID da requisição para verificar se a resposta de IA já foi processada pelo worker assíncrono.
-
-### 📝 Tasks
-- **`GET /api/v1/tasks/{task_id}`**: Endpoint para polling do progresso das tarefas de ingestão de documentos ou respostas do RAG. Retorna status (`QUEUED`, `PROCESSING`, `COMPLETED`, `FAILED`), porcentagem de progresso e payloads de resultados ou logs de erros detalhados.
-
----
-
-## 🔌 18. Exemplos Práticos de Uso (cURL)
-
-### Ingestão de Documento (Upload Assíncrono)
-```bash
-curl -X POST "http://localhost:8000/api/v1/document/upload" \
-     -H "accept: application/json" \
-     -H "Content-Type: multipart/form-data" \
-     -F "file=@manual_ti.pdf;type=application/pdf"
-```
-*Resposta esperada (HTTP 202 Accepted):*
+**Response `200`**:
 ```json
 {
-  "document_id": "87c4f420-ba12-421c-81bf-6548a3ee264d",
+  "status": "ok",
+  "environment": "development",
+  "version": "1.0.0",
+  "services": {
+    "chromadb": {"status": "healthy", "latency_ms": 0.5},
+    "redis": {"status": "not_connected"},
+    "rabbitmq": {"status": "not_connected"}
+  }
+}
+```
+
+---
+
+### Documentos
+
+| Método | Rota | Status | Descrição |
+|---|---|---|---|
+| `POST` | `/api/v1/document/upload` | 202 | Upload assíncrono de PDF ou Markdown |
+| `POST` | `/api/v1/document/{document_id}/process` | 200 | Processamento semântico síncrono (fallback manual) |
+| `POST` | `/api/v1/document/reprocess` | 200 | Reprocessar e reindexar todos os documentos |
+| `DELETE` | `/api/v1/document/{document_id}` | 200 | Excluir documento (ChromaDB + arquivo + cache) |
+
+**POST `/api/v1/document/upload`**
+- Body: `multipart/form-data` com campo `file` (`.pdf` ou `.md`)
+- Limite: `MAX_FILE_SIZE_MB` (padrão 10 MB)
+- Response `202`:
+```json
+{
+  "document_id": "uuid-v4",
   "status": "queued",
   "message": "Documento enviado para processamento"
 }
 ```
 
-### Consultar Progresso da Tarefa de Ingestão
-```bash
-curl -X GET "http://localhost:8000/api/v1/tasks/87c4f420-ba12-421c-81bf-6548a3ee264d" \
-     -H "accept: application/json"
-```
-*Resposta esperada (HTTP 200 OK — Concluído):*
+**DELETE `/api/v1/document/{document_id}`**
+- Response `200`:
 ```json
 {
-  "task_id": "87c4f420-ba12-421c-81bf-6548a3ee264d",
-  "document_id": "87c4f420-ba12-421c-81bf-6548a3ee264d",
-  "filename": "manual_ti.pdf",
-  "status": "COMPLETED",
-  "progress": 100,
-  "message": "Processamento concluído com sucesso. 14 chunks indexados no ChromaDB.",
-  "created_at": "2026-06-11T20:25:00",
-  "updated_at": "2026-06-11T20:25:05",
-  "error": null,
-  "result": null
+  "success": true,
+  "document_id": "uuid-v4",
+  "chunks_removed": 24,
+  "file_removed": true,
+  "message": "Documento removido com sucesso."
 }
 ```
 
-### Fazer uma Pergunta ao Sistema RAG (Assíncrono)
-```bash
-curl -X POST "http://localhost:8000/api/v1/rag/ask" \
-     -H "accept: application/json" \
-     -H "Content-Type: application/json" \
-     -d '{"question": "Quais são os protocolos de rede recomendados?", "limit": 5}'
-```
-*Resposta esperada (HTTP 202 Accepted):*
+---
+
+### RAG
+
+| Método | Rota | Status | Descrição |
+|---|---|---|---|
+| `POST` | `/api/v1/rag/ask` | 202 | Enfileira pergunta RAG e retorna `task_id`/`request_id` |
+| `GET` | `/api/v1/rag/result/{request_id}` | 200 | Consulta resultado no Redis pelo `request_id` |
+
+**POST `/api/v1/rag/ask`**
 ```json
+// Request
 {
-  "task_id": "f2923ea0-da41-48e0-a7d5-e51c8b3ee14f",
-  "request_id": "f2923ea0-da41-48e0-a7d5-e51c8b3ee14f",
+  "question": "Quais são as experiências profissionais do candidato?",
+  "limit": 10,
+  "filter_document_id": "uuid-opcional"
+}
+// Response 202
+{
+  "task_id": "uuid-v4",
+  "request_id": "uuid-v4",
   "status": "PROCESSING",
-  "timestamp": "2026-06-11T20:26:00.000000"
+  "timestamp": "2026-06-14T17:00:00.000000"
 }
 ```
 
-### Consultar Resultado do RAG via ID da Tarefa
-```bash
-curl -X GET "http://localhost:8000/api/v1/tasks/f2923ea0-da41-48e0-a7d5-e51c8b3ee14f" \
-     -H "accept: application/json"
-```
-*Resposta esperada (HTTP 200 OK — Resposta de IA com fontes detalhadas):*
+**GET `/api/v1/rag/result/{request_id}`**
 ```json
+// PROCESSING (ainda em fila)
+{ "status": "PROCESSING" }
+
+// COMPLETED
 {
-  "task_id": "f2923ea0-da41-48e0-a7d5-e51c8b3ee14f",
-  "document_id": null,
-  "filename": null,
   "status": "COMPLETED",
-  "progress": 100,
-  "message": "Resposta gerada com sucesso",
-  "created_at": "2026-06-11T20:26:00",
-  "updated_at": "2026-06-11T20:26:02",
-  "error": null,
-  "result": {
-    "request_id": "f2923ea0-da41-48e0-a7d5-e51c8b3ee14f",
-    "answer": "De acordo com as diretrizes do manual_ti.pdf, os protocolos recomendados são HTTPS e SSH.",
-    "sources": [
-      {
-        "chunk_id": "87c4f420-ba12-421c-81bf-6548a3ee264d_chunk_3",
-        "filename": "manual_ti.pdf",
-        "excerpt": "Para comunicações seguras na rede, é recomendado o uso do protocolo HTTPS para tráfego web e SSH para conexões de console...",
-        "similarity": 0.895
-      }
-    ]
-  }
-}
-```
-
-### Busca Semântica Direta no ChromaDB (Sem LLM)
-```bash
-curl -X POST "http://localhost:8000/api/v1/query/search" \
-     -H "accept: application/json" \
-     -H "Content-Type: application/json" \
-     -d '{"query": "criptografia de dados", "limit": 2, "filter_document_id": "87c4f420-ba12-421c-81bf-6548a3ee264d"}'
-```
-*Resposta esperada (HTTP 200 OK):*
-```json
-{
-  "query": "criptografia de dados",
-  "total_results": 2,
-  "results": [
+  "request_id": "uuid-v4",
+  "answer": "Resposta gerada pelo Gemini...",
+  "sources": [
     {
-      "chunk_id": "87c4f420-ba12-421c-81bf-6548a3ee264d_chunk_7",
-      "text": "Todos os dados em trânsito e em repouso devem ser cifrados utilizando chaves robustas padrão AES-256.",
-      "similarity": 0.8142,
-      "metadata": {
-        "source_doc_id": "87c4f420-ba12-421c-81bf-6548a3ee264d",
-        "filename": "manual_ti.pdf",
-        "chunk_index": 7
-      }
+      "chunk_id": "doc-id_chunk_0",
+      "filename": "curriculo.pdf",
+      "excerpt": "Trecho do documento...",
+      "similarity": 0.8734
     }
   ]
 }
@@ -633,130 +604,237 @@ curl -X POST "http://localhost:8000/api/v1/query/search" \
 
 ---
 
-## 📊 19. Métricas e Observabilidade
+### Busca Semântica
 
-O DocMind incorpora logging estruturado utilizando a biblioteca **Loguru**:
-- **Níveis e Cores de Log:** Desenvolvido de forma amigável com formatação colorida no console em desenvolvimento, identificando etapas de `lifespan` da aplicação, conexões de infraestrutura, `HIT/MISS` de cache e thresholds de corte.
-- **Rastreabilidade de Busca (Recall):** Durante a fase de recuperação semântica no banco vetorial, a aplicação imprime no terminal os identificadores, nomes de arquivos, similaridades de cosseno e o início do texto de cada um dos chunks retornados. Chunks descartados por ficarem abaixo do threshold dinâmico ou por restrições de limite de tamanho de contexto também são explicitamente logados com seus respectivos motivos.
-- **Auditoria de Requisições:** Auditoria estruturada no log (`[REQUEST_AUDIT]`) de todos os payloads recebidos pelos endpoints da API e das estruturas de dados enviadas ao Google Gemini (`[LLM_CALL]`), contendo informações das dimensões do embedding gerado, modelo ativo e quantidade de caracteres e tokens estimados submetidos ao LLM.
+| Método | Rota | Status | Descrição |
+|---|---|---|---|
+| `POST` | `/api/v1/query/search` | 200 | Busca semântica direta no ChromaDB (sem LLM) |
 
----
-
-## 💾 20. Estratégia de Caching Semântico
-
-O cache do pipeline RAG otimiza a latência e reduz as chamadas caras à API externa do Gemini:
-1. **Deduplicação de Perguntas Identificadas:** O SHA-256 é computado a partir de perguntas normalizadas (minúsculo, sem pontuação terminal e sem espaços repetidos).
-2. **Ciclo de Expiração (TTL):** As chaves são persistidas por 3600 segundos (1 hora) por padrão. O TTL reinicia a cada gravação.
-3. **Desativação Inteligente (Graceful Degradation):** Em caso de falha de conexão com o cluster Redis local, o pipeline RAG captura a exceção, desativa o cache de forma transparente e repassa todas as buscas e gerações diretamente no banco vetorial e no modelo de IA, sem gerar timeouts ou erros de resposta para o cliente web.
-4. **Flushing do Cache:** O comando Redis `FLUSHDB` é invocado para invalidar chaves antigas sempre que novos parâmetros são calculados, quando documentos são excluídos ou em reprocessing CLI.
-
----
-
-## 🎯 21. Estratégia de Recuperação e Re-ranking Híbrido
-
-O sistema implementa regras estritas de recuperação baseadas nas especificidades e tipos de perguntas submetidas:
-
-1. **Classificação e Boost por Palavras-Chave de Currículo (CV):**
-   O RAGService verifica dinamicamente através de regex se a pergunta tem intenção de encontrar dados profissionais, experiências, históricos de carreira, habilidades ou tópicos de formação (como `"currículo"`, `"experiência"`, `"trabalhou"`).
-   - Se for uma pergunta sobre currículo:
-     - Ele força a recuperação de um limite dinâmico de **12 chunks** (em vez do limite padrão de 10 da API).
-     - Ele executa uma expansão de query injetando palavras-chave estruturadas no embedding (`"experiência profissional empresas trabalhou cargo emprego histórico profissional carreira currículo trabalho cargo"`).
-     - Ele calcula um boost de score de até `+0.3` proporcional à quantidade de palavras-chave encontradas nos fragmentos candidatos.
-     - Ele reduz o limiar mínimo de similaridade dinâmico do threshold (baseline dividida por 2, ex.: `max_similarity * 0.50`) e força o envio de **pelo menos os 10 primeiros fragmentos** ao LLM Gemini para garantir que toda a linha temporal de contratações do profissional seja apresentada de forma unificada e lógica, evitando respostas que omitam cargos antigos.
-
-2. **Re-ranking Híbrido:**
-   Cada candidato de similaridade vetorial do ChromaDB passa por um cálculo híbrido de reordenação:
-   $$\text{Score Híbrido} = (0.7 \times \text{Similaridade Vetorial Cosseno}) + (0.3 \times \text{Token Overlap Ratio})$$
-   Onde o *Token Overlap Ratio* é a interseção entre o conjunto de termos (tokens) únicos da pergunta e o conjunto de termos do fragmento de texto analisado, limpando stop-words clássicas de Português e Inglês.
-
-3. **Filtragem por Threshold Dinâmico:**
-   O limiar de corte de blocos de texto não é fixo. Ele adapta-se conforme o maior score híbrido encontrado nos resultados recuperados:
-   - Se o maior score híbrido da lista for inferior à baseline (`settings.RAG_MIN_SIMILARITY`), o threshold mínimo de corte é definido como `max_hybrid_score * 0.70`.
-   - Se o maior score híbrido for superior, o limiar é definido como o maior valor entre `max_hybrid_score * 0.70` e a baseline.
-   Isso permite que perguntas difíceis (com pontuações vetoriais baixas) ainda consigam contexto, e perguntas altamente específicas façam um filtro rigoroso.
-
-4. **Fallback Top-K:**
-   Caso o filtro dinâmico descarte todos os chunks recuperados, o RAGService reativa os **3 primeiros chunks** do topo da lista HNSW como fallback de garantia, assegurando que o Gemini possua ao menos alguma fonte próxima de informação técnica para responder.
-
-5. **Controle de Caracteres Máximos de Contexto:**
-   O tamanho acumulado dos chunks selecionados é validado. Se a inserção de um chunk adicional fizer o contexto ultrapassar **25.000 caracteres**, o processamento interrompe a inclusão e descarta os chunks subsequentes para evitar o estouro da janela de contexto aceita pelo Gemini.
+**POST `/api/v1/query/search`**
+```json
+// Request
+{
+  "query": "experiência com Python e FastAPI",
+  "limit": 5,
+  "filter_document_id": "uuid-opcional"
+}
+// Response 200
+{
+  "query": "experiência com Python e FastAPI",
+  "total_results": 3,
+  "results": [
+    {
+      "chunk_id": "doc-id_chunk_3",
+      "text": "Trecho do chunk...",
+      "similarity": 0.8234,
+      "metadata": {"filename": "...", "chunk_index": 3}
+    }
+  ]
+}
+```
 
 ---
 
-## 📋 22. Checklist antes do Push para o GitHub
+### Tarefas
 
-Antes de realizar o commit e push de novas alterações para o GitHub, siga rigorosamente as etapas de validação abaixo para mitigar riscos de vazamento de credenciais e quebra de builds:
+| Método | Rota | Status | Descrição |
+|---|---|---|---|
+| `GET` | `/api/v1/tasks/{task_id}` | 200 | Consulta status e progresso de tarefa |
 
-- [ ] **Limpeza de Credenciais Sensíveis:**
-  - Verifique se a variável `GOOGLE_API_KEY` do arquivo `.env` não foi exposta em commits do git ou em arquivos temporários.
-  - Verifique se a variável `SECRET_KEY` foi alterada para um valor padrão seguro nas configurações globais e se as chaves em produção são injetadas exclusivamente por variáveis de ambiente de runtime do servidor.
-- [ ] **Configuração do .gitignore:**
-  - Garanta que o diretório de dados locais (`data/`) esteja completamente listado no `.gitignore` para evitar o commit de arquivos PDFs confidenciais dos usuários em `data/uploads/`, bases do banco vetorial em `data/chromadb/` e logs de tarefas de processamento em `data/tasks.json`.
-- [ ] **Integridade e Execução das Suítes de Testes:**
-  - Certifique-se de executar todas as suítes de testes automatizados locais para identificar bugs e regressões funcionais na API:
-    ```bash
-    .\venv\Scripts\python -m pytest tests/ -v
-    ```
-- [ ] **Validação do startup local:**
-  - Execute a inicialização do FastAPI e do worker em segundo plano para constatar que as configurações e injeções de variáveis de ambiente não causam quebras de importação ou travamentos inesperados.
+**GET `/api/v1/tasks/{task_id}`**
+```json
+{
+  "task_id": "uuid-v4",
+  "document_id": "uuid-v4",
+  "filename": "documento.pdf",
+  "status": "PROCESSING",
+  "progress": 60,
+  "message": "Executando segmentação semântica (chunking)...",
+  "created_at": "2026-06-14T17:00:00",
+  "updated_at": "2026-06-14T17:00:05",
+  "error_detail": null,
+  "result": null
+}
+```
 
----
-
-## 🔒 23. Variáveis Obrigatórias para Produção
-
-Em ambientes de produção, as seguintes variáveis de ambiente **devem ser explicitamente configuradas e injetadas** no servidor host ou orquestrador (Docker/Kubernetes):
-
-1. **`GOOGLE_API_KEY`**: Chave de produção com permissão de leitura nos modelos Gemini do Google AI Studio. **Nunca armazene essa chave de forma fixa no código.**
-2. **`SECRET_KEY`**: Chave forte de criptografia aleatória usada para geração de tokens corporativos seguros.
-3. **`APP_ENV`**: Deve ser definido obrigatoriamente como `production` para desligar detalhes de debug e logs informais no console, ativando logs estruturados em formato JSON compatível com agregadores de mercado.
-4. **`DEBUG`**: Deve ser definido como `false`.
-5. **`REDIS_URL`**: URL apontando para a instância Redis de produção (ex.: `redis://redis-cluster.internal:6379/0`).
-6. **`RABBITMQ_URL`**: URL contendo credenciais de produção e restrições de rede isoladas (ex.: `amqp://api_user:prod_pass@rabbitmq-broker.internal:5672/vhost_prod`).
-
----
-
-## 🔍 24. Controle de Inconsistências e Segurança
-
-Ao analisar o código da plataforma DocMind, foram encontradas as seguintes vulnerabilidades técnicas e divergências estruturais que precisam ser sanadas em ciclos futuros de desenvolvimento:
-
-### 🚨 Riscos de Segurança Identificados
-1. **Vazamento do Arquivo `data/tasks.json` no Controle de Versão (Git):**
-   O arquivo `data/tasks.json` (que armazena o histórico e progresso de tarefas da aplicação em tempo de execução) está atualmente versionado e sendo rastreado pelo Git. Ele é modificado a cada requisição de processamento, o que gera ruídos nos commits do repositório, conflitos frequentes de merge e expõe dados internos de auditoria e payloads das requisições corporativas dos usuários.
-2. **Exposição de Chaves Sensíveis no `.env` Local:**
-   O arquivo de desenvolvimento `.env` (que contém uma chave `GOOGLE_API_KEY` válida ou seu formato antigo de testes) não está sendo excluído de forma adequada em commits mais antigos do histórico do git caso já tenha sido commitado anteriormente.
-3. **Diretórios de Uploads e Bancos Vetoriais sem Regras de Exclusão no `.gitignore`:**
-   O `.gitignore` do projeto ignora caminhos genéricos como `chromadb/` e `data/chroma/`, mas não contém regras explícitas para impedir o commit das pastas `data/uploads/` e `data/chromadb/`. Isso pode fazer com que arquivos confidenciais submetidos à API de upload do DocMind e índices vetoriais pesados de desenvolvimento sejam enviados acidentalmente para o repositório público do GitHub.
-
-### ⚠️ Inconsistências Técnicas entre Código, Testes e Configurações
-1. **AttributeError Crítico com `settings.RAG_CONTEXT_CHUNKS`:**
-   No arquivo `app/services/rag_service.py` (linha 196), a busca RAG tenta recuperar a variável de configuração `settings.RAG_CONTEXT_CHUNKS`. Contudo, esta variável não existe em `app/core/config.py`. Isso provoca uma falha de `AttributeError` em runtime se uma pergunta for enviada com o campo `limit` nulo no JSON.
-2. **Função de Teste Inexistente (`is_summary_query`):**
-   O arquivo `tests/test_rag.py` tenta testar uma função utilitária chamada `is_summary_query` importando-a de `app.services.rag_service`. Esta função não está implementada no código-fonte do serviço RAG, fazendo o teste quebrar com `ImportError`.
-3. **Teste de Jaccard Diversity Sem Implementação de Código:**
-   A suíte de testes `test_rag_service_jaccard_diversity_filtering` assume que o DocMind implementa filtragem por similaridade de vocabulário baseada em distância Jaccard (descartando trechos redundantes que compartilhem mais de 65% de palavras). Esta regra de negócio não está no arquivo `rag_service.py`, gerando falha de asserção nos testes.
-4. **Ignorância da Variável `MAX_CONTEXT_TOKENS` no Código:**
-   A configuração `settings.MAX_CONTEXT_TOKENS` (valor `12000` em `config.py` e `.env.example`) é ignorada pelo RAGService. A limitação física de tokens para evitar o estouro de contexto no Gemini é feita por uma verificação de tamanho em caracteres estática (`MAX_CONTEXT_CHARS = 25000`) no código do serviço. Isso invalida as alterações de limites realizadas pelos operadores no `.env` e faz o teste `test_rag_service_token_limit_handling` quebrar por tentar simular limites mais baixos.
-5. **Divergências de Parâmetros Padrão:**
-   Existem disparidades nos limites configurados por padrão nos arquivos da aplicação:
-   - `GEMINI_MODEL`: Definido como `gemini-2.5-flash` em `config.py` mas listado como `gemini-1.5-pro` no antigo `.env.example`.
-   - `LLM_MAX_TOKENS`: Definido como `2048` em `config.py` mas configurado como `1024` no antigo `.env.example`.
-   - `RAG_MIN_SIMILARITY`: Definido como `0.25` em `config.py` mas configurado como `0.35` no `.env.example`.
-   - `CHUNK_SIZE` e `CHUNK_OVERLAP`: Padrões de `1000` e `150` no `config.py`, mas `500` e `50` no antigo `.env.example`.
-6. **Variáveis de Configuração Inativas (Sem Uso):**
-   As variáveis `PERSIST_DIRECTORY` (redundância do ChromaDB) e `RABBITMQ_DOCUMENT_QUEUE` (nome alternativo da fila) estão declaradas no `config.py` e `.env.example`, mas nunca são lidas ou referenciadas por nenhum módulo de negócio da aplicação.
+**Status possíveis**:
+| Status | Progress | Significado |
+|---|---|---|
+| `QUEUED` | 0% | Mensagem publicada, aguardando worker |
+| `PROCESSING` | 10–80% | Worker processando (localizando, extraindo, chunkando, indexando) |
+| `COMPLETED` | 100% | Processamento concluído com sucesso |
+| `FAILED` | 0% | Falha após esgotamento de retentativas |
 
 ---
 
-## 🗺️ 25. Melhorias Futuras (Roadmap)
+### Raiz
 
-Para as próximas iterações do desenvolvimento do DocMind, recomenda-se a inclusão dos seguintes itens no roadmap técnico:
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/` | Redireciona para `/docs` (Swagger UI) |
+| `GET` | `/docs` | Swagger UI interativo |
+| `GET` | `/redoc` | ReDoc (documentação alternativa) |
 
-- [ ] **Correção do Bug `RAG_CONTEXT_CHUNKS`:** Substituir a chamada indevida em `rag_service.py` para usar a variável padrão existente `settings.DEFAULT_CONTEXT_CHUNKS`.
-- [ ] **Alinhamento dos Testes do RAGService:**
-  - Implementar a função `is_summary_query` para que perguntas sobre resumos aumentem o tamanho do contexto de forma nativa e o teste associado passe.
-  - Implementar a filtragem por diversidade de Jaccard no pipeline RAG para remover chunks semanticamente equivalentes e otimizar a diversidade de conteúdo enviado ao Gemini.
-  - Ajustar o limitador de tokens do contexto em `rag_service.py` para respeitar dinamicamente o valor de `settings.MAX_CONTEXT_TOKENS` configurado no arquivo `.env`.
-- [ ] **Tratamento do `.gitignore` para Dados Locais:** Remover o arquivo `data/tasks.json` do controle de versão do Git usando `git rm --cached data/tasks.json` e adicionar as regras corretas de exclusão para toda a pasta `data/` no `.gitignore`.
-- [ ] **Autenticação JWT com Segurança Corporativa:** Adicionar middleware de autenticação nas rotas da API, utilizando o `pyjwt` e `passlib[bcrypt]` já listados nas dependências do projeto para controle de acesso de usuários.
-- [ ] **Isolamento de Coleções por Usuário (Multi-tenant RAG):** Permitir que o ChromaDB crie coleções específicas baseadas em tokens ou metadados de projetos de usuários, separando os documentos indexados de forma lógica e segura.
-- [ ] **Adicionar Suporte a Novos Formatos de Arquivos:** Estender o `DocumentProcessorService` para processar e extrair dados de planilhas Excel (`.xlsx`), documentos Word (`.docx`) e arquivos de texto simples (`.txt`).
+---
+
+## Tecnologias
+
+| Categoria | Tecnologia | Versão | Uso |
+|---|---|---|---|
+| Framework Web | FastAPI | ≥ 0.111.0 | API REST, routers, middlewares |
+| ASGI Server | Uvicorn | ≥ 0.29.0 | Servidor assíncrono de produção |
+| Validação | Pydantic v2 | ≥ 2.7.0 | Schemas, validação de dados |
+| Configuração | pydantic-settings | ≥ 2.2.1 | `.env` settings com validação |
+| Logging | Loguru | ≥ 0.7.2 | Logs estruturados + interceptação |
+| Broker | RabbitMQ (aio-pika) | ≥ 9.4.1 | Mensageria assíncrona AMQP |
+| Broker (sync) | pika | ≥ 1.3.2 | Dependência sync (não usado diretamente) |
+| Cache | redis[asyncio] | ≥ 5.0.4 | Cache de respostas RAG |
+| Banco Vetorial | ChromaDB | ≥ 0.5.0 | Persistência e busca vetorial |
+| LLM | Google Gemini 2.5-flash | — | Geração de respostas |
+| LLM Framework | LangChain | ≥ 0.2.1 | Chain Prompt→LLM→Parser |
+| LLM Provider | langchain-google-genai | ≥ 1.0.6 | Integração Gemini |
+| LLM SDK | google-generativeai | ≥ 0.5.4 | SDK Google AI |
+| Embeddings | sentence-transformers | ≥ 2.6.0 | Modelo all-MiniLM-L6-v2 local |
+| Embeddings Framework | langchain-community | ≥ 0.2.1 | HuggingFaceEmbeddings |
+| Text Splitting | langchain (LangChain) | ≥ 0.2.1 | RecursiveCharacterTextSplitter |
+| PDF | pypdf | ≥ 4.2.0 | Extração de texto de PDF |
+| HTTP Client | httpx | ≥ 0.27.0 | Testes e requests HTTP |
+| Upload | python-multipart | ≥ 0.0.9 | Suporte `multipart/form-data` |
+| Tests | pytest + pytest-asyncio | ≥ 8.1.1 | Suite de testes |
+| Auth Libs | PyJWT + passlib[bcrypt] | ≥ 2.8.0 | Presentes em requirements (não ativo na API atual) |
+| Container | Docker + Docker Compose | 3.9 | Orquestração de serviços |
+
+---
+
+## Variáveis de Ambiente
+
+Arquivo: `.env` (template em `.env.example`)
+
+| Variável | Padrão | Descrição |
+|---|---|---|
+| `APP_NAME` | `Plataforma NLP RAG Enterprise` | Nome da aplicação |
+| `APP_ENV` | `development` | Ambiente (`development`/`production`) |
+| `DEBUG` | `true` | Ativa logs DEBUG e modo desenvolvimento |
+| `API_V1_STR` | `/api/v1` | Prefixo da API v1 |
+| `SECRET_KEY` | `super-secret-key-change-in-production` | Chave secreta (JWT, futuro) |
+| `HOST` | `0.0.0.0` | Host do servidor |
+| `PORT` | `8000` | Porta do servidor |
+| `BACKEND_CORS_ORIGINS` | `["http://localhost:3000","http://localhost:8000"]` | Origins permitidos no CORS |
+| `CHROMADB_PATH` | `./data/chromadb` | Diretório de persistência do ChromaDB |
+| `PERSIST_DIRECTORY` | `./data/chromadb` | Alias para CHROMADB_PATH |
+| `UPLOAD_DIR` | `./data/uploads` | Diretório de arquivos enviados |
+| `MAX_FILE_SIZE_MB` | `10` | Tamanho máximo de arquivo em MB |
+| `CHUNK_SIZE` | `500` | Tamanho do chunk em caracteres |
+| `CHUNK_OVERLAP` | `50` | Sobreposição entre chunks |
+| `EMBEDDING_MODEL_NAME` | `sentence-transformers/all-MiniLM-L6-v2` | Modelo de embeddings |
+| `REDIS_URL` | `redis://localhost:6379/0` | URL de conexão Redis |
+| `RABBITMQ_URL` | `amqp://guest:guest@localhost:5672/` | URL de conexão RabbitMQ |
+| `RABBITMQ_QUEUE` | `document_processing_queue` | Fila principal de documentos |
+| `RABBITMQ_DOCUMENT_QUEUE` | `document_processing` | Alias da fila de documentos |
+| `RABBITMQ_RAG_QUEUE` | `rag_requests` | Fila de perguntas RAG |
+| `RABBITMQ_EXCHANGE` | `document_exchange` | Exchange principal |
+| `RABBITMQ_ROUTING_KEY` | `document.process` | Routing key da exchange principal |
+| `CACHE_TTL_SECONDS` | `3600` | TTL padrão do cache Redis (1 hora) |
+| `GOOGLE_API_KEY` | `""` | API Key do Google AI (Gemini) |
+| `GEMINI_MODEL` | `gemini-2.5-flash` | Modelo Gemini utilizado |
+| `LLM_TEMPERATURE` | `0.2` | Temperatura do LLM (0=determinístico) |
+| `LLM_MAX_TOKENS` | `2048` | Máximo de tokens na resposta do LLM |
+| `DEFAULT_CONTEXT_CHUNKS` | `10` | Chunks padrão de contexto RAG |
+| `MIN_CONTEXT_CHUNKS` | `3` | Mínimo de chunks de contexto |
+| `MAX_CONTEXT_CHUNKS` | `10` | Máximo de chunks de contexto |
+| `MIN_CV_CONTEXT_CHUNKS` | `10` | Mínimo de chunks para queries de CV |
+| `MAX_CV_CONTEXT_CHUNKS` | `12` | Máximo de chunks para queries de CV |
+| `MIN_SUMMARY_CONTEXT_CHUNKS` | `10` | Mínimo de chunks para queries de resumo |
+| `MAX_SUMMARY_CONTEXT_CHUNKS` | `12` | Máximo de chunks para queries de resumo |
+| `MAX_CONTEXT_TOKENS` | `12000` | Máximo de tokens no contexto enviado ao LLM |
+| `RAG_MIN_SIMILARITY` | `0.35` | Similaridade mínima baseline para filtro dinâmico |
+| `EXCERPT_LENGTH` | `400` | Tamanho do trecho (excerpt) nas fontes citadas |
+
+---
+
+## Roadmap
+
+Os seguintes itens são mencionados no código como trabalho futuro ou estão parcialmente presentes:
+
+- **Checagem real de saúde** dos serviços no endpoint `/health` (atualmente retorna mocks)
+- **Autenticação JWT** — `PyJWT` e `passlib[bcrypt]` estão no `requirements.txt` mas não integrados à API
+- **Escalabilidade horizontal de workers** via Docker Swarm (infraestrutura Docker Compose pronta)
+- **Configuração Docker Swarm** (`docker stack deploy`) para múltiplas réplicas de worker
+
+---
+
+## RELATÓRIO DE CONSISTÊNCIA
+
+### 1. Funcionalidades Encontradas no Código
+
+| # | Funcionalidade | Arquivo Principal |
+|---|---|---|
+| 1 | Upload assíncrono PDF/Markdown via RabbitMQ | `document.py` (endpoint) |
+| 2 | Processamento semântico síncrono (fallback) | `document.py` (endpoint) |
+| 3 | Reprocessamento em lote de todos os documentos | `document.py` (endpoint) |
+| 4 | Exclusão de documento (ChromaDB + arquivo + cache) | `document.py` (endpoint) |
+| 5 | Busca semântica direta no ChromaDB | `query.py` (endpoint) |
+| 6 | RAG assíncrono via RabbitMQ (ask + result) | `rag.py` (endpoint) |
+| 7 | Rastreamento de tarefas em JSON thread-safe | `task_service.py` |
+| 8 | Pipeline RAG com re-ranking híbrido | `rag_service.py` |
+| 9 | Threshold dinâmico adaptativo | `rag_service.py` |
+| 10 | Detecção de queries de CV/carreira | `rag_service.py` |
+| 11 | Keyword boost para CV queries | `rag_service.py` |
+| 12 | Fallback Top-K (3 chunks) | `rag_service.py` |
+| 13 | Controle de janela de contexto (25k chars) | `rag_service.py` |
+| 14 | Cache Redis com SHA-256 determinístico | `cache_service.py` |
+| 15 | Consumer RabbitMQ (aio-pika, DLQ, retry 3×) | `rabbitmq_service.py` + `document_worker.py` |
+| 16 | Dead Letter Queue (DLQ) | `rabbitmq_service.py` |
+| 17 | ChromaDB com cosine similarity (HNSW) | `vector_store.py` |
+| 18 | Embeddings HuggingFace + fallback offline | `embedding_service.py` |
+| 19 | Script CLI reprocess | `reprocess_cli.py` |
+| 20 | Worker standalone (asyncio, dual queue) | `document_worker.py` |
+| 21 | Logs estruturados Loguru (dev/prod) | `logging.py` |
+| 22 | CORS middleware configurável | `main.py` |
+| 23 | Global exception handler 500 | `main.py` |
+| 24 | Consumer RAG no startup do FastAPI (lifespan) | `main.py` |
+| 25 | Docker Compose com healthchecks | `docker-compose.yml` |
+
+### 2. Funcionalidades Documentadas nos READMEs Anteriores
+
+Os READMEs anteriores cobriam a maior parte das funcionalidades, porém com diversas imprecisões:
+- Mencionavam `RAG_CONTEXT_CHUNKS` (inexistente no código — o correto é `DEFAULT_CONTEXT_CHUNKS`)
+- Não documentavam o consumer RAG integrado no lifespan da API
+- Não detalhavam o mecanismo de keyword boost
+- Não documentavam o script CLI `reprocess_cli.py`
+- Endpoints listados de forma incompleta (sem schemas de response)
+- Configuração do `GEMINI_MODEL` (gemini-2.5-flash) não documentada
+
+### 3. Funcionalidades Sem Documentação (Encontradas no Código)
+
+| Funcionalidade | Localização |
+|---|---|
+| Consumer RAG integrado no `lifespan` do FastAPI (além do worker) | `main.py:34-41` |
+| Script CLI `reprocess_cli.py` (standalone sem HTTP) | `app/services/reprocess_cli.py` |
+| Worker consome **duas filas** simultaneamente (doc + RAG) | `document_worker.py:324-333` |
+| Retry automático com header `x-retry-count` (máx 3) | `document_worker.py:209-283` |
+| Fallback de embedding determinístico offline (hash-based) | `embedding_service.py:45-65` |
+| `EXCERPT_LENGTH` configurável nas fontes citadas | `config.py:76`, `rag_service.py:494` |
+| `GEMINI_MODEL=gemini-2.5-flash` (não `gemini-pro`) | `config.py:62` |
+| `LLM_MAX_TOKENS=2048` no código vs `1024` no `.env` | divergência .env vs config.py |
+| `RAG_MIN_SIMILARITY=0.25` no código vs `0.35` no `.env` | divergência .env vs config.py |
+
+### 4. Divergências Encontradas
+
+| Divergência | Localização |
+|---|---|
+| `.env` tem `LLM_MAX_TOKENS=1024`; `config.py` tem default `2048` | `.env:35`, `config.py:64` |
+| `.env` tem `RAG_MIN_SIMILARITY=0.35`; `config.py` default é `0.25` | `.env:46`, `config.py:75` |
+| `.env` não define `RABBITMQ_RAG_QUEUE`; `config.py` tem default `rag_requests` | `.env`, `config.py:54` |
+| `.env` não define `GEMINI_MODEL`; `config.py` tem default `gemini-2.5-flash` | `.env`, `config.py:62` |
+| `Dockerfile` usa `CMD ["python", "app.py"]` — arquivo inexistente no projeto | `Dockerfile:11` |
+| `health.py` retorna status mockado (`mock`) para Redis e RabbitMQ | `health.py:29-36` |
+| `rag_service.py` referencia `settings.RAG_CONTEXT_CHUNKS` (linha 196) — variável não existe | `rag_service.py:196` |
+
+### 5. Sugestões de Melhoria na Documentação
+
+1. **Sincronizar `.env` e `config.py`**: alinhar `LLM_MAX_TOKENS`, `RAG_MIN_SIMILARITY`, `GEMINI_MODEL` e `RABBITMQ_RAG_QUEUE` entre os dois arquivos
+2. **Corrigir `Dockerfile`**: o `CMD` aponta para `app.py` que não existe; deveria ser `uvicorn app.main:app --host 0.0.0.0 --port 8000`
+3. **Implementar health check real**: o endpoint `/health` retorna mocks para Redis e RabbitMQ — deveria verificar conexões reais
+4. **Documentar `is_summary_query()`**: função presente no código (`rag_service.py`) e testada em `test_rag.py` mas não utilizada no pipeline atual (detectada nos testes, não no `answer()`)
+5. **Adicionar `.env.example` completo**: incluir `RABBITMQ_RAG_QUEUE`, `GEMINI_MODEL`, `RABBITMQ_DOCUMENT_QUEUE`, `EXCERPT_LENGTH`
